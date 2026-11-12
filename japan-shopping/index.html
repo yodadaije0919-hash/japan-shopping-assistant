@@ -1,0 +1,778 @@
+<title>일본 쇼핑 비서</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+JP:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: phone-width app shell (max 480px) with sticky header and fixed bottom tab bar; price tags borrow Japanese drugstore POP yellow. */
+:root{
+  --bg:#F3F5F9; --surface:#FFFFFF; --ink:#17203A; --muted:#5B6580; --line:#DFE3EC;
+  --accent:#2445D6; --accent-soft:#E6EBFF; --tag:#FFD43B; --tag-ink:#3A2B00;
+  --good:#1D8548; --good-soft:#E3F4EA; --warn:#A86A12; --warn-soft:#FBF0DC; --bad:#C9342A; --bad-soft:#FBE6E4;
+  --f-display:"Black Han Sans","Noto Sans KR",system-ui,sans-serif;
+  --f-body:"Noto Sans KR","Noto Sans JP",-apple-system,"PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --f-jp:"Noto Sans JP","Hiragino Sans",system-ui,sans-serif;
+  --f-num:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1220; --surface:#171C2D; --ink:#E7EAF4; --muted:#98A1BB; --line:#283049;
+  --accent:#7D93FF; --accent-soft:#232C52; --tag:#FFD43B; --tag-ink:#2A1F00;
+  --good:#4CC47F; --good-soft:#15301F; --warn:#E5AA4B; --warn-soft:#33270F; --bad:#FF6F62; --bad-soft:#3A1916; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1220; --surface:#171C2D; --ink:#E7EAF4; --muted:#98A1BB; --line:#283049;
+  --accent:#7D93FF; --accent-soft:#232C52; --tag:#FFD43B; --tag-ink:#2A1F00;
+  --good:#4CC47F; --good-soft:#15301F; --warn:#E5AA4B; --warn-soft:#33270F; --bad:#FF6F62; --bad-soft:#3A1916; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.app{max-width:480px;margin:0 auto;min-height:100%;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.top-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.brand{font-family:var(--f-display);font-size:21px;letter-spacing:.01em;line-height:1.1}
+.brand small{display:block;font-family:var(--f-body);font-size:12px;color:var(--muted);letter-spacing:0;margin-top:3px}
+.chip-btn{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 12px;font-size:13px;white-space:nowrap}
+.sample{font-size:12px;color:var(--warn);background:var(--warn-soft);padding-block:6px;text-align:center}
+main{display:flex;flex-direction:column;gap:16px;padding-block:16px}
+h2{font-family:var(--f-display);font-weight:400;font-size:20px;margin:0;text-wrap:balance}
+h3{font-size:15px;margin:0}
+.muted{color:var(--muted)}
+.small{font-size:12.5px}
+.jp{font-family:var(--f-jp);font-size:12px;color:var(--muted)}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.pad{padding:14px}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+.seg button{border:0;background:transparent;border-radius:9px;padding:9px 6px;font-weight:500;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.notice{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:12px;background:var(--accent-soft);font-size:13.5px}
+.notice b{color:var(--accent)}
+.rank{display:flex;flex-direction:column}
+.rank-row{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;width:100%}
+.rank-row:first-child{border-top:0}
+.rank-n{font-family:var(--f-display);font-size:22px;text-align:center;color:var(--muted)}
+.rank-row:nth-child(-n+3) .rank-n{color:var(--accent)}
+.rank-main{min-width:0;display:flex;flex-direction:column;gap:2px}
+.rank-name{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank-side{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:500;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.accent{background:var(--accent-soft);color:var(--accent)}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.line{border:1px solid var(--line);color:var(--muted)}
+.tag{display:inline-block;background:var(--tag);color:var(--tag-ink);font-family:var(--f-num);font-weight:600;padding:2px 8px;border-radius:4px;transform:rotate(-1.5deg)}
+.price{font-family:var(--f-num);font-weight:600;font-variant-numeric:tabular-nums}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.between{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.search{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px;font:inherit;color:var(--ink)}
+.cats{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.cats button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;white-space:nowrap}
+.cats button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.back{border:0;background:transparent;padding:0;color:var(--accent);font-weight:500;align-self:flex-start}
+.store{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
+.store:first-of-type{border-top:0}
+.store.best{background:color-mix(in srgb,var(--tag) 12%,transparent)}
+.report{display:flex;gap:6px}
+.report button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 10px;font-size:12.5px}
+.btn{border:0;background:var(--accent);color:#fff;border-radius:12px;padding:13px 16px;font-weight:700;width:100%}
+.btn.ghost{background:var(--surface);color:var(--accent);border:1px solid var(--accent)}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stepper button{border:0;background:var(--bg);width:34px;height:32px;font-size:17px}
+.stepper span{min-width:32px;text-align:center;font-family:var(--f-num)}
+.li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px 14px;border-top:1px solid var(--line)}
+.li:first-child{border-top:0}
+.li>div:first-child{min-width:0}
+.group{display:flex;flex-direction:column;gap:8px;padding:14px;border-top:1px dashed var(--line)}
+.group:first-of-type{border-top:0}
+.stop{font-family:var(--f-display);background:var(--ink);color:var(--surface);width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;font-size:13px;flex:none}
+.big{font-family:var(--f-num);font-size:28px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.bar{height:12px;background:var(--bg);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--good);border-radius:999px}
+.bar.over i{background:var(--bad)}
+.bar.near i{background:var(--warn)}
+.limits{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.limit{border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.form label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted);min-width:0}
+.form .full{grid-column:1/-1}
+.form input,.form select,.sheet input,.sheet select{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px 12px;font:inherit;width:100%;min-width:0}
+.del{border:0;background:transparent;color:var(--muted);font-size:13px;padding:4px}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.tabbar-in{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tabbar button{border:0;background:transparent;padding:9px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;color:var(--muted);position:relative}
+.tabbar button svg{width:22px;height:22px}
+.tabbar button[aria-current="page"]{color:var(--accent);font-weight:700}
+.badge{position:absolute;top:5px;left:calc(50% + 6px);background:var(--bad);color:#fff;font-size:10.5px;font-family:var(--f-num);border-radius:999px;padding:0 5px;line-height:16px}
+.sheet{position:fixed;inset:0;z-index:20;background:rgba(10,14,28,.45);display:flex;align-items:flex-end;justify-content:center}
+.sheet-in{background:var(--surface);width:100%;max-width:480px;border-radius:18px 18px 0 0;padding-top:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px;max-height:88%;overflow:auto}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:999px;font-size:13.5px;max-width:calc(100% - 32px)}
+.photo{position:relative;border:1.5px dashed var(--line);border-radius:12px;padding:14px;align-items:center;justify-content:center;text-align:center;cursor:pointer;color:var(--accent)!important;font-weight:500;min-height:88px}
+.photo img{max-height:220px;width:auto;object-fit:contain;border-radius:8px}
+.photo input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.photo:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.empty{padding:28px 16px;text-align:center;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.rank-row,.cats button,.seg button{transition:background .15s,color .15s}}
+</style>
+
+<div class="app">
+  <header class="top"><div class="wrap top-row" id="top"></div><div class="sample wrap" id="sampleBar"></div></header>
+  <main class="wrap" id="view"></main>
+</div>
+<nav class="tabbar" aria-label="메뉴"><div class="tabbar-in" id="tabs"></div></nav>
+<div class="sheet" id="sheet" hidden></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+/* ---------- text ---------- */
+const T = {
+ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는지',sample:'샘플 데이터로 만든 시제품이에요. 가격·재고는 실제와 달라요.',
+ settings:'설정',tHome:'인기',tCompare:'가격비교',tList:'장바구니',tTrack:'면세한도',
+ tourist:'관광객 인기',local:'현지인 인기',touristDesc:'한국·대만 여행자가 이번 주 많이 찾은 상품',localDesc:'일본 현지인이 실제로 많이 사는 상품',
+ lowest:'최저',localRank:'현지 {n}위',tourRank:'관광객 {n}위',hidden:'관광객은 잘 모르는 템',rising:'시즌 급상승',
+ refundTitle:'11월 1일부터 일본 면세가 환급 방식으로 바뀌었어요',refundBody:'매장에서는 세금 포함 가격을 내고, 출국할 때 공항 세관에서 확인받은 뒤 소비세를 돌려받아요. 한 매장에서 하루 5,000엔(세전) 이상 사야 대상이에요. 환급 수수료는 매장마다 달라요.',
+ search:'상품 이름으로 찾기 (예: 동전파스)',all:'전체',med:'의약품',cos:'화장품',food:'과자·식품',life:'생활용품',
+ back:'← 목록',storesNear:'{city} 근처 매장',taxIn:'세금 포함',afterRefund:'면세 환급 후',notCarried:'취급 안 함',
+ ok:'재고 있음',low:'얼마 안 남음',out:'품절',agoMin:'{m}분 전',agoH:'{h}시간 전',people:'{n}명 제보',mine:'내 제보',
+ have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',coupon:'쿠폰 {p}% ({min} 이상)',couponAny:'쿠폰 {p}%',
+ addList:'장바구니에 담기',added:'장바구니에 담았어요',inList:'장바구니에 {q}개 있어요',
+ listTitle:'내 장바구니',listEmpty:'아직 담은 상품이 없어요. 인기나 가격비교 탭에서 담아보세요.',
+ planTitle:'추천 쇼핑 동선',planDesc:'품절 제보가 있는 매장은 빼고, 면세 기준과 쿠폰까지 따져서 고른 조합이에요.',
+ totalNet:'예상 실결제 (환급 후)',stores:'매장 {n}곳',
+ taxfreeOk:'면세 대상',taxfreeNo:'면세 기준 미달',needMore:'¥{need} 더 사면 약 ¥{ref} 환급',refund:'환급 예정 ¥{r}',couponApplied:'쿠폰 -¥{c}',
+ altCheap:'각 상품 최저가 매장만 골라 사기',altOne:'한 곳에서 다 사기 ({s})',altNone:'한 곳에서 다 살 수 있는 매장 없음',save:'¥{s} 절약',
+ unavailable:'근처에서 구할 수 없음: {names}',done:'구매 완료로 면세한도에 기록',recorded:'면세한도 트래커에 기록했어요',
+ trackTitle:'입국 면세한도',trackKR:'한국 입국 기준 · 1인 미화 800달러',trackTW:'대만 입국 기준 · 1인 NT$20,000',
+ used:'사용',left:'남음',over:'초과',
+ alcohol:'술',tobacco:'담배',perfume:'향수',general:'일반 물품',
+ alcKR:'2병 · 합계 2L · $400 이하',alcTW:'1L 이하',tobLim:'200개비 이하',perfKR:'100ml 이하',
+ taxEst:'예상 세금 (간이세율 20% 가정)',declare:'자진신고하면',penalty:'신고 안 하고 적발되면',
+ declareNote:'관세 30% 감면(최대 20만 원)',penaltyNote:'가산세 40%',
+ twOver:'초과분은 품목별 세율로 공항에서 과세돼요. 금액이 크면 자진신고하세요.',
+ tipKR:'출국 전 국내 면세점에서 산 물건도 합산돼요. 직접 추가해 두세요.',
+ addItem:'구매 직접 추가',name:'물건 이름',yen:'가격 (엔)',type:'종류',amount:'용량/수량',ml:'ml',sticks:'개비',add:'추가',
+ example:'예시',clearEx:'예시 지우기',purchases:'구매 기록',noPurch:'기록된 구매가 없어요.',
+ lang:'언어',home:'국적 (입국 기준)',city:'쇼핑 지역',rates:'환율 (예시값, 직접 수정)',rKRW:'1엔 = 원',rTWD:'1엔 = 대만달러',rUSD:'1달러 = 엔',close:'닫기',
+ korea:'한국',taiwan:'대만',tokyo:'도쿄 신주쿠',osaka:'오사카 난바',disclaim:'세금 계산은 참고용이에요. 정확한 금액은 세관에서 확정돼요.',m:'m',
+ snapBtn:'가격표 찍어서 제보',snapTitle:'가격표 제보',snapDesc:'가격표나 선반 라벨을 찍으면 상품과 가격을 읽어서 채워줘요. 틀린 부분은 고쳐서 올려주세요.',
+ store:'매장',photo:'가격표 사진 찍기 또는 고르기',photoAgain:'다시 찍기',readTag:'사진에서 읽기',reading:'읽는 중… (10~30초)',stop:'중지',
+ noAuto:'이 화면에서는 자동 읽기를 쓸 수 없어요. 직접 입력해 주세요.',product:'상품',choose:'상품 고르기',priceExcl:'세전 가격 (엔)',inclIs:'세금 포함 {p}',stockNow:'지금 재고',
+ warnDiff:'평소 가격({p})과 차이가 커요. 숫자를 한 번 더 확인해 주세요.',submitRep:'제보하기',localOnly:'시제품에서는 제보가 이 기기에만 저장돼요.',
+ repDone:'제보했어요. +10점',points:'내 제보 포인트 {n}점',snapPitch:'가격표 한 장이 다음 여행자의 헛걸음을 막아줘요.',myPrice:'내 가격 제보 · {a}',
+ conf_high:'인식 확실',conf_medium:'인식 보통',conf_low:'인식 불확실',sale:'세일가',
+ shareLive:'공유 중 · 여행자 {n}명의 제보가 실시간으로 반영돼요',shareLoading:'다른 여행자 제보를 불러오는 중…',
+ shareSlow:'다른 여행자 제보를 아직 불러오지 못했어요. 내 제보는 이 기기에 먼저 저장돼요.',shareRO:'보기 권한이라 내 제보는 이 기기에만 저장돼요.',
+ shareOff:'이 화면에서는 공유가 안 돼서 제보가 이 기기에만 저장돼요.',sharedOk:'제보했어요. 다른 여행자에게도 보여요. +10점',
+ reportedShared:'제보 고마워요. 다른 여행자에게도 보여요.',shareFail:'공유에 실패해서 이 기기에만 저장했어요.',
+ errDenied:'자동 읽기를 허용하지 않았어요. 직접 입력해 주세요.',errRate:'요청이 많아요. 잠시 후 다시 눌러 주세요.',errRead:'가격표를 읽지 못했어요. 더 가까이서 다시 찍어 주세요.',errGeneric:'읽기에 실패했어요. 직접 입력해 주세요.'},
+zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'這是用範例資料做的原型，價格與庫存非真實資訊。',
+ settings:'設定',tHome:'熱門',tCompare:'比價',tList:'購物清單',tTrack:'免稅額度',
+ tourist:'觀光客熱門',local:'在地人熱門',touristDesc:'本週韓國、台灣旅客最常找的商品',localDesc:'日本在地人實際常買的商品',
+ lowest:'最低',localRank:'在地第{n}名',tourRank:'觀光客第{n}名',hidden:'觀光客少知道',rising:'季節熱賣',
+ refundTitle:'11月1日起日本免稅改為退稅制',refundBody:'在店內先付含稅價，出境時經機場海關確認後退還消費稅。同一店家同一天購買滿5,000日圓（未稅）才適用。退稅手續費依店家而異。',
+ search:'搜尋商品名稱（例：樂膚貼）',all:'全部',med:'醫藥品',cos:'美妝',food:'零食食品',life:'生活用品',
+ back:'← 列表',storesNear:'{city}附近店家',taxIn:'含稅',afterRefund:'退稅後',notCarried:'未販售',
+ ok:'有貨',low:'剩不多',out:'缺貨',agoMin:'{m}分鐘前',agoH:'{h}小時前',people:'{n}人回報',mine:'我的回報',
+ have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',coupon:'優惠券 {p}%（滿{min}）',couponAny:'優惠券 {p}%',
+ addList:'加入購物清單',added:'已加入購物清單',inList:'清單裡有{q}個',
+ listTitle:'我的購物清單',listEmpty:'還沒有加入商品，到熱門或比價頁加入吧。',
+ planTitle:'推薦購物路線',planDesc:'排除有缺貨回報的店家，並考量免稅門檻與優惠券後的組合。',
+ totalNet:'預估實付（退稅後）',stores:'{n}間店',
+ taxfreeOk:'可免稅',taxfreeNo:'未達免稅門檻',needMore:'再買¥{need}約可退¥{ref}',refund:'預計退稅 ¥{r}',couponApplied:'優惠券 -¥{c}',
+ altCheap:'每樣都去最便宜的店買',altOne:'全部在同一家買（{s}）',altNone:'沒有一家能買齊',save:'省 ¥{s}',
+ unavailable:'附近買不到：{names}',done:'標記已購買並記入免稅額度',recorded:'已記入免稅額度',
+ trackTitle:'入境免稅額度',trackKR:'韓國入境標準・每人 US$800',trackTW:'台灣入境標準・每人 NT$20,000',
+ used:'已用',left:'剩餘',over:'超過',
+ alcohol:'酒',tobacco:'菸',perfume:'香水',general:'一般物品',
+ alcKR:'2瓶・合計2L・US$400以下',alcTW:'1公升以下',tobLim:'200支以下',perfKR:'100ml以下',
+ taxEst:'預估稅額（假設簡易稅率20%）',declare:'主動申報',penalty:'未申報被查到',
+ declareNote:'關稅減免30%（最多20萬韓元）',penaltyNote:'加罰40%',
+ twOver:'超過部分會在機場依品項稅率課稅，金額大時請主動申報。',
+ tipKR:'出國前在韓國免稅店買的也要合計，請自行加入。',
+ addItem:'手動新增購買',name:'物品名稱',yen:'價格（日圓）',type:'種類',amount:'容量/數量',ml:'ml',sticks:'支',add:'新增',
+ example:'範例',clearEx:'清除範例',purchases:'購買紀錄',noPurch:'還沒有購買紀錄。',
+ lang:'語言',home:'國籍（入境標準）',city:'購物地區',rates:'匯率（範例值，可自行修改）',rKRW:'1日圓 = 韓元',rTWD:'1日圓 = 新台幣',rUSD:'1美元 = 日圓',close:'關閉',
+ korea:'韓國',taiwan:'台灣',tokyo:'東京 新宿',osaka:'大阪 難波',disclaim:'稅額僅供參考，實際金額以海關為準。',m:'m',
+ snapBtn:'拍價格標籤回報',snapTitle:'價格標籤回報',snapDesc:'拍下價格標籤或貨架標示，會自動讀取商品與價格。有錯請修正後再送出。',
+ store:'店家',photo:'拍攝或選擇價格標籤照片',photoAgain:'重拍',readTag:'從照片讀取',reading:'讀取中…（約10~30秒）',stop:'停止',
+ noAuto:'此畫面無法自動讀取，請手動輸入。',product:'商品',choose:'選擇商品',priceExcl:'未稅價格（日圓）',inclIs:'含稅 {p}',stockNow:'目前庫存',
+ warnDiff:'與平常價格（{p}）差距大，請再確認一次。',submitRep:'送出回報',localOnly:'原型中回報只存在這台裝置。',
+ repDone:'已回報，+10點',points:'我的回報點數 {n}點',snapPitch:'一張價格標籤，能讓下一位旅客少跑一趟。',myPrice:'我的價格回報・{a}',
+ conf_high:'辨識清楚',conf_medium:'辨識普通',conf_low:'辨識不確定',sale:'特價',
+ shareLive:'共享中・{n}位旅客的回報即時更新',shareLoading:'正在載入其他旅客的回報…',
+ shareSlow:'還無法載入其他旅客的回報，你的回報先存在這台裝置。',shareRO:'你只有檢視權限，回報只存在這台裝置。',
+ shareOff:'此畫面無法共享，回報只存在這台裝置。',sharedOk:'已回報，其他旅客也看得到。+10點',
+ reportedShared:'謝謝回報，其他旅客也看得到。',shareFail:'共享失敗，已先存在這台裝置。',
+ errDenied:'未允許自動讀取，請手動輸入。',errRate:'請求太多，請稍後再試。',errRead:'無法讀取標籤，請靠近一點再拍。',errGeneric:'讀取失敗，請手動輸入。'}
+};
+const t=(k,v={})=>{let s=(T[S.lang]&&T[S.lang][k])||T.ko[k]||k;for(const x in v)s=s.replaceAll('{'+x+'}',v[x]);return s;};
+
+/* ---------- sample data ---------- */
+const PRODUCTS=[
+ {id:'roihi',cat:'med',base:980,tr:1,lr:15,ja:'ロイヒつぼ膏 156枚',ko:'로이히츠보코 동전파스 156매',zh:'樂膚貼 圓形痠痛貼布 156枚'},
+ {id:'kyusoku',cat:'life',base:560,tr:2,lr:21,ja:'休足時間 18枚',ko:'휴족시간 18매',zh:'休足時間 足部舒緩貼 18枚'},
+ {id:'eyebon',cat:'med',base:780,tr:3,lr:24,ja:'アイボン 500ml',ko:'아이봉 세안액 500ml',zh:'小林製藥 Eyebon 洗眼液 500ml'},
+ {id:'sante',cat:'med',base:600,tr:4,lr:17,ja:'サンテFXネオ 12ml',ko:'산테 FX 네오 안약',zh:'參天 Sante FX Neo 眼藥水'},
+ {id:'cabbagin',cat:'med',base:1980,tr:5,lr:26,ja:'キャベジンコーワα 300錠',ko:'캬베진 코와α 300정',zh:'Cabbagin 腸胃錠 300錠'},
+ {id:'ryukaku',cat:'med',base:700,tr:6,lr:19,ja:'龍角散ダイレクト ミント 16包',ko:'용각산 다이렉트 민트 16포',zh:'龍角散 Direct 薄荷 16包'},
+ {id:'melano',cat:'cos',base:1100,tr:7,lr:12,ja:'メラノCC 薬用美容液',ko:'멜라노 CC 미용액',zh:'Melano CC 美容液',
+   lk:'현지에서도 꾸준한 미백 미용액',lz:'在地也長賣的美白精華'},
+ {id:'biore',cat:'cos',base:750,tr:8,lr:9,ja:'ビオレUV アクアリッチ',ko:'비오레 UV 아쿠아리치 선크림',zh:'Bioré UV 水感防曬',
+   lk:'현지인도 사계절 쓰는 선크림',lz:'在地人四季都用的防曬'},
+ {id:'kitkat',cat:'food',base:420,tr:9,lr:30,ja:'キットカット 抹茶 大袋',ko:'킷캣 말차 대용량',zh:'KitKat 抹茶 大包裝'},
+ {id:'meguri',cat:'life',base:1100,tr:10,lr:6,ja:'めぐりズム ホットアイマスク 12枚',ko:'메구리즘 온열 안대 12매',zh:'蒸氣眼罩 12枚',
+   lk:'출퇴근 직장인 피로 관리템',lz:'通勤上班族的放鬆小物'},
+ {id:'canmake',cat:'cos',base:940,tr:11,lr:22,ja:'キャンメイク マシュマロフィニッシュパウダー',ko:'캔메이크 마시멜로 피니시 파우더',zh:'CANMAKE 棉花糖蜜粉'},
+ {id:'ohta',cat:'med',base:1300,tr:12,lr:20,ja:'太田胃散 75g',ko:'오타이산 위장약',zh:'太田胃散'},
+ {id:'hadalabo',cat:'cos',base:800,tr:14,lr:1,ja:'肌ラボ 極潤ヒアルロン液 170ml',ko:'하다라보 고쿠준 히알루론 로션',zh:'肌研 極潤玻尿酸化妝水',
+   lk:'싸고 넉넉해서 리필로 꾸준히 사요',lz:'便宜量多，在地人固定回購'},
+ {id:'hatomugi',cat:'cos',base:600,tr:20,lr:2,ja:'ハトムギ化粧水 500ml',ko:'하토무기 화장수 500ml',zh:'薏仁化妝水 500ml',
+   lk:'몸에도 듬뿍 쓰는 가성비 화장수',lz:'全身都能用的高CP化妝水'},
+ {id:'loxonin',cat:'med',base:620,tr:18,lr:3,ja:'ロキソニンS 12錠',ko:'록소닌 S 진통제 12정',zh:'Loxonin S 止痛藥 12錠',
+   lk:'일본 가정 상비 진통제. 약사 있는 매장에서만 팔아요',lz:'日本家庭常備止痛藥，需有藥師的店才買得到'},
+ {id:'kairo',cat:'life',base:600,tr:19,lr:4,hot:true,ja:'ホッカイロ 貼る 30個',ko:'핫카이로 붙이는 핫팩 30개',zh:'HOKKAIRO 暖暖包 30入',
+   lk:'11월부터 수요가 확 느는 겨울 필수품',lz:'11月起需求大增的冬季必備'},
+ {id:'lulu',cat:'med',base:1500,tr:30,lr:5,hot:true,ja:'ルルアタックEX 24錠',ko:'루루 어택 EX 감기약',zh:'LuLu Attack EX 感冒藥',
+   lk:'감기철 현지인 상비약',lz:'感冒季在地人常備藥'},
+ {id:'netsu',cat:'med',base:450,tr:25,lr:7,ja:'熱さまシート 16枚',ko:'네츠사마 쿨링시트 16매',zh:'退熱貼 16枚',
+   lk:'아이 있는 집 상비템',lz:'有小孩家庭的常備品'},
+ {id:'curel',cat:'cos',base:1800,tr:16,lr:8,ja:'キュレル 潤浸保湿フェイスクリーム',ko:'큐렐 보습 크림',zh:'Curél 潤浸保濕霜',
+   lk:'건조한 겨울 민감피부용',lz:'乾燥冬季的敏感肌保養'},
+ {id:'calorie',cat:'food',base:200,tr:28,lr:10,ja:'カロリーメイト ブロック 4本',ko:'칼로리메이트 블록 4개입',zh:'CalorieMate 營養口糧 4條',
+   lk:'바쁜 직장인 간편식',lz:'忙碌上班族的快速一餐'},
+ {id:'minon',cat:'cos',base:1500,tr:22,lr:11,ja:'ミノン アミノモイスト 化粧水',ko:'미논 아미노 모이스트 로션',zh:'MINON 胺基酸保濕化妝水',
+   lk:'민감피부 현지인 스테디셀러',lz:'敏感肌在地人的長銷品'},
+ {id:'lipo',cat:'med',base:1100,tr:35,lr:13,ja:'リポビタンD 10本',ko:'리포비탄 D 10병',zh:'力保美達 10瓶',
+   lk:'야근할 때 찾는 영양드링크',lz:'加班必備的營養飲料'},
+];
+const P=Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
+const CHAINS=[
+ {id:'donki',ko:'돈키호테',zh:'唐吉訶德',ja:'ドン・キホーテ',f:.97,cp:{p:5,min:10000}},
+ {id:'matsukiyo',ko:'마츠모토키요시',zh:'松本清',ja:'マツモトキヨシ',f:1.0,cp:{p:7,min:10000}},
+ {id:'cocokara',ko:'코코카라파인',zh:'Cocokara Fine',ja:'ココカラファイン',f:1.01,cp:{p:5,min:5000}},
+ {id:'sugi',ko:'스기약국',zh:'杉藥局',ja:'スギ薬局',f:.95,cp:null},
+ {id:'daikoku',ko:'다이코쿠드럭',zh:'大國藥妝',ja:'ダイコクドラッグ',f:.93,cp:null},
+ {id:'bic',ko:'빅카메라',zh:'Bic Camera',ja:'ビックカメラ',f:1.03,cp:{p:7,min:0}},
+];
+const DIST={tokyo:{donki:240,matsukiyo:120,cocokara:410,sugi:650,daikoku:880,bic:330},
+            osaka:{donki:180,matsukiyo:300,cocokara:520,sugi:760,daikoku:140,bic:610}};
+
+function rnd(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}h^=h>>>13;h=Math.imul(h,0x5bd1e995);h^=h>>>15;return (h>>>0)/4294967296;}
+function stores(){return CHAINS.map(c=>({...c,sid:S.city+'-'+c.id,dist:DIST[S.city][c.id]})).sort((a,b)=>a.dist-b.dist);}
+function latestPrice(k){
+  const mine=S.priceRep&&S.priceRep[k],sh=SHARED.price[k];
+  if(mine&&(!sh||mine.at>=sh.at))return{b:mine.b,at:mine.at,mine:true};
+  return sh?{b:sh.b,at:sh.at,mine:sh.mine}:null;
+}
+function priceAt(st,p){
+  const r=latestPrice(st.sid+'|'+p.id);
+  if(r)return r.b;
+  return basePrice(st,p);
+}
+function basePrice(st,p){
+  if(st.id==='bic'&&p.cat==='food')return null;
+  if(st.id!=='donki'&&rnd(st.sid+p.id+'c')<.1)return null;
+  const x=p.base*st.f*(.94+rnd(st.sid+p.id)*.14);
+  return Math.max(98,Math.round(x/10)*10-2);
+}
+const rate=p=>p.cat==='food'?.08:.10;
+const withTax=(b,p)=>Math.floor(b*(1+rate(p)));
+function stockOf(st,p){
+  const k=st.sid+'|'+p.id,u=S.reports[k],sh=SHARED.stock[k];
+  const mins=at=>Math.max(0,Math.round((Date.now()-at)/60000));
+  if(sh&&(!u||sh.at>u.at))return{st:sh.st,mine:sh.mine,ago:mins(sh.at),n:sh.n};
+  if(u)return{st:u.st,mine:true,ago:mins(u.at),n:sh&&sh.st===u.st?sh.n:1};
+  let r=rnd(k+'s');if(p.hot)r*=.55;
+  return{st:r<.12?'out':r<.3?'low':'ok',ago:5+Math.floor(rnd(k+'m')*170),n:1+Math.floor(rnd(k+'n')*9)};
+}
+
+/* ---------- state ---------- */
+function samplePurchases(){return[
+ {n:{ko:'유니클로 겨울옷',zh:'UNIQLO 冬裝'},yen:14900,type:'general',ex:true},
+ {n:{ko:'공항 면세점 위스키',zh:'機場免稅店威士忌'},yen:8800,type:'alcohol',vol:700,ex:true},
+ {n:{ko:'캐릭터 굿즈',zh:'角色周邊'},yen:6200,type:'general',ex:true}];}
+function defaults(){return{lang:'ko',home:'KR',city:'tokyo',rates:{krw:9.4,twd:.21,usd:150},tab:'home',rank:'tourist',detail:null,q:'',cat:'all',
+ list:[{id:'roihi',q:2},{id:'kyusoku',q:3},{id:'eyebon',q:1},{id:'hadalabo',q:1},{id:'kairo',q:1}],purchases:samplePurchases(),reports:{},priceRep:{},points:0};}
+let S;try{S=Object.assign(defaults(),JSON.parse(localStorage.getItem('jsa-v1')||'{}'));}catch(e){S=defaults();}
+function save(){try{localStorage.setItem('jsa-v1',JSON.stringify(S));}catch(e){}}
+
+/* ---------- formatting ---------- */
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const yen=n=>'¥'+Math.round(n).toLocaleString('ja-JP');
+const homeAmt=n=>S.home==='KR'?'≈ '+Math.round(n*S.rates.krw).toLocaleString('ko-KR')+'원':'≈ NT$'+Math.round(n*S.rates.twd).toLocaleString('zh-TW');
+const pname=p=>p[S.lang]||p.ko;
+const sname=s=>s[S.lang]||s.ko;
+const ago=m=>m<60?t('agoMin',{m}):t('agoH',{h:Math.round(m/60)});
+function lowestOf(p){let best=null;for(const st of stores()){const b=priceAt(st,p);if(b!=null&&(!best||b<best.b))best={b,st};}return best;}
+function stockPill(s){const cls={ok:'good',low:'warn',out:'bad'}[s.st];
+  const meta=(s.mine?t('mine')+' · ':'')+ago(s.ago)+(s.n>1||!s.mine?' · '+t('people',{n:s.n||1}):'');
+  return `<span class="pill ${cls}">${t(s.st)}</span><span class="small muted">${meta}</span>`;}
+
+/* ---------- views ---------- */
+function renderTop(){
+  document.documentElement.lang=S.lang==='zh'?'zh-Hant':'ko';
+  document.getElementById('top').innerHTML=`<div class="brand">${t('app')}<small>${t('sub')}</small></div>
+   <button class="chip-btn" data-a="settings">${t(S.city)} · ${t('settings')}</button>`;
+  document.getElementById('sampleBar').textContent=t('sample');
+}
+const ICONS={
+ home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10l8-6 8 6v10h-5v-6H9v6z"/></svg>',
+ compare:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h11M4 12h16M4 17h8"/><circle cx="18" cy="7" r="2"/><circle cx="15" cy="17" r="2"/></svg>',
+ list:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 4h2l2.4 11h11L21 7H6.2"/><circle cx="9" cy="19.5" r="1.4"/><circle cx="17" cy="19.5" r="1.4"/></svg>',
+ track:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>'};
+function renderTabs(){
+  const n=S.list.reduce((a,b)=>a+b.q,0);
+  document.getElementById('tabs').innerHTML=[['home','tHome'],['compare','tCompare'],['list','tList'],['track','tTrack']].map(([k,l])=>
+   `<button data-a="tab" data-v="${k}" ${S.tab===k?'aria-current="page"':''}>${ICONS[k]}<span>${t(l)}</span>${k==='list'&&n?`<span class="badge">${n}</span>`:''}</button>`).join('');
+}
+
+function viewHome(){
+  const tour=S.rank==='tourist';
+  const items=[...PRODUCTS].sort((a,b)=>tour?a.tr-b.tr:a.lr-b.lr).slice(0,12);
+  const rows=items.map((p,i)=>{
+    const lo=lowestOf(p);
+    const hidden=!tour&&p.tr-p.lr>=10;
+    const note=!tour&&(S.lang==='zh'?p.lz:p.lk);
+    return `<button class="rank-row" data-a="open" data-v="${p.id}">
+      <span class="rank-n">${i+1}</span>
+      <span class="rank-main"><span class="rank-name">${esc(pname(p))}</span><span class="jp">${p.ja}</span>
+        ${note?`<span class="small muted">${esc(note)}</span>`:''}
+        <span class="row">${tour?`<span class="pill line">${t('localRank',{n:p.lr})}</span>`:`<span class="pill line">${t('tourRank',{n:p.tr})}</span>`}
+        ${hidden?`<span class="pill accent">${t('hidden')}</span>`:''}${p.hot?`<span class="pill bad">${t('rising')}</span>`:''}</span></span>
+      <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span><span class="small muted">${t('lowest')} · ${esc(sname(lo.st))}</span>`:''}</span>
+    </button>`;}).join('');
+  return `<div class="seg" role="group"><button data-a="rank" data-v="tourist" aria-pressed="${tour}">${t('tourist')}</button><button data-a="rank" data-v="local" aria-pressed="${!tour}">${t('local')}</button></div>
+   <p class="small muted" style="margin:-6px 0 0">${tour?t('touristDesc'):t('localDesc')}</p>
+   <div class="card rank">${rows}</div>
+   <div class="notice"><b>${t('refundTitle')}</b><span>${t('refundBody')}</span></div>`;
+}
+
+function filtered(){
+  const q=S.q.trim().toLowerCase();
+  return PRODUCTS.filter(p=>(S.cat==='all'||p.cat===S.cat)&&(!q||[p.ko,p.zh,p.ja].some(x=>x.toLowerCase().includes(q))));
+}
+function resultsHTML(){
+  const list=filtered();
+  if(!list.length)return `<div class="empty">—</div>`;
+  return list.map(p=>{const lo=lowestOf(p);return `<button class="rank-row" style="grid-template-columns:1fr auto" data-a="open" data-v="${p.id}">
+   <span class="rank-main"><span class="rank-name">${esc(pname(p))}</span><span class="jp">${p.ja}</span></span>
+   <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span><span class="small muted">${esc(sname(lo.st))}</span>`:''}</span></button>`;}).join('');
+}
+function viewCompare(){
+  if(S.detail&&P[S.detail])return viewDetail(P[S.detail]);
+  const cats=['all','med','cos','food','life'];
+  return `<div class="card pad between"><div style="min-width:0;display:flex;flex-direction:column;gap:2px"><h3>${t('snapPitch')}</h3><span class="small muted">${t('points',{n:S.points||0})}</span>
+       <span class="small" id="shareLine" style="color:${SHARE.state==='live'?'var(--good)':'var(--muted)'}">${shareNote()}</span></div>
+     <button class="chip-btn" data-a="snap" data-v="">${t('snapBtn')}</button></div>
+   <input class="search" id="q" type="search" placeholder="${t('search')}" value="${esc(S.q)}" autocomplete="off">
+   <div class="cats" role="group">${cats.map(c=>`<button data-a="cat" data-v="${c}" aria-pressed="${S.cat===c}">${t(c)}</button>`).join('')}</div>
+   <div class="card rank" id="results">${resultsHTML()}</div>`;
+}
+function viewDetail(p){
+  const rows=stores().map(st=>({st,b:priceAt(st,p),s:stockOf(st,p)}));
+  const avail=rows.filter(r=>r.b!=null);
+  const minB=Math.min(...avail.filter(r=>r.s.st!=='out').map(r=>r.b));
+  const inList=S.list.find(l=>l.id===p.id);
+  const body=rows.sort((a,b)=>(a.b??1e9)-(b.b??1e9)).map(r=>{
+    const best=r.b===minB&&r.s.st!=='out';
+    const cp=r.st.cp?(r.st.cp.min?t('coupon',{p:r.st.cp.p,min:yen(r.st.cp.min)}):t('couponAny',{p:r.st.cp.p})):'';
+    return `<div class="store ${best?'best':''}">
+     <div class="between"><div><h3>${esc(sname(r.st))}</h3><span class="small muted num">${r.st.dist}${t('m')}</span>${cp?` <span class="pill line">${cp}</span>`:''}</div>
+      <div style="text-align:right">${r.b==null?`<span class="small muted">${t('notCarried')}</span>`:
+        `${best?`<span class="tag">${yen(withTax(r.b,p))}</span>`:`<span class="price">${yen(withTax(r.b,p))}</span>`}
+         <div class="small muted">${t('afterRefund')} <span class="num">${yen(r.b)}</span></div>
+         ${(()=>{const lp=latestPrice(r.st.sid+'|'+p.id);if(!lp)return'';const a=ago(Math.max(0,Math.round((Date.now()-lp.at)/60000)));
+           return lp.mine?`<span class="pill accent">${t('myPrice',{a})}</span>`:`<span class="pill good">${t('people',{n:1})} · ${a}</span>`;})()}`}</div></div>
+     ${r.b==null?'':`<div class="between"><div class="row">${stockPill(r.s)}</div>
+      <div class="report"><button data-a="report" data-v="${r.st.sid}|${p.id}|ok">${t('have')}</button><button data-a="report" data-v="${r.st.sid}|${p.id}|out">${t('soldout')}</button></div></div>`}
+    </div>`;}).join('');
+  return `<button class="back" data-a="back">${t('back')}</button>
+   <div><h2>${esc(pname(p))}</h2><div class="jp">${p.ja}</div>
+    <div class="row" style="margin-top:8px"><span class="pill line">${t('tourRank',{n:p.tr})}</span><span class="pill line">${t('localRank',{n:p.lr})}</span>${p.hot?`<span class="pill bad">${t('rising')}</span>`:''}</div></div>
+   <div class="between"><span class="small muted">${t('storesNear',{city:t(S.city)})}</span><span class="small muted">${t('taxIn')} / ${t('afterRefund')}</span></div>
+   <div class="card">${body}</div>
+   <div class="row" style="justify-content:space-between">
+     <div class="stepper"><button data-a="dq" data-v="-1" aria-label="-">−</button><span id="dq">${S._dq||1}</span><button data-a="dq" data-v="1" aria-label="+">+</button></div>
+     <span class="small muted">${inList?t('inList',{q:inList.q}):''}</span></div>
+   <button class="btn" data-a="add" data-v="${p.id}">${t('addList')}</button>
+   <button class="btn ghost" data-a="snap" data-v="${p.id}">${t('snapBtn')}</button>`;
+}
+
+/* ---------- planner ---------- */
+function computePlan(){
+  const sts=stores();
+  const items=S.list.map(l=>({p:P[l.id],q:l.q})).filter(x=>x.p);
+  const opts=items.map(it=>sts.map((st,si)=>{const b=priceAt(st,it.p);const s=stockOf(st,it.p);return(b!=null&&s.st!=='out')?{si,b}:null;}).filter(Boolean));
+  const ok=items.map((_,i)=>opts[i].length>0);
+  const idx=items.map((_,i)=>i).filter(i=>ok[i]);
+  function evalA(asg){
+    const g={};
+    idx.forEach(i=>{const si=asg[i];const o=opts[i].find(o=>o.si===si);(g[si]=g[si]||{si,lines:[],sub:0,tax:0});
+      g[si].lines.push({p:items[i].p,q:items[i].q,b:o.b});g[si].sub+=o.b*items[i].q;g[si].tax+=Math.floor(o.b*rate(items[i].p))*items[i].q;});
+    let total=0;const groups=Object.values(g).map(x=>{
+      const st=sts[x.si];const cpn=st.cp&&x.sub>=st.cp.min?Math.floor(x.sub*st.cp.p/100):0;
+      const taxA=Math.floor(x.tax*(1-(cpn?st.cp.p/100:0)));const elig=x.sub>=5000;
+      const paid=x.sub-cpn+taxA;const net=paid-(elig?taxA:0);total+=net;
+      return{...x,st,cpn,taxA,elig,paid,net};});
+    return{total,groups:groups.sort((a,b)=>a.st.dist-b.st.dist)};
+  }
+  function improve(asg){
+    let cur=evalA(asg).total;
+    for(let it=0;it<40;it++){
+      let best=null;
+      for(const i of idx)for(const o of opts[i]){if(o.si===asg[i])continue;const a2=[...asg];a2[i]=o.si;const c=evalA(a2).total;if(c<cur-0.5&&(!best||c<best.c))best={a:a2,c};}
+      const used=[...new Set(idx.map(i=>asg[i]))];
+      for(const from of used)for(let to=0;to<sts.length;to++){if(to===from)continue;const a2=[...asg];let fine=true;
+        for(const i of idx)if(asg[i]===from){if(opts[i].some(o=>o.si===to))a2[i]=to;else{fine=false;break;}}
+        if(!fine)continue;const c=evalA(a2).total;if(c<cur-0.5&&(!best||c<best.c))best={a:a2,c};}
+      if(!best)break;asg=best.a;cur=best.c;
+    }
+    return asg;
+  }
+  const cheap=items.map((_,i)=>ok[i]?opts[i].reduce((a,b)=>b.b<a.b?b:a).si:-1);
+  const cheapEval=evalA(cheap);
+  let single=null;
+  sts.forEach((st,si)=>{if(idx.every(i=>opts[i].some(o=>o.si===si))){const a=items.map(()=>si);const e=evalA(a);if(!single||e.total<single.e.total)single={st,e,a};}});
+  let best=improve(cheap);let bestE=evalA(best);
+  if(single){const a=improve(single.a);const e=evalA(a);if(e.total<bestE.total){best=a;bestE=e;}}
+  return{plan:bestE,cheapEval,single,missing:items.filter((_,i)=>!ok[i]).map(x=>x.p)};
+}
+
+function viewList(){
+  if(!S.list.length)return `<h2>${t('listTitle')}</h2><div class="card empty">${t('listEmpty')}</div>`;
+  const items=S.list.map(l=>`<div class="li"><div><div class="rank-name">${esc(pname(P[l.id]))}</div><div class="jp">${P[l.id].ja}</div></div>
+    <div class="stepper"><button data-a="lq" data-v="${l.id}|-1" aria-label="-">−</button><span>${l.q}</span><button data-a="lq" data-v="${l.id}|1" aria-label="+">+</button></div></div>`).join('');
+  const {plan,cheapEval,single,missing}=computePlan();
+  const groups=plan.groups.map((g,i)=>{
+    const need=5000-g.sub;
+    return `<div class="group">
+      <div class="between"><div class="row"><span class="stop">${i+1}</span><h3>${esc(sname(g.st))}</h3><span class="small muted num">${g.st.dist}${t('m')}</span></div>
+        <span class="price">${yen(g.net)}</span></div>
+      ${g.lines.map(l=>`<div class="between small"><span style="min-width:0">${esc(pname(l.p))} × ${l.q}</span><span class="num muted">${yen(withTax(l.b,l.p)*l.q)}</span></div>`).join('')}
+      <div class="row">${g.elig?`<span class="pill good">${t('taxfreeOk')}</span><span class="pill line">${t('refund',{r:g.taxA.toLocaleString('ja-JP')})}</span>`:
+        `<span class="pill warn">${t('taxfreeNo')}</span><span class="small muted">${t('needMore',{need:need.toLocaleString('ja-JP'),ref:Math.floor(5000*.1).toLocaleString('ja-JP')})}</span>`}
+        ${g.cpn?`<span class="pill accent">${t('couponApplied',{c:g.cpn.toLocaleString('ja-JP')})}</span>`:''}</div>
+    </div>`;}).join('');
+  const alt=(label,total)=>`<div class="between small"><span class="muted" style="min-width:0">${label}</span><span class="num">${yen(total)}${total>plan.total?` <span class="pill good">${t('save',{s:Math.round(total-plan.total).toLocaleString('ja-JP')})}</span>`:''}</span></div>`;
+  return `<h2>${t('listTitle')}</h2><div class="card">${items}</div>
+   <div class="card">
+    <div class="pad" style="display:flex;flex-direction:column;gap:6px;border-bottom:1px solid var(--line)">
+     <h2>${t('planTitle')}</h2><span class="small muted">${t('planDesc')}</span>
+     <div class="between" style="margin-top:6px"><span class="small muted">${t('totalNet')} · ${t('stores',{n:plan.groups.length})}</span></div>
+     <div class="row" style="align-items:baseline"><span class="big">${yen(plan.total)}</span><span class="muted">${homeAmt(plan.total)}</span></div>
+    </div>
+    ${groups}
+    <div class="pad" style="display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line)">
+     ${alt(t('altCheap'),cheapEval.total)}
+     ${single?alt(t('altOne',{s:sname(single.st)}),single.e.total):`<span class="small muted">${t('altNone')}</span>`}
+     ${missing.length?`<span class="small" style="color:var(--bad)">${t('unavailable',{names:missing.map(pname).join(', ')})}</span>`:''}
+    </div>
+   </div>
+   <button class="btn ghost" data-a="done">${t('done')}</button>`;
+}
+
+/* ---------- tracker ---------- */
+function viewTrack(){
+  const KR=S.home==='KR';let gen=0,alcMl=0,alcN=0,alcYen=0,tob=0,perf=0;
+  S.purchases.forEach(x=>{if(x.type==='general')gen+=x.yen;else if(x.type==='alcohol'){alcMl+=x.vol||0;alcN++;alcYen+=x.yen;}else if(x.type==='tobacco')tob+=x.vol||0;else if(x.type==='perfume')perf+=x.vol||0;});
+  const limit=KR?800:20000;const used=KR?gen/S.rates.usd:gen*S.rates.twd;
+  const pct=Math.min(100,used/limit*100);const cls=used>limit?'over':used>limit*.8?'near':'';
+  const fmt=v=>KR?'$'+Math.round(v).toLocaleString('en-US'):'NT$'+Math.round(v).toLocaleString('zh-TW');
+  const usdKrw=S.rates.usd*S.rates.krw;
+  let taxBox='';
+  if(used>limit){
+    if(KR){const tax=(used-limit)*usdKrw*.2;const red=Math.min(tax*.3,200000);
+      const w=n=>Math.round(n/100)*100;
+      taxBox=`<div class="card pad" style="display:flex;flex-direction:column;gap:8px">
+        <span class="small muted">${t('taxEst')}</span>
+        <div class="between"><span>${t('declare')} <span class="small muted">${t('declareNote')}</span></span><span class="price" style="color:var(--good)">${w(tax-red).toLocaleString('ko-KR')}원</span></div>
+        <div class="between"><span>${t('penalty')} <span class="small muted">${t('penaltyNote')}</span></span><span class="price" style="color:var(--bad)">${w(tax*1.4).toLocaleString('ko-KR')}원</span></div>
+        <span class="small muted">${t('disclaim')}</span></div>`;}
+    else taxBox=`<div class="notice"><b>${t('over')} ${fmt(used-limit)}</b><span>${t('twOver')}</span></div>`;
+  }
+  const lim=(label,okv,txt,rule)=>`<div class="limit"><span class="small muted">${label}</span><span class="price" style="color:${okv?'var(--ink)':'var(--bad)'}">${txt}</span><span class="small muted">${rule}</span></div>`;
+  const alcOk=KR?(alcN<=2&&alcMl<=2000&&alcYen/S.rates.usd<=400):alcMl<=1000;
+  const limits=`<div class="limits">
+    ${lim(t('alcohol'),alcOk,(alcN?alcN+'· ':'')+alcMl+'ml',KR?t('alcKR'):t('alcTW'))}
+    ${lim(t('tobacco'),tob<=200,tob+t('sticks'),t('tobLim'))}
+    ${KR?lim(t('perfume'),perf<=100,perf+'ml',t('perfKR')):''}</div>`;
+  const hasEx=S.purchases.some(x=>x.ex);
+  const list=S.purchases.length?S.purchases.map((x,i)=>`<div class="li"><div><div class="rank-name">${esc(typeof x.n==='object'?(x.n[S.lang]||x.n.ko):x.n)}</div>
+     <div class="row small muted"><span>${t(x.type)}${x.vol?` · ${x.vol}${x.type==='tobacco'?t('sticks'):'ml'}`:''}</span>${x.ex?`<span class="pill warn">${t('example')}</span>`:''}</div></div>
+     <div class="row"><span class="price">${yen(x.yen)}</span><button class="del" data-a="delp" data-v="${i}" aria-label="삭제">✕</button></div></div>`).join(''):`<div class="empty">${t('noPurch')}</div>`;
+  return `<div><h2>${t('trackTitle')}</h2><span class="small muted">${KR?t('trackKR'):t('trackTW')}</span></div>
+   <div class="card pad" style="display:flex;flex-direction:column;gap:10px">
+     <div class="between"><span class="small muted">${t('general')} ${t('used')}</span><span class="small muted">${used>limit?t('over'):t('left')} <b class="num">${fmt(Math.abs(limit-used))}</b></span></div>
+     <div class="row" style="align-items:baseline"><span class="big" style="color:${used>limit?'var(--bad)':'var(--ink)'}">${fmt(used)}</span><span class="muted num">/ ${fmt(limit)}</span></div>
+     <div class="bar ${cls}" role="progressbar" aria-valuenow="${Math.round(pct)}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>
+     <span class="small muted">${yen(gen)}</span>
+   </div>
+   ${taxBox}${limits}
+   ${KR?`<p class="small muted" style="margin:0">${t('tipKR')}</p>`:''}
+   <div class="card"><div class="pad between" style="border-bottom:1px solid var(--line)"><h3>${t('purchases')}</h3>${hasEx?`<button class="chip-btn" data-a="clearex">${t('clearEx')}</button>`:''}</div>${list}</div>
+   <form class="card pad form" id="addForm">
+     <h3 class="full">${t('addItem')}</h3>
+     <label class="full">${t('name')}<input id="fName" required maxlength="40"></label>
+     <label>${t('yen')}<input id="fYen" type="number" inputmode="numeric" min="1" required></label>
+     <label>${t('type')}<select id="fType"><option value="general">${t('general')}</option><option value="alcohol">${t('alcohol')}</option><option value="tobacco">${t('tobacco')}</option><option value="perfume">${t('perfume')}</option></select></label>
+     <label class="full" id="fVolWrap" hidden>${t('amount')}<input id="fVol" type="number" inputmode="numeric" min="1"></label>
+     <button class="btn full" type="submit">${t('add')}</button>
+   </form>`;
+}
+
+/* ---------- settings ---------- */
+function openSettings(){
+  const sh=document.getElementById('sheet');
+  sh.innerHTML=`<div class="sheet-in" role="dialog" aria-modal="true" aria-label="${t('settings')}">
+    <div class="between"><h2>${t('settings')}</h2><button class="chip-btn" data-a="closeSheet">${t('close')}</button></div>
+    <div class="form">
+      <label>${t('lang')}<select id="sLang"><option value="ko">한국어</option><option value="zh">繁體中文</option></select></label>
+      <label>${t('home')}<select id="sHome"><option value="KR">${t('korea')}</option><option value="TW">${t('taiwan')}</option></select></label>
+      <label class="full">${t('city')}<select id="sCity"><option value="tokyo">${t('tokyo')}</option><option value="osaka">${t('osaka')}</option></select></label>
+      <span class="full small muted">${t('rates')}</span>
+      <label>${t('rKRW')}<input id="sKRW" type="number" step="0.01" value="${S.rates.krw}"></label>
+      <label>${t('rTWD')}<input id="sTWD" type="number" step="0.001" value="${S.rates.twd}"></label>
+      <label class="full">${t('rUSD')}<input id="sUSD" type="number" step="0.1" value="${S.rates.usd}"></label>
+    </div></div>`;
+  sh.hidden=false;
+  sh.querySelector('#sLang').value=S.lang;sh.querySelector('#sHome').value=S.home;sh.querySelector('#sCity').value=S.city;
+}
+
+/* ---------- price-tag report ---------- */
+let SAMPLE=null,SN=null,snapCtl=null;
+(async()=>{try{if(!window.claude||!window.claude.use)return;const s=await window.claude.use('sample');if(!s)return;
+  const lim=await s.limits().catch(()=>null);if(lim&&lim.images){SAMPLE=s;if(SN)renderSnap();}}catch(e){}})();
+function openSnap(pid){SN={pid:pid||'',sid:stores()[0].sid,blob:null,url:null,busy:false,msg:'',err:false,price:'',stock:'ok',conf:null,sale:false};renderSnap();}
+function closeSnap(){if(snapCtl)snapCtl.abort();if(SN&&SN.url)URL.revokeObjectURL(SN.url);SN=null;document.getElementById('sheet').hidden=true;render();}
+async function shrink(file){try{const bmp=await createImageBitmap(file);const k=Math.min(1,1280/Math.max(bmp.width,bmp.height));
+  const c=document.createElement('canvas');c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);
+  return await new Promise(r=>c.toBlob(b=>r(b||file),'image/jpeg',.85));}catch(e){return file;}}
+function snapDerived(){
+  if(!SN)return;const p=P[SN.pid];const st=stores().find(s=>s.sid===SN.sid);const b=parseInt(SN.price,10);
+  const incl=document.getElementById('nIncl'),warn=document.getElementById('nWarn'),btn=document.getElementById('nSubmit');
+  if(incl)incl.textContent=p&&b>0?t('inclIs',{p:yen(withTax(b,p))}):'';
+  const cur=p&&st?basePrice(st,p):null;
+  if(warn){const off=cur&&b>0&&Math.abs(b-cur)/cur>.5;warn.hidden=!off;if(off)warn.textContent=t('warnDiff',{p:yen(cur)});}
+  if(btn)btn.disabled=!(p&&b>0&&b<200000);
+}
+function renderSnap(){
+  const sh=document.getElementById('sheet');
+  const opts=stores().map(s=>`<option value="${s.sid}">${esc(sname(s))} · ${s.dist}${t('m')}</option>`).join('');
+  const prods=`<option value="">${t('choose')}</option>`+PRODUCTS.map(p=>`<option value="${p.id}">${esc(pname(p))}</option>`).join('');
+  sh.innerHTML=`<div class="sheet-in" role="dialog" aria-modal="true" aria-label="${t('snapTitle')}">
+    <div class="between"><h2>${t('snapTitle')}</h2><button class="chip-btn" data-a="closeSnap">${t('close')}</button></div>
+    <span class="small muted">${t('snapDesc')}</span>
+    <div class="form">
+      <label class="full">${t('store')}<select id="nStore">${opts}</select></label>
+      <label class="full photo" for="nPhoto">${SN.url?`<img src="${SN.url}" alt="">`:''}<span>${SN.url?t('photoAgain'):t('photo')}</span>
+        <input id="nPhoto" type="file" accept="image/*" capture="environment"></label>
+      ${SAMPLE?(SN.busy?`<div class="full between"><span class="small">${t('reading')}</span><button type="button" class="chip-btn" data-a="stopRead">${t('stop')}</button></div>`:
+        `<button type="button" class="btn ghost full" data-a="readTag" ${SN.blob?'':'disabled'}>${t('readTag')}</button>`):
+        `<span class="full small muted">${t('noAuto')}</span>`}
+      ${SN.msg?`<div class="full row small" style="color:${SN.err?'var(--bad)':'var(--ink)'}">${SN.conf?`<span class="pill ${SN.conf==='high'?'good':SN.conf==='medium'?'warn':'bad'}">${t('conf_'+SN.conf)}</span>`:''}${SN.sale?`<span class="pill bad">${t('sale')}</span>`:''}<span>${esc(SN.msg)}</span></div>`:''}
+      <label class="full">${t('product')}<select id="nProd">${prods}</select></label>
+      <label>${t('priceExcl')}<input id="nPrice" type="number" inputmode="numeric" min="1" value="${esc(SN.price)}"></label>
+      <div style="display:flex;align-items:flex-end;padding-bottom:10px"><span class="price" id="nIncl"></span></div>
+      <span class="full small" id="nWarn" style="color:var(--warn)" hidden></span>
+      <div class="full" style="display:flex;flex-direction:column;gap:4px"><span class="small muted">${t('stockNow')}</span>
+        <div class="seg" style="grid-template-columns:repeat(3,1fr)">${['ok','low','out'].map(k=>`<button type="button" data-a="nStock" data-v="${k}" aria-pressed="${SN.stock===k}">${t(k)}</button>`).join('')}</div></div>
+      <button type="button" class="btn full" id="nSubmit" data-a="submitRep">${t('submitRep')}</button>
+      <span class="full small muted">${shareNote()}</span>
+    </div></div>`;
+  sh.hidden=false;
+  sh.querySelector('#nStore').value=SN.sid;sh.querySelector('#nProd').value=SN.pid;
+  snapDerived();
+}
+async function readTag(){
+  if(!SAMPLE||!SN||!SN.blob||SN.busy)return;
+  SN.busy=true;SN.msg='';SN.err=false;SN.conf=null;renderSnap();
+  snapCtl=new AbortController();const me=SN;
+  const catalog=PRODUCTS.map(p=>p.id+' | '+p.ja).join('\n');
+  const prompt=`The image is a photo of a price tag (shelf label or POP card) in a Japanese drugstore or discount store.
+Find the matching product in the catalog below and read its price.
+
+Catalog (id | Japanese product name):
+${catalog}
+
+Rules:
+- If the tag shows both 税込 (tax included) and 税抜 / 本体価格 (before tax), read both. If it shows only one, use its label to decide which one it is.
+- If the product is not in the catalog, product_id is null.
+- If something cannot be read, set it to null. Never guess digits you cannot see.
+- note: one short sentence in ${S.lang==='zh'?'Traditional Chinese':'Korean'} for a traveler, saying what you read.
+
+Reply with only one JSON object:
+{"product_id": string|null, "tag_name": string|null, "jan": string|null, "price_excl": number|null, "price_incl": number|null, "is_sale": boolean, "confidence": "high"|"medium"|"low", "note": string}`;
+  try{
+    const r=await SAMPLE.json(prompt,{images:[SN.blob],signal:snapCtl.signal});
+    if(SN!==me)return;
+    if(r&&typeof r==='object'){
+      if(r.product_id&&P[r.product_id])SN.pid=r.product_id;
+      const p=P[SN.pid];const ex=Number(r.price_excl),inc=Number(r.price_incl);
+      let b=ex>0?Math.round(ex):(inc>0?Math.round(inc/(1+(p?rate(p):.1))):0);
+      if(b>0)SN.price=String(b);
+      SN.conf=['high','medium','low'].includes(r.confidence)?r.confidence:null;SN.sale=!!r.is_sale;
+      SN.msg=String(r.note||'')+(r.tag_name?` (${r.tag_name})`:'');
+    }
+  }catch(e){
+    if(SN!==me)return;
+    const c=e&&e.code;
+    if(c==='not_granted'||c==='images_unavailable'){SAMPLE=null;SN.msg=t('errDenied');}
+    else if(c==='cancelled')SN.msg='';
+    else SN.msg=c==='rate_limited'?t('errRate'):c==='invalid_json'?t('errRead'):t('errGeneric');
+    SN.err=!!SN.msg;
+  }
+  SN.busy=false;renderSnap();
+}
+function submitRep(){
+  if(!SN)return;const b=parseInt(SN.price,10);if(!P[SN.pid]||!(b>0))return;
+  const k=SN.sid+'|'+SN.pid,now=Date.now();
+  S.priceRep[k]={b,at:now,sale:SN.sale};S.reports[k]={st:SN.stock,at:now};S.points=(S.points||0)+10;
+  const live=shareReport(k,{b,st:SN.stock});
+  const pid=SN.pid;closeSnap();S.tab='compare';S.detail=pid;render();toast(live?t('sharedOk'):t('repDone'));
+}
+
+/* ---------- shared reports (db) ---------- */
+// reports/<viewerId> = {items:{"<storeId>|<productId>":{b?,st?,at}}} — one document per traveler, everyone reads all.
+const SHARED={price:{},stock:{},people:0};
+const SHARE={state:'off',db:null,uid:null,mine:{},chain:Promise.resolve(),pending:0,deferred:false};
+function shareNote(){
+  return SHARE.state==='live'?t('shareLive',{n:Math.max(1,SHARED.people)}):SHARE.state==='loading'?t('shareLoading'):
+    SHARE.state==='slow'?t('shareSlow'):SHARE.state==='ro'?t('shareRO'):t('shareOff');
+}
+function validEntry(v,now){
+  if(!v||typeof v!=='object')return null;const at=Number(v.at);if(!(at>0&&at<now+120000&&at>now-30*864e5))return null;
+  const ok=x=>x>0&&x<now+120000&&x>now-30*864e5;const out={at};
+  const b=Number(v.b),bAt=Number(v.bAt||v.at);if(Number.isInteger(b)&&b>0&&b<200000&&ok(bAt)){out.b=b;out.bAt=bAt;}
+  const stAt=Number(v.stAt||v.at);if(['ok','low','out'].includes(v.st)&&ok(stAt)){out.st=v.st;out.stAt=stAt;}
+  return(out.b||out.st)?out:null;
+}
+function aggregate(docs){
+  const now=Date.now(),price={},stock={},seen={};let people=0;
+  for(const d of docs){
+    const body=d.data&&d.data();const items=body&&body.items;if(!items||typeof items!=='object')continue;
+    const isMine=d.id===SHARE.uid;let any=false;
+    for(const k of Object.keys(items).slice(0,400)){
+      if(!/^[a-z]+-[a-z]+\|[a-z]+$/.test(k))continue;const e=validEntry(items[k],now);if(!e)continue;any=true;
+      if(e.b&&(!price[k]||e.bAt>price[k].at))price[k]={b:e.b,at:e.bAt,mine:isMine};
+      if(e.st)(seen[k]=seen[k]||[]).push({st:e.st,at:e.stAt,mine:isMine});
+    }
+    if(any)people++;
+  }
+  for(const k in seen){const l=seen[k].sort((a,b)=>b.at-a.at);const top=l[0];
+    const n=l.filter(x=>x.st===top.st&&top.at-x.at<12*36e5).length;stock[k]={st:top.st,at:top.at,mine:top.mine,n};}
+  SHARED.price=price;SHARED.stock=stock;SHARED.people=people;
+}
+function safeRender(){
+  const ae=document.activeElement;
+  if(SN||!document.getElementById('sheet').hidden){SHARE.deferred=true;return;}
+  if(ae&&ae.id==='q'){const r=document.getElementById('results');if(r)r.innerHTML=resultsHTML();const sl=document.getElementById('shareLine');if(sl)sl.textContent=shareNote();return;}
+  if(ae&&ae.closest&&ae.closest('#addForm')){SHARE.deferred=true;return;}
+  render();
+}
+function shareReport(k,entry){
+  if(!SHARE.db||!SHARE.uid||SHARE.state==='ro'||SHARE.state==='off')return false;
+  const now=Date.now(),next={};
+  for(const [kk,v] of Object.entries(SHARE.mine))if(v&&v.at>now-14*864e5)next[kk]=v;
+  const rec={...(next[k]||{}),at:now};
+  if(entry.b){rec.b=entry.b;rec.bAt=now;}
+  if(entry.st){rec.st=entry.st;rec.stAt=now;}
+  next[k]=rec;
+  const keys=Object.keys(next).sort((a,b)=>next[b].at-next[a].at).slice(0,300);
+  SHARE.mine=Object.fromEntries(keys.map(x=>[x,next[x]]));
+  const body={items:SHARE.mine,v:1};SHARE.pending++;
+  SHARE.chain=SHARE.chain.then(()=>SHARE.db.doc('reports/'+SHARE.uid).set(body)).catch(e=>{
+    if(e&&e.code==='invalid_argument'){SHARE.state='ro';}
+    toast(t('shareFail'));
+  }).finally(()=>{SHARE.pending--;});
+  return SHARE.state==='live'||SHARE.state==='loading'||SHARE.state==='slow';
+}
+(async()=>{
+  try{
+    if(!window.claude||!window.claude.use)return;
+    const [db,user]=await Promise.all([window.claude.use('db'),window.claude.use('user')]);
+    const uid=user?await user.id():null;
+    if(!db||!uid)return;
+    SHARE.db=db;SHARE.uid=uid;SHARE.state='loading';safeRender();
+    const timer=setTimeout(()=>{if(SHARE.state==='loading'){SHARE.state='slow';safeRender();}},10000);
+    db.collection('reports').onSnapshot(snap=>{
+      const own=snap.docs.find(d=>d.id===uid);
+      if(own&&!SHARE.pending){const it=own.data()&&own.data().items;if(it&&typeof it==='object')SHARE.mine={...it};}
+      aggregate(snap.docs);
+      if(!snap.metadata.fromCache){clearTimeout(timer);if(SHARE.state==='loading'||SHARE.state==='slow')SHARE.state='live';}
+      safeRender();
+    },err=>{clearTimeout(timer);SHARE.state=(err&&err.code==='revoked')?'off':'slow';safeRender();});
+  }catch(e){}
+})();
+
+/* ---------- render + events ---------- */
+function render(){
+  renderTop();renderTabs();
+  const v=document.getElementById('view');
+  v.innerHTML=S.tab==='home'?viewHome():S.tab==='compare'?viewCompare():S.tab==='list'?viewList():viewTrack();
+  save();
+}
+let toastT;function toast(m){const el=document.getElementById('toast');el.textContent=m;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,2200);}
+const A={
+ tab:v=>{S.tab=v;if(v!=='compare')S.detail=null;else S.detail=null;window.scrollTo(0,0);render();},
+ rank:v=>{S.rank=v;render();},
+ open:v=>{S.tab='compare';S.detail=v;S._dq=1;window.scrollTo(0,0);render();},
+ back:()=>{S.detail=null;render();},
+ cat:v=>{S.cat=v;render();},
+ dq:v=>{S._dq=Math.max(1,(S._dq||1)+(+v));document.getElementById('dq').textContent=S._dq;},
+ add:v=>{const q=S._dq||1;const l=S.list.find(x=>x.id===v);if(l)l.q+=q;else S.list.push({id:v,q});toast(t('added'));render();},
+ lq:v=>{const[id,d]=v.split('|');const l=S.list.find(x=>x.id===id);if(!l)return;l.q+=(+d);if(l.q<=0)S.list=S.list.filter(x=>x.id!==id);render();},
+ report:v=>{const[sid,pid,st]=v.split('|');const k=sid+'|'+pid;S.reports[k]={st,at:Date.now()};
+   const live=shareReport(k,{st});toast(live?t('reportedShared'):t('reported'));render();},
+ done:()=>{const{plan}=computePlan();plan.groups.forEach(g=>{const n=g.lines.map(l=>pname(l.p)).join(', ');S.purchases.push({n:sname(g.st)+' · '+n,yen:Math.round(g.net),type:'general'});});
+   S.list=[];S.tab='track';toast(t('recorded'));window.scrollTo(0,0);render();},
+ delp:v=>{S.purchases.splice(+v,1);render();},
+ clearex:()=>{S.purchases=S.purchases.filter(x=>!x.ex);render();},
+ settings:()=>openSettings(),
+ snap:v=>openSnap(v),
+ closeSnap:()=>closeSnap(),
+ readTag:()=>readTag(),
+ stopRead:()=>{if(snapCtl)snapCtl.abort();},
+ nStock:v=>{if(SN){SN.stock=v;document.querySelectorAll('[data-a="nStock"]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));}},
+ submitRep:()=>submitRep(),
+ closeSheet:()=>{document.getElementById('sheet').hidden=true;render();},
+};
+document.addEventListener('click',e=>{
+  const sh=document.getElementById('sheet');if(e.target===sh){if(SN)closeSnap();else{sh.hidden=true;render();}return;}
+  const el=e.target.closest('[data-a]');if(!el)return;A[el.dataset.a]?.(el.dataset.v,el);
+});
+document.addEventListener('input',e=>{
+  const id=e.target.id;
+  if(id==='q'){S.q=e.target.value;document.getElementById('results').innerHTML=resultsHTML();save();}
+  const num=x=>{const n=parseFloat(x);return n>0?n:null;};
+  if(id==='sKRW'&&num(e.target.value))S.rates.krw=num(e.target.value);
+  if(id==='sTWD'&&num(e.target.value))S.rates.twd=num(e.target.value);
+  if(id==='sUSD'&&num(e.target.value))S.rates.usd=num(e.target.value);
+  if(id==='nPrice'&&SN){SN.price=e.target.value;snapDerived();}
+  if(id.startsWith('s'))save();
+});
+document.addEventListener('change',e=>{
+  const id=e.target.id;
+  if(id==='sLang'){S.lang=e.target.value;openSettings();renderTop();renderTabs();}
+  if(id==='sHome'){S.home=e.target.value;}
+  if(id==='sCity'){S.city=e.target.value;renderTop();}
+  if(id==='nStore'&&SN){SN.sid=e.target.value;snapDerived();}
+  if(id==='nProd'&&SN){SN.pid=e.target.value;snapDerived();}
+  if(id==='nPhoto'&&SN&&e.target.files&&e.target.files[0]){const me=SN;shrink(e.target.files[0]).then(b=>{if(SN!==me)return;if(SN.url)URL.revokeObjectURL(SN.url);
+    SN.blob=b;SN.url=URL.createObjectURL(b);SN.msg='';SN.conf=null;renderSnap();if(SAMPLE)readTag();});}
+  if(id==='fType'){const w=document.getElementById('fVolWrap');w.hidden=e.target.value==='general';}
+  save();
+});
+document.addEventListener('submit',e=>{
+  if(e.target.id!=='addForm')return;e.preventDefault();
+  const n=document.getElementById('fName').value.trim(),y=parseInt(document.getElementById('fYen').value,10),ty=document.getElementById('fType').value,vol=parseInt(document.getElementById('fVol').value,10)||0;
+  if(!n||!(y>0))return;S.purchases.push({n,yen:y,type:ty,vol:ty==='general'?0:vol});render();
+});
+document.addEventListener('focusout',()=>{setTimeout(()=>{if(SHARE.deferred&&!SN&&document.getElementById('sheet').hidden){
+  const ae=document.activeElement;if(!(ae&&ae.closest&&ae.closest('#addForm'))){SHARE.deferred=false;render();}}},0);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const sh=document.getElementById('sheet');if(!sh.hidden){if(SN)closeSnap();else{sh.hidden=true;render();}}}});
+render();
+</script>
