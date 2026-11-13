@@ -511,7 +511,7 @@ function viewTrack(){
   const lim=(label,okv,txt,rule)=>`<div class="limit"><span class="small muted">${label}</span><span class="price" style="color:${okv?'var(--ink)':'var(--bad)'}">${txt}</span><span class="small muted">${rule}</span></div>`;
   const alcOk=KR?(alcN<=2&&alcMl<=2000&&alcYen/S.rates.usd<=400):alcMl<=1500;
   const limits=`<div class="limits">
-    ${lim(t('alcohol'),alcOk,(alcN?alcN+'· ':'')+alcMl+'ml',KR?t('alcKR'):t('alcTW'))}
+    ${lim(t('alcohol'),alcOk,(alcN?alcN+(S.lang==='ko'?'병':'瓶')+' · ':'')+alcMl+'ml',KR?t('alcKR'):t('alcTW'))}
     ${lim(t('tobacco'),tob<=200,tob+t('sticks'),t('tobLim'))}
     ${KR?lim(t('perfume'),perf<=100,perf+'ml',t('perfKR')):''}</div>`;
   const hasEx=S.purchases.some(x=>x.ex);
