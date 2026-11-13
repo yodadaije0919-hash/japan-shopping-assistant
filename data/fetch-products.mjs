@@ -12,8 +12,8 @@ import { dirname, join } from 'node:path';
 
 const DIR = dirname(fileURLToPath(import.meta.url));
 const ENDPOINT = 'https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch';
-// Multi-packs: "セット", "×3", "×10個", "20箱", "3個" etc. ("1箱（10本入）" and "18枚入" are single items.)
-const BUNDLE = /セット|まとめ|ケース|コストコ|アソート|コラボ|たまごっち|[×xX]\s*(?:[2-9]|\d{2,})|(?:^|[^\d])(?:[2-9]|\d{2,})\s*(?:箱|個|袋|パック)(?!入)/;
+// Multi-packs: "セット", "×3", "×10個", "20箱", "3個" etc. ("1箱（10本入）", "18枚入", "100mL×10本" and "2枚×8包" are single items.)
+const BUNDLE = /セット|まとめ|ケース|コストコ|アソート|コラボ|たまごっち|[×xX]\s*(?:[2-9]|\d{2,})(?!\d*\s*(?:本|枚|錠|包|ml|g))|(?:^|[^\d])(?:[2-9]|\d{2,})\s*(?:箱|個|袋|パック)(?!入)/;
 const norm = s => String(s || '').normalize('NFKC').toLowerCase().replace(/\s+/g, '');
 // Every word of the search term (brand, product, size) has to appear in the listing name.
 export const matchesQuery = (name, query) => query.split(/\s+/).filter(Boolean).every(w => norm(name).includes(norm(w)));

@@ -87,7 +87,7 @@ data/
    ```bash
    set -a; . ./.env; set +a; node data/fetch-products.mjs
    ```
-3. 결과에 `needs_review`가 붙은 상품은 정확한 JAN을 `data/catalog.json`에 적고 다시 실행합니다. 같은 JAN만 쓰도록 고정됩니다.
+3. 22개 상품의 JAN은 `data/catalog.json`에 모두 확정해 두었습니다. 새 상품을 추가하면 `needs_review`가 붙으니, 정확한 JAN을 적고 다시 실행합니다. 같은 JAN만 쓰도록 고정됩니다.
 4. `products.json` 내용을 `index.html`의 `YDATA`에 반영합니다.
 
 야후 API를 쓰는 화면에는 이용 조건에 따라 아래쪽에 "Webサービス by Yahoo! JAPAN" 크레딧을 표시합니다.
