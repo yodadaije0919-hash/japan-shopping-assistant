@@ -1,0 +1,407 @@
+{
+ "source": "Yahoo!ショッピング 商品検索API v3",
+ "fetchedAt": "2026-11-13T07:19:35.114Z",
+ "products": [
+  {
+   "id": "roihi",
+   "cat": "med",
+   "query": "ロイヒつぼ膏 156枚",
+   "jan": "4987167007263",
+   "name_ja": "第３類医薬品 ロイヒつぼ膏 156枚 肩こり 腰痛 温感貼り薬 (1個)",
+   "brand": "NICHIBAN",
+   "image": "https://item-shopping.c.yimg.jp/i/j/kusuri-hagakure_1287-1-a",
+   "online": {
+    "median": 790,
+    "min": 608,
+    "sellers": 11
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "kyusoku",
+   "cat": "life",
+   "query": "休足時間 18枚",
+   "jan": "4903301138525",
+   "name_ja": "休足時間　足すっきりシート　18枚入　ライオン",
+   "brand": "休足時間",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_3184959",
+   "online": {
+    "median": 1149,
+    "min": 877,
+    "sellers": 11
+   },
+   "reviews": 84,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "eyebon",
+   "cat": "med",
+   "query": "アイボン 500ml",
+   "jan": "4987072053287",
+   "name_ja": "【第3類医薬品】アイボンWビタミンプレミアム 500ml",
+   "brand": "アイボン",
+   "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4987072053287",
+   "online": {
+    "median": 962,
+    "min": 752,
+    "sellers": 8
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "sante",
+   "cat": "med",
+   "query": "サンテFXネオ 12ml",
+   "jan": "4987084410443",
+   "name_ja": "2980円以上で注文可能  第２類医薬品 サンテFXネオ 12mL 目薬 眼疲労 (1個)",
+   "brand": null,
+   "image": "https://item-shopping.c.yimg.jp/i/j/minoku-max_773-1-b",
+   "online": {
+    "median": 297,
+    "min": 268,
+    "sellers": 14
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "cabbagin",
+   "cat": "med",
+   "query": "キャベジンコーワα 300錠",
+   "jan": "4987973126226",
+   "name_ja": "第２類医薬品 キャベジンコーワαプラス 300錠 (1個)",
+   "brand": "キャベジンコーワ",
+   "image": "https://item-shopping.c.yimg.jp/i/j/kusuri-hagakure_1758964736-1-a",
+   "online": {
+    "median": 2155,
+    "min": 1705,
+    "sellers": 12
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "ryukaku",
+   "cat": "med",
+   "query": "龍角散ダイレクト ミント 16包",
+   "jan": "4987240210535",
+   "name_ja": "【第3類医薬品】龍角散ダイレクトスティックミント 16包",
+   "brand": "龍角散",
+   "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4987240210535",
+   "online": {
+    "median": 525,
+    "min": 474,
+    "sellers": 10
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "melano",
+   "cat": "cos",
+   "query": "メラノCC 薬用美容液",
+   "jan": "4987241169658",
+   "name_ja": "【医薬部外品】ロート製薬 メラノCC 薬用美容液 20ml",
+   "brand": "メラノCC",
+   "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4987241169658",
+   "online": {
+    "median": 959,
+    "min": 959,
+    "sellers": 1
+   },
+   "reviews": 27,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)",
+    "같은 JAN 판매처 1곳뿐"
+   ]
+  },
+  {
+   "id": "biore",
+   "cat": "cos",
+   "query": "ビオレUV アクアリッチ",
+   "jan": "4901301447647",
+   "name_ja": "ビオレ UV アクアリッチ ウォータリーエッセンス 70g SPF50+・PA++++ 花王",
+   "brand": "ビオレUV",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_hk42790",
+   "online": {
+    "median": 1011,
+    "min": 1005,
+    "sellers": 3
+   },
+   "reviews": 51,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "kitkat",
+   "cat": "food",
+   "query": "キットカット 抹茶",
+   "jan": "4902201183031",
+   "name_ja": "送料無料 ネスレ キットカット ミニ 濃い抹茶 10枚 ×1袋【10枚】",
+   "brand": "キットカット",
+   "image": "https://item-shopping.c.yimg.jp/i/j/quickfactory_8603",
+   "online": {
+    "median": 547,
+    "min": 448,
+    "sellers": 4
+   },
+   "reviews": 2,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "meguri",
+   "cat": "life",
+   "query": "めぐりズム 蒸気でホットアイマスク 12枚",
+   "jan": "4901301460547",
+   "name_ja": "新【花王 めぐりズム 蒸気でホットアイマスク 12枚入り 】無香料 / ラベンダー / 完熟ゆずの香り / 森林浴の香り / カモミールの香り/ひのきの香り/金木犀の香り",
+   "brand": "Kao",
+   "image": "https://item-shopping.c.yimg.jp/i/j/kabuiris_4901301460547",
+   "online": {
+    "median": 1450,
+    "min": 1450,
+    "sellers": 1
+   },
+   "reviews": 14,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)",
+    "같은 JAN 판매처 1곳뿐"
+   ]
+  },
+  {
+   "id": "canmake",
+   "cat": "cos",
+   "query": "キャンメイク マシュマロフィニッシュパウダー",
+   "jan": "4901008314037",
+   "name_ja": "CANMAKE（キャンメイク） マシュマロフィニッシュパウダー〜Abloom〜01 ディアレストブーケ 井田ラボラトリーズ",
+   "brand": "CANMAKE",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_pn07823",
+   "online": {
+    "median": 1145,
+    "min": 1034,
+    "sellers": 4
+   },
+   "reviews": 71,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "ohta",
+   "cat": "med",
+   "query": "太田胃散 75g",
+   "jan": "4987033904016",
+   "name_ja": "【第2類医薬品】太田胃散 太田胃散 ７５ｇ 飲みすぎ、胸やけ、胃部不快感、胃弱、胃もたれ、食べすぎ、胃痛、消化不良、消化促進、食欲不振、胃酸過多",
+   "brand": "太田胃散",
+   "image": "https://item-shopping.c.yimg.jp/i/j/maidora_4987033904016",
+   "online": {
+    "median": 1291,
+    "min": 1291,
+    "sellers": 1
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)",
+    "같은 JAN 판매처 1곳뿐"
+   ]
+  },
+  {
+   "id": "hadalabo",
+   "cat": "cos",
+   "query": "肌ラボ 極潤ヒアルロン液 170ml",
+   "jan": "4987241155729",
+   "name_ja": "肌ラボ 極潤ヒアルロン液 詰替 170mL 化粧水 うるおい 保湿 無着色 無香料 弱酸性 ロート製薬",
+   "brand": "肌ラボ",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_6167728",
+   "online": {
+    "median": 781,
+    "min": 661,
+    "sellers": 4
+   },
+   "reviews": 95,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "hatomugi",
+   "cat": "cos",
+   "query": "ハトムギ化粧水 500ml",
+   "jan": "4903335693601",
+   "name_ja": "ナチュリエ ハトムギ化粧水 スキンコンディショナー　500ml イミュ（イチオシ）",
+   "brand": "naturie",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_9783183",
+   "online": {
+    "median": 630,
+    "min": 539,
+    "sellers": 9
+   },
+   "reviews": 997,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "loxonin",
+   "cat": "med",
+   "query": "ロキソニンS 12錠",
+   "jan": "4987107610867",
+   "name_ja": "『ロキソニンS 12錠』  【税制対象商品】ロキソニン 12錠 頭痛薬 頭痛 解熱 痛み【第1類医薬品】",
+   "brand": "ロキソニンS",
+   "image": "https://item-shopping.c.yimg.jp/i/j/papamama_me4987107610867-00-000",
+   "online": {
+    "median": 667,
+    "min": 559,
+    "sellers": 4
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "kairo",
+   "cat": "life",
+   "query": "ホッカイロ 貼る 30個",
+   "jan": "4987067827008",
+   "name_ja": "ホッカイロ 貼るタイプ レギュラー 30個入 興和 返品種別A",
+   "brand": "ホッカイロ",
+   "image": "https://item-shopping.c.yimg.jp/i/j/joshin_4987067827008-73-30001171",
+   "online": {
+    "median": 897,
+    "min": 795,
+    "sellers": 5
+   },
+   "reviews": 10,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "lulu",
+   "cat": "med",
+   "query": "ルルアタックEX 24錠",
+   "jan": "4987107609205",
+   "name_ja": "ルルアタックEX　２４錠　第一三共ヘルスケア　指定第２類医薬品　`送料無料",
+   "brand": "第一三共ヘルスケア",
+   "image": "https://item-shopping.c.yimg.jp/i/j/drug-yanagawa_4987107609205-f",
+   "online": {
+    "median": 1986,
+    "min": 1635,
+    "sellers": 10
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "netsu",
+   "cat": "med",
+   "query": "熱さまシート 16枚",
+   "jan": "4987072087725",
+   "name_ja": "お買い得熱さまシート 冷却シート 大人用 16枚入 冷感ツブ配合 小林製薬",
+   "brand": "小林製薬",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_1662083",
+   "online": {
+    "median": 526,
+    "min": 380,
+    "sellers": 6
+   },
+   "reviews": 105,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "curel",
+   "cat": "cos",
+   "query": "キュレル 潤浸保湿フェイスクリーム",
+   "jan": "4901301236210",
+   "name_ja": "【医薬部外品】花王 キュレル（cureL） 潤浸保湿フェイスクリーム  40g",
+   "brand": "Curel",
+   "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4901301236210",
+   "online": {
+    "median": 2150,
+    "min": 2098,
+    "sellers": 8
+   },
+   "reviews": 821,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "calorie",
+   "cat": "food",
+   "query": "カロリーメイト ブロック 4本",
+   "jan": "4987035648918",
+   "name_ja": "◆カロリーメイトブロックバニラ味 4本",
+   "brand": "大塚製薬",
+   "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4987035648918",
+   "online": {
+    "median": 181,
+    "min": 171,
+    "sellers": 2
+   },
+   "reviews": 48,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)",
+    "같은 JAN 판매처 2곳뿐"
+   ]
+  },
+  {
+   "id": "minon",
+   "cat": "cos",
+   "query": "ミノン アミノモイスト 化粧水",
+   "jan": "4987107670335",
+   "name_ja": "≪15日はP2%≫【化粧品】ミノンアミノモイスト モイストローションI しっとり 150mL ×1個〔敏感肌・保湿化粧水〕",
+   "brand": "MINON",
+   "image": "https://item-shopping.c.yimg.jp/i/j/jetdrug_4987107670335-01",
+   "online": {
+    "median": 1832,
+    "min": 1799,
+    "sellers": 4
+   },
+   "reviews": 5,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "lipo",
+   "cat": "med",
+   "query": "リポビタンD 10本",
+   "jan": "4987306008113",
+   "name_ja": "リポビタンDスーパー　1箱（10本入）　大正製薬　エナジードリンク",
+   "brand": "リポビタン",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_1322009",
+   "online": {
+    "median": 2079,
+    "min": 1958,
+    "sellers": 2
+   },
+   "reviews": 24,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)",
+    "같은 JAN 판매처 2곳뿐"
+   ]
+  }
+ ]
+}
