@@ -146,10 +146,10 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  taxfreeOk:'면세 대상',taxfreeNo:'면세 기준 미달',needMore:'¥{need} 더 사면 약 ¥{ref} 환급',refund:'환급 예정 ¥{r}',couponApplied:'쿠폰 -¥{c}',
  altCheap:'각 상품 최저가 매장만 골라 사기',altOne:'한 곳에서 다 사기 ({s})',altNone:'한 곳에서 다 살 수 있는 매장 없음',save:'¥{s} 절약',
  unavailable:'근처에서 구할 수 없음: {names}',done:'구매 완료로 면세한도에 기록',recorded:'면세한도 트래커에 기록했어요',
- trackTitle:'입국 면세한도',trackKR:'한국 입국 기준 · 1인 미화 800달러',trackTW:'대만 입국 기준 · 1인 NT$20,000',
+ trackTitle:'입국 면세한도',trackKR:'한국 입국 기준 · 1인 미화 800달러',trackTW:'대만 입국 기준 · 1인 NT$35,000',
  used:'사용',left:'남음',over:'초과',
  alcohol:'술',tobacco:'담배',perfume:'향수',general:'일반 물품',
- alcKR:'2병 · 합계 2L · $400 이하',alcTW:'1L 이하',tobLim:'200개비 이하',perfKR:'100ml 이하',
+ alcKR:'2병 · 합계 2L · $400 이하',alcTW:'1.5L 이하 (만 18세 이상)',tobLim:'200개비 이하',perfKR:'100ml 이하',
  taxEst:'예상 세금 (간이세율 20% 가정)',declare:'자진신고하면',penalty:'신고 안 하고 적발되면',
  declareNote:'관세 30% 감면(최대 20만 원)',penaltyNote:'가산세 40%',
  twOver:'초과분은 품목별 세율로 공항에서 과세돼요. 금액이 크면 자진신고하세요.',
@@ -185,10 +185,10 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  taxfreeOk:'可免稅',taxfreeNo:'未達免稅門檻',needMore:'再買¥{need}約可退¥{ref}',refund:'預計退稅 ¥{r}',couponApplied:'優惠券 -¥{c}',
  altCheap:'每樣都去最便宜的店買',altOne:'全部在同一家買（{s}）',altNone:'沒有一家能買齊',save:'省 ¥{s}',
  unavailable:'附近買不到：{names}',done:'標記已購買並記入免稅額度',recorded:'已記入免稅額度',
- trackTitle:'入境免稅額度',trackKR:'韓國入境標準・每人 US$800',trackTW:'台灣入境標準・每人 NT$20,000',
+ trackTitle:'入境免稅額度',trackKR:'韓國入境標準・每人 US$800',trackTW:'台灣入境標準・每人 NT$35,000',
  used:'已用',left:'剩餘',over:'超過',
  alcohol:'酒',tobacco:'菸',perfume:'香水',general:'一般物品',
- alcKR:'2瓶・合計2L・US$400以下',alcTW:'1公升以下',tobLim:'200支以下',perfKR:'100ml以下',
+ alcKR:'2瓶・合計2L・US$400以下',alcTW:'1.5公升以下（滿18歲）',tobLim:'200支以下',perfKR:'100ml以下',
  taxEst:'預估稅額（假設簡易稅率20%）',declare:'主動申報',penalty:'未申報被查到',
  declareNote:'關稅減免30%（最多20萬韓元）',penaltyNote:'加罰40%',
  twOver:'超過部分會在機場依品項稅率課稅，金額大時請主動申報。',
@@ -479,7 +479,7 @@ function viewList(){
 function viewTrack(){
   const KR=S.home==='KR';let gen=0,alcMl=0,alcN=0,alcYen=0,tob=0,perf=0;
   S.purchases.forEach(x=>{if(x.type==='general')gen+=x.yen;else if(x.type==='alcohol'){alcMl+=x.vol||0;alcN++;alcYen+=x.yen;}else if(x.type==='tobacco')tob+=x.vol||0;else if(x.type==='perfume')perf+=x.vol||0;});
-  const limit=KR?800:20000;const used=KR?gen/S.rates.usd:gen*S.rates.twd;
+  const limit=KR?800:35000;const used=KR?gen/S.rates.usd:gen*S.rates.twd;
   const pct=Math.min(100,used/limit*100);const cls=used>limit?'over':used>limit*.8?'near':'';
   const fmt=v=>KR?'$'+Math.round(v).toLocaleString('en-US'):'NT$'+Math.round(v).toLocaleString('zh-TW');
   const usdKrw=S.rates.usd*S.rates.krw;
@@ -495,7 +495,7 @@ function viewTrack(){
     else taxBox=`<div class="notice"><b>${t('over')} ${fmt(used-limit)}</b><span>${t('twOver')}</span></div>`;
   }
   const lim=(label,okv,txt,rule)=>`<div class="limit"><span class="small muted">${label}</span><span class="price" style="color:${okv?'var(--ink)':'var(--bad)'}">${txt}</span><span class="small muted">${rule}</span></div>`;
-  const alcOk=KR?(alcN<=2&&alcMl<=2000&&alcYen/S.rates.usd<=400):alcMl<=1000;
+  const alcOk=KR?(alcN<=2&&alcMl<=2000&&alcYen/S.rates.usd<=400):alcMl<=1500;
   const limits=`<div class="limits">
     ${lim(t('alcohol'),alcOk,(alcN?alcN+'· ':'')+alcMl+'ml',KR?t('alcKR'):t('alcTW'))}
     ${lim(t('tobacco'),tob<=200,tob+t('sticks'),t('tobLim'))}
