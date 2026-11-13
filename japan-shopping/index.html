@@ -549,9 +549,9 @@ function openSettings(){
       <label>${t('home')}<select id="sHome"><option value="KR">${t('korea')}</option><option value="TW">${t('taiwan')}</option></select></label>
       <label class="full">${t('city')}<select id="sCity"><option value="tokyo">${t('tokyo')}</option><option value="osaka">${t('osaka')}</option></select></label>
       <span class="full small muted">${t('rates')}</span>
-      <label>${t('rKRW')}<input id="sKRW" type="number" step="0.01" value="${S.rates.krw}"></label>
-      <label>${t('rTWD')}<input id="sTWD" type="number" step="0.001" value="${S.rates.twd}"></label>
-      <label class="full">${t('rUSD')}<input id="sUSD" type="number" step="0.1" value="${S.rates.usd}"></label>
+      <label>${t('rKRW')}<input id="sKRW" type="number" inputmode="decimal" min="0" step="0.01" value="${S.rates.krw}"></label>
+      <label>${t('rTWD')}<input id="sTWD" type="number" inputmode="decimal" min="0" step="0.001" value="${S.rates.twd}"></label>
+      <label class="full">${t('rUSD')}<input id="sUSD" type="number" inputmode="decimal" min="0" step="0.1" value="${S.rates.usd}"></label>
     </div></div>`;
   sh.hidden=false;
   sh.querySelector('#sLang').value=S.lang;sh.querySelector('#sHome').value=S.home;sh.querySelector('#sCity').value=S.city;
@@ -759,6 +759,7 @@ const A={
 };
 document.addEventListener('click',e=>{
   const sh=document.getElementById('sheet');if(e.target===sh){if(SN)closeSnap();else{sh.hidden=true;render();}return;}
+  if(e.target.id==='sheet'&&!SN){A.closeSheet();return;}
   const el=e.target.closest('[data-a]');if(!el)return;A[el.dataset.a]?.(el.dataset.v,el);
 });
 document.addEventListener('input',e=>{
@@ -773,9 +774,10 @@ document.addEventListener('input',e=>{
 });
 document.addEventListener('change',e=>{
   const id=e.target.id;
-  if(id==='sLang'){S.lang=e.target.value;openSettings();renderTop();renderTabs();}
-  if(id==='sHome'){S.home=e.target.value;}
-  if(id==='sCity'){S.city=e.target.value;renderTop();}
+  if(id==='sLang'){S.lang=e.target.value;openSettings();render();}
+  if(id==='sHome'){S.home=e.target.value;render();}
+  if(id==='sCity'){S.city=e.target.value;render();}
+  if(id==='sKRW'||id==='sTWD'||id==='sUSD')render();
   if(id==='nStore'&&SN){SN.sid=e.target.value;snapDerived();}
   if(id==='nProd'&&SN){SN.pid=e.target.value;snapDerived();}
   if(id==='nPhoto'&&SN&&e.target.files&&e.target.files[0]){const me=SN;shrink(e.target.files[0]).then(b=>{if(SN!==me)return;if(SN.url)URL.revokeObjectURL(SN.url);
