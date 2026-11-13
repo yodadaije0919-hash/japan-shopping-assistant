@@ -505,12 +505,12 @@ function viewTrack(){
       const w=n=>Math.round(n/100)*100;
       taxBox=`<div class="card pad" style="display:flex;flex-direction:column;gap:8px">
         <span class="small muted">${t('taxEst')}</span>
-        <div class="between"><span>${t('declare')} <span class="small muted">${t('declareNote')}</span></span><span class="price" style="color:var(--good)">${w(tax-red).toLocaleString('ko-KR')}원</span></div>
-        <div class="between"><span>${t('penalty')} <span class="small muted">${t('penaltyNote')}</span></span><span class="price" style="color:var(--bad)">${w(tax*1.4).toLocaleString('ko-KR')}원</span></div>
+        <div class="between"><span style="min-width:0;display:flex;flex-direction:column"><span>${t('declare')}</span><span class="small muted">${t('declareNote')}</span></span><span class="price" style="color:var(--good);white-space:nowrap">${w(tax-red).toLocaleString('ko-KR')}원</span></div>
+        <div class="between"><span style="min-width:0;display:flex;flex-direction:column"><span>${t('penalty')}</span><span class="small muted">${t('penaltyNote')}</span></span><span class="price" style="color:var(--bad);white-space:nowrap">${w(tax*1.4).toLocaleString('ko-KR')}원</span></div>
         <span class="small muted">${t('disclaim')}</span></div>`;}
     else taxBox=`<div class="notice"><b>${t('over')} ${fmt(used-limit)}</b><span>${t('twOver')}</span></div>`;
   }
-  const lim=(label,okv,txt,rule)=>`<div class="limit"><span class="small muted">${label}</span><span class="price" style="color:${okv?'var(--ink)':'var(--bad)'}">${txt}</span><span class="small muted">${rule}</span></div>`;
+  const lim=(label,okv,txt,rule)=>`<div class="limit"><span class="small muted">${label}</span><span class="price" style="color:${okv?'var(--ink)':'var(--bad)'}">${txt}</span><span class="small muted">${rule}</span>${okv?'':`<span class="pill bad" style="align-self:flex-start">${t('over')}</span>`}</div>`;
   const alcOk=KR?(alcN<=2&&alcMl<=2000&&alcYen/S.rates.usd<=400):alcMl<=1500;
   const limits=`<div class="limits">
     ${lim(t('alcohol'),alcOk,(alcN?alcN+(S.lang==='ko'?'병':'瓶')+' · ':'')+alcMl+'ml',KR?t('alcKR'):t('alcTW'))}
@@ -519,7 +519,7 @@ function viewTrack(){
   const hasEx=S.purchases.some(x=>x.ex);
   const list=S.purchases.length?S.purchases.map((x,i)=>`<div class="li"><div><div class="rank-name">${esc(typeof x.n==='object'?(x.n[S.lang]||x.n.ko):x.n)}</div>
      <div class="row small muted"><span>${t(x.type)}${x.vol?` · ${x.vol}${x.type==='tobacco'?t('sticks'):'ml'}`:''}</span>${x.ex?`<span class="pill warn">${t('example')}</span>`:''}</div></div>
-     <div class="row"><span class="price">${yen(x.yen)}</span><button class="del" data-a="delp" data-v="${i}" aria-label="삭제">✕</button></div></div>`).join(''):`<div class="empty">${t('noPurch')}</div>`;
+     <div class="row"><span class="price">${yen(x.yen)}</span><button class="del" data-a="delp" data-v="${i}" aria-label="${S.lang==='ko'?'삭제':'刪除'}">✕</button></div></div>`).join(''):`<div class="empty">${t('noPurch')}</div>`;
   return `<div><h2>${t('trackTitle')}</h2><span class="small muted">${KR?t('trackKR'):t('trackTW')}</span></div>
    <div class="card pad" style="display:flex;flex-direction:column;gap:10px">
      <div class="between"><span class="small muted">${t('general')} ${t('used')}</span><span class="small muted">${used>limit?t('over'):t('left')} <b class="num">${fmt(Math.abs(limit-used))}</b></span></div>
@@ -535,7 +535,7 @@ function viewTrack(){
      <label class="full">${t('name')}<input id="fName" required maxlength="40"></label>
      <label>${t('yen')}<input id="fYen" type="number" inputmode="numeric" min="1" required></label>
      <label>${t('type')}<select id="fType"><option value="general">${t('general')}</option><option value="alcohol">${t('alcohol')}</option><option value="tobacco">${t('tobacco')}</option><option value="perfume">${t('perfume')}</option></select></label>
-     <label class="full" id="fVolWrap" hidden>${t('amount')}<input id="fVol" type="number" inputmode="numeric" min="1"></label>
+     <label class="full" id="fVolWrap" hidden><span id="fVolLbl">${t('amount')}</span><input id="fVol" type="number" inputmode="numeric" min="1"></label>
      <button class="btn full" type="submit">${t('add')}</button>
    </form>`;
 }
@@ -783,7 +783,8 @@ document.addEventListener('change',e=>{
   if(id==='nProd'&&SN){SN.pid=e.target.value;snapDerived();}
   if(id==='nPhoto'&&SN&&e.target.files&&e.target.files[0]){const me=SN;shrink(e.target.files[0]).then(b=>{if(SN!==me)return;if(SN.url)URL.revokeObjectURL(SN.url);
     SN.blob=b;SN.url=URL.createObjectURL(b);SN.msg='';SN.conf=null;renderSnap();if(SAMPLE)readTag();});}
-  if(id==='fType'){const w=document.getElementById('fVolWrap');w.hidden=e.target.value==='general';}
+  if(id==='fType'){const w=document.getElementById('fVolWrap'),g=e.target.value==='general',tb=e.target.value==='tobacco',ko=S.lang==='ko';w.hidden=g;document.getElementById('fVol').required=!g;
+    document.getElementById('fVolLbl').textContent=tb?(ko?'개수 (개비)':'數量（支）'):(ko?'용량 (ml)':'容量（ml）');}
   save();
 });
 document.addEventListener('submit',e=>{
