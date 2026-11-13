@@ -51,12 +51,18 @@ h3{font-size:15px;margin:0}
 .notice{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:12px;background:var(--accent-soft);font-size:13.5px}
 .notice b{color:var(--accent)}
 .rank{display:flex;flex-direction:column}
-.rank-row{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;width:100%}
+.rank-row{display:grid;grid-template-columns:34px 44px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;width:100%}
 .rank-row:first-child{border-top:0}
 .rank-n{font-family:var(--f-display);font-size:22px;text-align:center;color:var(--muted)}
 .rank-row:nth-child(-n+3) .rank-n{color:var(--accent)}
 .rank-main{min-width:0;display:flex;flex-direction:column;gap:2px}
 .rank-name{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.thumb{width:44px;height:44px;border-radius:8px;object-fit:contain;background:#fff;border:1px solid var(--line);flex:none}
+.thumb.ph{display:block}
+.hero-img{width:96px;height:96px}
+.online{display:flex;gap:12px;align-items:center;padding:12px 14px}
+.credit{text-align:center;font-size:11px;color:var(--muted);padding:18px 0 4px}
+.credit a{color:inherit}
 .rank-side{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
 .pill{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:500;padding:2px 8px;border-radius:999px;white-space:nowrap}
 .pill.accent{background:var(--accent-soft);color:var(--accent)}
@@ -107,6 +113,7 @@ h3{font-size:15px;margin:0}
 .tabbar button svg{width:22px;height:22px}
 .tabbar button[aria-current="page"]{color:var(--accent);font-weight:700}
 .badge{position:absolute;top:5px;left:calc(50% + 6px);background:var(--bad);color:#fff;font-size:10.5px;font-family:var(--f-num);border-radius:999px;padding:0 5px;line-height:16px}
+[hidden]{display:none!important}
 .sheet{position:fixed;inset:0;z-index:20;background:rgba(10,14,28,.45);display:flex;align-items:flex-end;justify-content:center}
 .sheet-in{background:var(--surface);width:100%;max-width:480px;border-radius:18px 18px 0 0;padding-top:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px;max-height:88%;overflow:auto}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:999px;font-size:13.5px;max-width:calc(100% - 32px)}
@@ -146,7 +153,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  taxfreeOk:'면세 대상',taxfreeNo:'면세 기준 미달',needMore:'¥{need} 더 사면 약 ¥{ref} 환급',refund:'환급 예정 ¥{r}',couponApplied:'쿠폰 -¥{c}',
  altCheap:'각 상품 최저가 매장만 골라 사기',altOne:'한 곳에서 다 사기 ({s})',altNone:'한 곳에서 다 살 수 있는 매장 없음',save:'¥{s} 절약',
  unavailable:'근처에서 구할 수 없음: {names}',done:'구매 완료로 면세한도에 기록',recorded:'면세한도 트래커에 기록했어요',
- trackTitle:'입국 면세한도',trackKR:'한국 입국 기준 · 1인 미화 800달러',trackTW:'대만 입국 기준 · 1인 NT$35,000',
+ onlineRef:'온라인 참고가',onlineNote:'야후 쇼핑 {n}곳 중앙값 · {d} 기준 · 배송비 제외, 매장가와 달라요',trackTitle:'입국 면세한도',trackKR:'한국 입국 기준 · 1인 미화 800달러',trackTW:'대만 입국 기준 · 1인 NT$35,000',
  used:'사용',left:'남음',over:'초과',
  alcohol:'술',tobacco:'담배',perfume:'향수',general:'일반 물품',
  alcKR:'2병 · 합계 2L · $400 이하',alcTW:'1.5L 이하 (만 18세 이상)',tobLim:'200개비 이하',perfKR:'100ml 이하',
@@ -185,7 +192,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  taxfreeOk:'可免稅',taxfreeNo:'未達免稅門檻',needMore:'再買¥{need}約可退¥{ref}',refund:'預計退稅 ¥{r}',couponApplied:'優惠券 -¥{c}',
  altCheap:'每樣都去最便宜的店買',altOne:'全部在同一家買（{s}）',altNone:'沒有一家能買齊',save:'省 ¥{s}',
  unavailable:'附近買不到：{names}',done:'標記已購買並記入免稅額度',recorded:'已記入免稅額度',
- trackTitle:'入境免稅額度',trackKR:'韓國入境標準・每人 US$800',trackTW:'台灣入境標準・每人 NT$35,000',
+ onlineRef:'網路參考價',onlineNote:'Yahoo購物 {n}家中位數 · {d} · 不含運費，與店內價格不同',trackTitle:'入境免稅額度',trackKR:'韓國入境標準・每人 US$800',trackTW:'台灣入境標準・每人 NT$35,000',
  used:'已用',left:'剩餘',over:'超過',
  alcohol:'酒',tobacco:'菸',perfume:'香水',general:'一般物品',
  alcKR:'2瓶・合計2L・US$400以下',alcTW:'1.5公升以下（滿18歲）',tobLim:'200支以下',perfKR:'100ml以下',
@@ -249,6 +256,12 @@ const PRODUCTS=[
  {id:'lipo',cat:'med',base:1100,tr:35,lr:13,ja:'リポビタンD 10本',ko:'리포비탄 D 10병',zh:'力保美達 10瓶',
    lk:'야근할 때 찾는 영양드링크',lz:'加班必備的營養飲料'},
 ];
+/* Real product data: Yahoo!ショッピング 商品検索API v3, fetched 2026-11-13 by data/fetch-products.mjs. onl = online median price (tax incl.), n = sellers. */
+const YDATA_AT='2026-11-13';
+const YDATA={"roihi":{"jan":"4987167007263","img":"https://item-shopping.c.yimg.jp/i/j/kusuri-hagakure_1287-1-a","onl":790,"n":11},"kyusoku":{"jan":"4903301138525","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_3184959","onl":1149,"n":11},"eyebon":{"jan":"4987072053287","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987072053287","onl":962,"n":8},"sante":{"jan":"4987084410443","img":"https://item-shopping.c.yimg.jp/i/j/minoku-max_773-1-b","onl":297,"n":14},"cabbagin":{"jan":"4987973126226","img":"https://item-shopping.c.yimg.jp/i/j/kusuri-hagakure_1758964736-1-a","onl":2155,"n":12},"ryukaku":{"jan":"4987240210535","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987240210535","onl":525,"n":10},"melano":{"jan":"4987241169658","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987241169658","onl":959,"n":1},"biore":{"jan":"4901301447647","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_hk42790","onl":1011,"n":3},"kitkat":{"jan":"4902201183031","img":"https://item-shopping.c.yimg.jp/i/j/quickfactory_8603","onl":547,"n":4},"meguri":{"jan":"4901301460547","img":"https://item-shopping.c.yimg.jp/i/j/kabuiris_4901301460547","onl":1450,"n":1},"canmake":{"jan":"4901008314037","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_pn07823","onl":1145,"n":4},"ohta":{"jan":"4987033904016","img":"https://item-shopping.c.yimg.jp/i/j/maidora_4987033904016","onl":1291,"n":1},"hadalabo":{"jan":"4987241155729","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_6167728","onl":781,"n":4},"hatomugi":{"jan":"4903335693601","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_9783183","onl":630,"n":9},"loxonin":{"jan":"4987107610867","img":"https://item-shopping.c.yimg.jp/i/j/papamama_me4987107610867-00-000","onl":667,"n":4},"kairo":{"jan":"4987067827008","img":"https://item-shopping.c.yimg.jp/i/j/joshin_4987067827008-73-30001171","onl":897,"n":5},"lulu":{"jan":"4987107609205","img":"https://item-shopping.c.yimg.jp/i/j/drug-yanagawa_4987107609205-f","onl":1986,"n":10},"netsu":{"jan":"4987072087725","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_1662083","onl":526,"n":6},"curel":{"jan":"4901301236210","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4901301236210","onl":2150,"n":8},"calorie":{"jan":"4987035648918","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987035648918","onl":181,"n":2},"minon":{"jan":"4987107670335","img":"https://item-shopping.c.yimg.jp/i/j/jetdrug_4987107670335-01","onl":1832,"n":4},"lipo":{"jan":"4987306008113","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_1322009","onl":2079,"n":2}};
+PRODUCTS.forEach(p=>{const y=YDATA[p.id];if(y)Object.assign(p,y);});
+const thumb=(p,cls='')=>p.img&&/^https:\/\/item-shopping\.c\.yimg\.jp\//.test(p.img)?`<img class="thumb ${cls}" src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">`:`<span class="thumb ph ${cls}"></span>`;
+
 const P=Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
 const CHAINS=[
  {id:'donki',ko:'돈키호테',zh:'唐吉訶德',ja:'ドン・キホーテ',f:.97,cp:{p:5,min:10000}},
@@ -338,7 +351,7 @@ function viewHome(){
     const hidden=!tour&&p.tr-p.lr>=10;
     const note=!tour&&(S.lang==='zh'?p.lz:p.lk);
     return `<button class="rank-row" data-a="open" data-v="${p.id}">
-      <span class="rank-n">${i+1}</span>
+      <span class="rank-n">${i+1}</span>${thumb(p)}
       <span class="rank-main"><span class="rank-name">${esc(pname(p))}</span><span class="jp">${p.ja}</span>
         ${note?`<span class="small muted">${esc(note)}</span>`:''}
         <span class="row">${tour?`<span class="pill line">${t('localRank',{n:p.lr})}</span>`:`<span class="pill line">${t('tourRank',{n:p.tr})}</span>`}
@@ -358,8 +371,8 @@ function filtered(){
 function resultsHTML(){
   const list=filtered();
   if(!list.length)return `<div class="empty">—</div>`;
-  return list.map(p=>{const lo=lowestOf(p);return `<button class="rank-row" style="grid-template-columns:1fr auto" data-a="open" data-v="${p.id}">
-   <span class="rank-main"><span class="rank-name">${esc(pname(p))}</span><span class="jp">${p.ja}</span></span>
+  return list.map(p=>{const lo=lowestOf(p);return `<button class="rank-row" style="grid-template-columns:44px 1fr auto" data-a="open" data-v="${p.id}">
+   ${thumb(p)}<span class="rank-main"><span class="rank-name">${esc(pname(p))}</span><span class="jp">${p.ja}</span></span>
    <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span><span class="small muted">${esc(sname(lo.st))}</span>`:''}</span></button>`;}).join('');
 }
 function viewCompare(){
@@ -391,8 +404,9 @@ function viewDetail(p){
       <div class="report"><button data-a="report" data-v="${r.st.sid}|${p.id}|ok">${t('have')}</button><button data-a="report" data-v="${r.st.sid}|${p.id}|out">${t('soldout')}</button></div></div>`}
     </div>`;}).join('');
   return `<button class="back" data-a="back">${t('back')}</button>
-   <div><h2>${esc(pname(p))}</h2><div class="jp">${p.ja}</div>
-    <div class="row" style="margin-top:8px"><span class="pill line">${t('tourRank',{n:p.tr})}</span><span class="pill line">${t('localRank',{n:p.lr})}</span>${p.hot?`<span class="pill bad">${t('rising')}</span>`:''}</div></div>
+   <div class="row" style="align-items:flex-start;gap:14px;flex-wrap:nowrap">${thumb(p,'hero-img')}<div style="min-width:0"><h2>${esc(pname(p))}</h2><div class="jp">${p.ja}</div>
+    <div class="row" style="margin-top:8px"><span class="pill line">${t('tourRank',{n:p.tr})}</span><span class="pill line">${t('localRank',{n:p.lr})}</span>${p.hot?`<span class="pill bad">${t('rising')}</span>`:''}</div></div></div>
+   ${p.onl?`<div class="card online between"><div style="min-width:0"><b>${t('onlineRef')}</b><div class="small muted">${t('onlineNote',{n:p.n,d:YDATA_AT})}</div><div class="small muted num">JAN ${p.jan}</div></div><span class="price">${yen(p.onl)}</span></div>`:''}
    <div class="between"><span class="small muted">${t('storesNear',{city:t(S.city)})}</span><span class="small muted">${t('taxIn')} / ${t('afterRefund')}</span></div>
    <div class="card">${body}</div>
    <div class="row" style="justify-content:space-between">
@@ -709,10 +723,12 @@ function shareReport(k,entry){
 })();
 
 /* ---------- render + events ---------- */
+/* Required credit for the Yahoo! JAPAN Web API (format A). Do not restyle. */
+const CREDIT='<footer class="credit"><!-- Begin Yahoo! JAPAN Web Services Attribution Snippet --><a href="https://developer.yahoo.co.jp/sitemap/" target="_blank" rel="noopener">Webサービス by Yahoo! JAPAN</a><!-- End Yahoo! JAPAN Web Services Attribution Snippet --></footer>';
 function render(){
   renderTop();renderTabs();
   const v=document.getElementById('view');
-  v.innerHTML=S.tab==='home'?viewHome():S.tab==='compare'?viewCompare():S.tab==='list'?viewList():viewTrack();
+  v.innerHTML=(S.tab==='home'?viewHome():S.tab==='compare'?viewCompare():S.tab==='list'?viewList():viewTrack())+CREDIT;
   save();
 }
 let toastT;function toast(m){const el=document.getElementById('toast');el.textContent=m;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,2200);}

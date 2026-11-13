@@ -1,0 +1,137 @@
+{
+ "_note": "id: 앱 상품 id, query: 야후 검색어, jan: 확인된 JAN 코드 (비어 있으면 검색으로 후보를 찾음)",
+ "products": [
+  {
+   "id": "roihi",
+   "cat": "med",
+   "query": "ロイヒつぼ膏 156枚",
+   "jan": ""
+  },
+  {
+   "id": "kyusoku",
+   "cat": "life",
+   "query": "休足時間 18枚",
+   "jan": ""
+  },
+  {
+   "id": "eyebon",
+   "cat": "med",
+   "query": "アイボン 500ml",
+   "jan": ""
+  },
+  {
+   "id": "sante",
+   "cat": "med",
+   "query": "サンテFXネオ 12ml",
+   "jan": ""
+  },
+  {
+   "id": "cabbagin",
+   "cat": "med",
+   "query": "キャベジンコーワα 300錠",
+   "jan": ""
+  },
+  {
+   "id": "ryukaku",
+   "cat": "med",
+   "query": "龍角散ダイレクト ミント 16包",
+   "jan": ""
+  },
+  {
+   "id": "melano",
+   "cat": "cos",
+   "query": "メラノCC 薬用美容液",
+   "jan": ""
+  },
+  {
+   "id": "biore",
+   "cat": "cos",
+   "query": "ビオレUV アクアリッチ",
+   "jan": ""
+  },
+  {
+   "id": "kitkat",
+   "cat": "food",
+   "query": "キットカット 抹茶",
+   "jan": ""
+  },
+  {
+   "id": "meguri",
+   "cat": "life",
+   "query": "めぐりズム 蒸気でホットアイマスク 12枚",
+   "jan": ""
+  },
+  {
+   "id": "canmake",
+   "cat": "cos",
+   "query": "キャンメイク マシュマロフィニッシュパウダー",
+   "jan": ""
+  },
+  {
+   "id": "ohta",
+   "cat": "med",
+   "query": "太田胃散 75g",
+   "jan": ""
+  },
+  {
+   "id": "hadalabo",
+   "cat": "cos",
+   "query": "肌ラボ 極潤ヒアルロン液 170ml",
+   "jan": ""
+  },
+  {
+   "id": "hatomugi",
+   "cat": "cos",
+   "query": "ハトムギ化粧水 500ml",
+   "jan": ""
+  },
+  {
+   "id": "loxonin",
+   "cat": "med",
+   "query": "ロキソニンS 12錠",
+   "jan": ""
+  },
+  {
+   "id": "kairo",
+   "cat": "life",
+   "query": "ホッカイロ 貼る 30個",
+   "jan": ""
+  },
+  {
+   "id": "lulu",
+   "cat": "med",
+   "query": "ルルアタックEX 24錠",
+   "jan": ""
+  },
+  {
+   "id": "netsu",
+   "cat": "med",
+   "query": "熱さまシート 16枚",
+   "jan": ""
+  },
+  {
+   "id": "curel",
+   "cat": "cos",
+   "query": "キュレル 潤浸保湿フェイスクリーム",
+   "jan": ""
+  },
+  {
+   "id": "calorie",
+   "cat": "food",
+   "query": "カロリーメイト ブロック 4本",
+   "jan": ""
+  },
+  {
+   "id": "minon",
+   "cat": "cos",
+   "query": "ミノン アミノモイスト 化粧水",
+   "jan": ""
+  },
+  {
+   "id": "lipo",
+   "cat": "med",
+   "query": "リポビタンD 10本",
+   "jan": ""
+  }
+ ]
+}
