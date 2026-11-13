@@ -463,14 +463,15 @@ function viewList(){
     <div class="stepper"><button data-a="lq" data-v="${l.id}|-1" aria-label="-">−</button><span>${l.q}</span><button data-a="lq" data-v="${l.id}|1" aria-label="+">+</button></div></div>`).join('');
   const {plan,cheapEval,single,missing}=computePlan();
   const groups=plan.groups.map((g,i)=>{
-    const need=5000-g.sub;
+    const need=Math.ceil(5000-g.sub);const shown=g.lines.reduce((n,l)=>n+withTax(l.b,l.p)*l.q,0);
+    const cpnIn=Math.max(0,shown-Math.round(g.paid)),refIn=Math.round(g.paid)-Math.round(g.net);
     return `<div class="group">
       <div class="between"><div class="row"><span class="stop">${i+1}</span><h3>${esc(sname(g.st))}</h3><span class="small muted num">${g.st.dist}${t('m')}</span></div>
         <span class="price">${yen(g.net)}</span></div>
       ${g.lines.map(l=>`<div class="between small"><span style="min-width:0">${esc(pname(l.p))} × ${l.q}</span><span class="num muted">${yen(withTax(l.b,l.p)*l.q)}</span></div>`).join('')}
-      <div class="row">${g.elig?`<span class="pill good">${t('taxfreeOk')}</span><span class="pill line">${t('refund',{r:g.taxA.toLocaleString('ja-JP')})}</span>`:
+      <div class="row">${g.elig?`<span class="pill good">${t('taxfreeOk')}</span><span class="pill line">${t('refund',{r:refIn.toLocaleString('ja-JP')})}</span>`:
         `<span class="pill warn">${t('taxfreeNo')}</span><span class="small muted">${t('needMore',{need:need.toLocaleString('ja-JP'),ref:Math.floor(5000*.1).toLocaleString('ja-JP')})}</span>`}
-        ${g.cpn?`<span class="pill accent">${t('couponApplied',{c:g.cpn.toLocaleString('ja-JP')})}</span>`:''}</div>
+        ${g.cpn?`<span class="pill accent">${t('couponApplied',{c:cpnIn.toLocaleString('ja-JP')})}</span>`:''}</div>
     </div>`;}).join('');
   const alt=(label,total)=>`<div class="between small"><span class="muted" style="min-width:0">${label}</span><span class="num">${yen(total)}${total>plan.total?` <span class="pill good">${t('save',{s:Math.round(total-plan.total).toLocaleString('ja-JP')})}</span>`:''}</span></div>`;
   return `<h2>${t('listTitle')}</h2><div class="card">${items}</div>
