@@ -56,14 +56,15 @@ h3{font-size:15px;margin:0}
 .rank-n{font-family:var(--f-display);font-size:22px;text-align:center;color:var(--muted)}
 .rank-row:nth-child(-n+3) .rank-n{color:var(--accent)}
 .rank-main{min-width:0;display:flex;flex-direction:column;gap:2px}
-.rank-name{font-weight:500;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-height:1.3;word-break:keep-all;overflow-wrap:anywhere}
+.rank-name{font-weight:500;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-height:1.3;overflow-wrap:anywhere}
+:lang(ko) .rank-name,:lang(ko) .rank-side{word-break:keep-all}
 .thumb{width:44px;height:44px;border-radius:8px;object-fit:contain;background:#fff;border:1px solid var(--line);flex:none}
 .thumb.ph{display:block}
 .hero-img{width:96px;height:96px}
 .online{display:flex;gap:12px;align-items:center;padding:12px 14px}
 .credit{text-align:center;font-size:11px;color:var(--muted);padding:18px 0 4px}
 .credit a{color:inherit}
-.rank-side{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;max-width:96px;word-break:keep-all}
+.rank-side{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;max-width:96px}
 .pill{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:500;padding:2px 8px;border-radius:999px;white-space:nowrap}
 .pill.accent{background:var(--accent-soft);color:var(--accent)}
 .pill.good{background:var(--good-soft);color:var(--good)}
@@ -327,7 +328,7 @@ function stockPill(s){const cls={ok:'good',low:'warn',out:'bad'}[s.st];
 
 /* ---------- views ---------- */
 function renderTop(){
-  document.documentElement.lang=S.lang==='zh'?'zh-Hant':'ko';
+  document.documentElement.lang=S.lang==='zh'?'zh-Hant':'ko';document.title=t('app');
   document.getElementById('top').innerHTML=`<div class="brand">${t('app')}<small>${t('sub')}</small></div>
    <button class="chip-btn" data-a="settings">${t(S.city)} · ${t('settings')}</button>`;
   document.getElementById('sampleBar').textContent=t('sample');
