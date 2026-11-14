@@ -494,7 +494,7 @@ function viewList(){
 /* ---------- tracker ---------- */
 function viewTrack(){
   const KR=S.home==='KR';let gen=0,alcMl=0,alcN=0,alcYen=0,tob=0,perf=0;
-  S.purchases.forEach(x=>{if(x.type==='general')gen+=x.yen;else if(x.type==='alcohol'){alcMl+=x.vol||0;alcN++;alcYen+=x.yen;}else if(x.type==='tobacco')tob+=x.vol||0;else if(x.type==='perfume')perf+=x.vol||0;});
+  S.purchases.forEach(x=>{if(x.type==='general')gen+=x.yen;else if(x.type==='alcohol'){alcMl+=x.vol||0;alcN++;alcYen+=x.yen;}else if(x.type==='tobacco')tob+=x.vol||0;else if(x.type==='perfume'){perf+=x.vol||0;if(!KR)gen+=x.yen;}});
   const limit=KR?800:35000;const used=KR?gen/S.rates.usd:gen*S.rates.twd;
   const pct=Math.min(100,used/limit*100);const cls=used>limit?'over':used>limit*.8?'near':'';
   const fmt=v=>KR?'$'+Math.round(v).toLocaleString('en-US'):'NT$'+Math.round(v).toLocaleString('zh-TW');
@@ -534,7 +534,7 @@ function viewTrack(){
      <h3 class="full">${t('addItem')}</h3>
      <label class="full">${t('name')}<input id="fName" required maxlength="40"></label>
      <label>${t('yen')}<input id="fYen" type="number" inputmode="numeric" min="1" required></label>
-     <label>${t('type')}<select id="fType"><option value="general">${t('general')}</option><option value="alcohol">${t('alcohol')}</option><option value="tobacco">${t('tobacco')}</option><option value="perfume">${t('perfume')}</option></select></label>
+     <label>${t('type')}<select id="fType"><option value="general">${t('general')}</option><option value="alcohol">${t('alcohol')}</option><option value="tobacco">${t('tobacco')}</option>${KR?`<option value="perfume">${t('perfume')}</option>`:''}</select></label>
      <label class="full" id="fVolWrap" hidden><span id="fVolLbl">${t('amount')}</span><input id="fVol" type="number" inputmode="numeric" min="1"></label>
      <button class="btn full" type="submit">${t('add')}</button>
    </form>`;
