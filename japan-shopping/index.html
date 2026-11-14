@@ -143,7 +143,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  tourist:'관광객 인기',local:'현지인 인기',touristDesc:'한국·대만 여행자가 이번 주 많이 찾은 상품',localDesc:'일본 현지인이 실제로 많이 사는 상품',
  lowest:'최저',localRank:'현지 {n}위',tourRank:'관광객 {n}위',hidden:'관광객은 잘 모르는 템',rising:'시즌 급상승',
  refundTitle:'11월 1일부터 일본 면세가 환급 방식으로 바뀌었어요',refundBody:'매장에서는 세금 포함 가격을 내고, 출국할 때 공항 세관에서 확인받은 뒤 소비세를 돌려받아요. 한 매장에서 하루 5,000엔(세전) 이상 사야 대상이에요. 환급 수수료는 매장마다 달라요.',
- search:'상품 이름으로 찾기 (예: 동전파스)',all:'전체',med:'의약품',cos:'화장품',food:'과자·식품',life:'생활용품',
+ search:'상품 이름으로 찾기 (예: 동전파스)',noResult:'찾는 상품이 없어요. 다른 이름이나 분류로 찾아보세요.',all:'전체',med:'의약품',cos:'화장품',food:'과자·식품',life:'생활용품',
  back:'← 목록',storesNear:'{city} 근처 매장',taxIn:'세금 포함',afterRefund:'면세 환급 후',notCarried:'취급 안 함',
  ok:'재고 있음',low:'얼마 안 남음',out:'품절',agoMin:'{m}분 전',agoH:'{h}시간 전',people:'{n}명 제보',mine:'내 제보',
  have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',coupon:'쿠폰 {p}% ({min} 이상)',couponAny:'쿠폰 {p}%',
@@ -182,7 +182,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  tourist:'觀光客熱門',local:'在地人熱門',touristDesc:'本週韓國、台灣旅客最常找的商品',localDesc:'日本在地人實際常買的商品',
  lowest:'最低',localRank:'在地第{n}名',tourRank:'觀光客第{n}名',hidden:'觀光客少知道',rising:'季節熱賣',
  refundTitle:'11月1日起日本免稅改為退稅制',refundBody:'在店內先付含稅價，出境時經機場海關確認後退還消費稅。同一店家同一天購買滿5,000日圓（未稅）才適用。退稅手續費依店家而異。',
- search:'搜尋商品名稱（例：樂膚貼）',all:'全部',med:'醫藥品',cos:'美妝',food:'零食食品',life:'生活用品',
+ search:'搜尋商品名稱（例：樂膚貼）',noResult:'找不到商品，請換個名稱或分類試試。',all:'全部',med:'醫藥品',cos:'美妝',food:'零食食品',life:'生活用品',
  back:'← 列表',storesNear:'{city}附近店家',taxIn:'含稅',afterRefund:'退稅後',notCarried:'未販售',
  ok:'有貨',low:'剩不多',out:'缺貨',agoMin:'{m}分鐘前',agoH:'{h}小時前',people:'{n}人回報',mine:'我的回報',
  have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',coupon:'優惠券 {p}%（滿{min}）',couponAny:'優惠券 {p}%',
@@ -366,12 +366,15 @@ function viewHome(){
 }
 
 function filtered(){
-  const q=S.q.trim().toLowerCase();
-  return PRODUCTS.filter(p=>(S.cat==='all'||p.cat===S.cat)&&(!q||[p.ko,p.zh,p.ja].some(x=>x.toLowerCase().includes(q))));
+  const nz=x=>String(x||'').normalize('NFKC').toLowerCase().replace(/\s+/g,'');
+  const words=S.q.normalize('NFKC').toLowerCase().split(/\s+/).filter(Boolean);
+  return PRODUCTS.filter(p=>{if(S.cat!=='all'&&p.cat!==S.cat)return false;if(!words.length)return true;
+    const hay=nz([p.ko,p.zh,p.ja,p.jan,p.id].join('|'));const all=nz(S.q);
+    return hay.includes(all)||words.every(w=>hay.includes(w));});
 }
 function resultsHTML(){
   const list=filtered();
-  if(!list.length)return `<div class="empty">—</div>`;
+  if(!list.length)return `<div class="empty">${t('noResult')}</div>`;
   return list.map(p=>{const lo=lowestOf(p);return `<button class="rank-row" style="grid-template-columns:44px 1fr auto" data-a="open" data-v="${p.id}">
    ${thumb(p)}<span class="rank-main"><span class="rank-name">${esc(pname(p))}</span><span class="jp">${p.ja}</span></span>
    <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span><span class="small muted">${esc(sname(lo.st))}</span>`:''}</span></button>`;}).join('');
