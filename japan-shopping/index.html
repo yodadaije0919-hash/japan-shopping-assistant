@@ -322,7 +322,7 @@ const homeAmt=n=>S.home==='KR'?'≈ '+Math.round(n*S.rates.krw).toLocaleString('
 const pname=p=>p[S.lang]||p.ko;
 const sname=s=>s[S.lang]||s.ko;
 const ago=m=>m<60?t('agoMin',{m}):t('agoH',{h:Math.round(m/60)});
-function lowestOf(p){let best=null;for(const st of stores()){const b=priceAt(st,p);if(b!=null&&(!best||b<best.b))best={b,st};}return best;}
+function lowestOf(p){let best=null,any=null;for(const st of stores()){const b=priceAt(st,p);if(b==null)continue;if(!any||b<any.b)any={b,st};if(stockOf(st,p).st!=='out'&&(!best||b<best.b))best={b,st};}return best||any;}
 function stockPill(s){const cls={ok:'good',low:'warn',out:'bad'}[s.st];
   const meta=(s.mine?t('mine')+' · ':'')+ago(s.ago)+(s.n>1||!s.mine?' · '+t('people',{n:s.n||1}):'');
   return `<span class="pill ${cls}">${t(s.st)}</span><span class="small muted">${meta}</span>`;}
