@@ -620,7 +620,7 @@ function snapDerived(){
 function renderSnap(){
   const sh=document.getElementById('sheet');
   const opts=stores().map(s=>`<option value="${s.sid}">${esc(sname(s))} · ${s.dist}${t('m')}</option>`).join('');
-  const prods=`<option value="">${t('choose')}</option>`+PRODUCTS.map(p=>`<option value="${p.id}">${esc(pname(p))}</option>`).join('');
+  const prods=`<option value="">${t('choose')}</option>`+['med','cos','food','life'].map(c=>`<optgroup label="${t(c)}">${PRODUCTS.filter(p=>p.cat===c).map(p=>`<option value="${p.id}">${esc(pname(p))}</option>`).join('')}</optgroup>`).join('');
   sh.innerHTML=`<div class="sheet-in" role="dialog" aria-modal="true" aria-label="${t('snapTitle')}">
     <div class="between"><h2>${t('snapTitle')}</h2><button class="chip-btn" data-a="closeSnap">${t('close')}</button></div>
     <span class="small muted">${t('snapDesc')}</span>
