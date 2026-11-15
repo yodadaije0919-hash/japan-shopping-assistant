@@ -1,6 +1,6 @@
 // Fetch real product info for the catalog from the Yahoo!ショッピング 商品検索API (v3).
 //
-//   YAHOO_APP_ID=<Client ID> node data/fetch-products.mjs
+//   YAHOO_APP_ID=<Client ID> node data/fetch-products.mjs [id ...]
 //
 // Reads data/catalog.json, writes data/products.json and prints a review table.
 // API: https://developer.yahoo.co.jp/webapi/shopping/v3/itemsearch.html
@@ -60,7 +60,11 @@ export function summarize(entry, hits) {
 async function main() {
   const appid = process.env.YAHOO_APP_ID;
   if (!appid) { console.error('YAHOO_APP_ID 환경변수에 야후 Client ID를 넣어 주세요.'); process.exit(1); }
-  const { products } = JSON.parse(await readFile(join(DIR, 'catalog.json'), 'utf8'));
+  const all = JSON.parse(await readFile(join(DIR, 'catalog.json'), 'utf8')).products;
+  // Optional ids on the command line: fetch only those and keep the rest of products.json as it is.
+  const only = process.argv.slice(2);
+  const products = only.length ? all.filter(e => only.includes(e.id)) : all;
+  const prev = only.length ? JSON.parse(await readFile(join(DIR, 'products.json'), 'utf8')).products : [];
   const out = [];
   for (const [i, entry] of products.entries()) {
     if (i) await sleep(1100);
@@ -73,8 +77,10 @@ async function main() {
     const r = out.at(-1);
     console.log(`${String(i + 1).padStart(2)} ${entry.id.padEnd(10)} ${r.error ? 'ERROR ' + r.error : `${r.jan || '-'}  중앙값 ${r.online.median ?? '-'}엔  판매처 ${r.online.sellers}  ${r.needs_review.join(', ')}`}`);
   }
-  await writeFile(join(DIR, 'products.json'), JSON.stringify({ source: 'Yahoo!ショッピング 商品検索API v3', fetchedAt: new Date().toISOString(), products: out }, null, 1) + '\n');
-  console.log(`\ndata/products.json 저장 (${out.length}개). needs_review가 있는 상품은 JAN을 확인해서 catalog.json에 적고 다시 실행하세요.`);
+  const byId = new Map([...prev, ...out].map(r => [r.id, r]));
+  const merged = only.length ? all.map(e => byId.get(e.id)).filter(Boolean) : out;
+  await writeFile(join(DIR, 'products.json'), JSON.stringify({ source: 'Yahoo!ショッピング 商品検索API v3', fetchedAt: new Date().toISOString(), products: merged }, null, 1) + '\n');
+  console.log(`\ndata/products.json 저장 (${merged.length}개). needs_review가 있는 상품은 JAN을 확인해서 catalog.json에 적고 다시 실행하세요.`);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) main();

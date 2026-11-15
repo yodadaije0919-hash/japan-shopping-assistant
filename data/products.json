@@ -1,6 +1,6 @@
 {
  "source": "Yahoo!ショッピング 商品検索API v3",
- "fetchedAt": "2026-11-13T13:09:22.187Z",
+ "fetchedAt": "2026-11-15T12:51:04.191Z",
  "products": [
   {
    "id": "roihi",
@@ -11,9 +11,9 @@
    "brand": "NICHIBAN",
    "image": "https://item-shopping.c.yimg.jp/i/j/kusuri-hagakure_1287-1-a",
    "online": {
-    "median": 795,
+    "median": 793,
     "min": 608,
-    "sellers": 19
+    "sellers": 18
    },
    "reviews": 0,
    "needs_review": []
@@ -28,10 +28,10 @@
    "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_3184959",
    "online": {
     "median": 1155,
-    "min": 877,
+    "min": 880,
     "sellers": 16
    },
-   "reviews": 85,
+   "reviews": 82,
    "needs_review": []
   },
   {
@@ -39,9 +39,9 @@
    "cat": "med",
    "query": "アイボンd 500ml",
    "jan": "4987072032893",
-   "name_ja": "アイボンd 500ml 小林製薬【第3類医薬品】",
+   "name_ja": "【第3類医薬品】アイボンd 500ml",
    "brand": "アイボン",
-   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_1381743",
+   "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4987072032893",
    "online": {
     "median": 968,
     "min": 745,
@@ -75,9 +75,9 @@
    "brand": "キャベジンコーワ",
    "image": "https://item-shopping.c.yimg.jp/i/j/kusuri-hagakure_1758964736-1-a",
    "online": {
-    "median": 2180,
+    "median": 2199,
     "min": 1705,
-    "sellers": 18
+    "sellers": 19
    },
    "reviews": 0,
    "needs_review": []
@@ -91,9 +91,9 @@
    "brand": "龍角散",
    "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4987240210535",
    "online": {
-    "median": 669,
+    "median": 678,
     "min": 474,
-    "sellers": 14
+    "sellers": 13
    },
    "reviews": 0,
    "needs_review": []
@@ -107,11 +107,11 @@
    "brand": "メラノCC",
    "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_u877925",
    "online": {
-    "median": 1090,
+    "median": 1100,
     "min": 903,
     "sellers": 25
    },
-   "reviews": 261,
+   "reviews": 260,
    "needs_review": []
   },
   {
@@ -123,11 +123,11 @@
    "brand": "ビオレUV",
    "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_hk42790",
    "online": {
-    "median": 924,
-    "min": 780,
+    "median": 1005,
+    "min": 847,
     "sellers": 23
    },
-   "reviews": 78,
+   "reviews": 79,
    "needs_review": []
   },
   {
@@ -155,11 +155,11 @@
    "brand": "めぐりズム",
    "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_j930212",
    "online": {
-    "median": 1186,
-    "min": 1068,
+    "median": 1220,
+    "min": 1066,
     "sellers": 13
    },
-   "reviews": 75,
+   "reviews": 74,
    "needs_review": []
   },
   {
@@ -221,9 +221,9 @@
    "brand": "naturie",
    "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_9783183",
    "online": {
-    "median": 688,
+    "median": 697,
     "min": 539,
-    "sellers": 22
+    "sellers": 24
    },
    "reviews": 1016,
    "needs_review": []
@@ -237,7 +237,7 @@
    "brand": "ロキソニンS",
    "image": "https://item-shopping.c.yimg.jp/i/j/papamama_me4987107610867-00-000",
    "online": {
-    "median": 786,
+    "median": 761,
     "min": 352,
     "sellers": 12
    },
@@ -253,9 +253,9 @@
    "brand": null,
    "image": "https://item-shopping.c.yimg.jp/i/j/scbmitsuokun1972_4987067827008",
    "online": {
-    "median": 961,
-    "min": 781,
-    "sellers": 19
+    "median": 905,
+    "min": 778,
+    "sellers": 17
    },
    "reviews": 69,
    "needs_review": []
@@ -285,11 +285,11 @@
    "brand": "小林製薬",
    "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_1662083",
    "online": {
-    "median": 606,
+    "median": 591,
     "min": 378,
-    "sellers": 17
+    "sellers": 19
    },
-   "reviews": 119,
+   "reviews": 121,
    "needs_review": []
   },
   {
@@ -301,11 +301,11 @@
    "brand": "Curel",
    "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4901301236210",
    "online": {
-    "median": 2560,
+    "median": 2526,
     "min": 2098,
-    "sellers": 18
+    "sellers": 16
    },
-   "reviews": 985,
+   "reviews": 1024,
    "needs_review": []
   },
   {
@@ -333,9 +333,9 @@
    "brand": "MINON",
    "image": "https://item-shopping.c.yimg.jp/i/j/jetdrug_4987107670335-01",
    "online": {
-    "median": 2116,
+    "median": 2108,
     "min": 1518,
-    "sellers": 27
+    "sellers": 28
    },
    "reviews": 6,
    "needs_review": []
@@ -354,6 +354,278 @@
     "sellers": 17
    },
    "reviews": 27,
+   "needs_review": []
+  },
+  {
+   "id": "salonpas",
+   "cat": "med",
+   "query": "サロンパスAe 140枚",
+   "jan": "4987188100325",
+   "name_ja": "サロンパスA 　ビタミンE配合（140枚入）　　【第3類医薬品】",
+   "brand": "久光製薬",
+   "image": "https://item-shopping.c.yimg.jp/i/j/azumiyafuu-store_4987188100325-011",
+   "online": {
+    "median": 1768,
+    "min": 1298,
+    "sellers": 23
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "pabron",
+   "cat": "med",
+   "query": "パブロンゴールドA 微粒 44包",
+   "jan": "4987306045156",
+   "name_ja": "パブロンゴールドA　 微粒　 44包　大正製薬　第２類医薬品",
+   "brand": "大正製薬",
+   "image": "https://item-shopping.c.yimg.jp/i/j/azumiyafuu-store-2_4987306045156-1",
+   "online": {
+    "median": 1887,
+    "min": 1748,
+    "sellers": 12
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "eve",
+   "cat": "med",
+   "query": "イブA錠EX 40錠",
+   "jan": "4987300058510",
+   "name_ja": "指定第２類医薬品 イブA錠EX 40錠 生理痛 頭痛 解熱鎮痛 (1個)",
+   "brand": "EVE（エスエス製薬）",
+   "image": "https://item-shopping.c.yimg.jp/i/j/minoku-beauty_368-1-b",
+   "online": {
+    "median": 849,
+    "min": 601,
+    "sellers": 15
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "biofermin",
+   "cat": "med",
+   "query": "新ビオフェルミンS錠 350錠",
+   "jan": "4987306054783",
+   "name_ja": "(あわせ買い2999円以上で送料無料)大正製薬 新ビオフェルミンS錠 350錠",
+   "brand": "大正製薬",
+   "image": "https://item-shopping.c.yimg.jp/i/j/kenkoo-life_103-4987306054783",
+   "online": {
+    "median": 2188,
+    "min": 1760,
+    "sellers": 28
+   },
+   "reviews": 4,
+   "needs_review": []
+  },
+  {
+   "id": "oronine",
+   "cat": "med",
+   "query": "オロナインH軟膏 100g",
+   "jan": "4987035085713",
+   "name_ja": "【第2類医薬品】オロナインH軟膏 100g",
+   "brand": null,
+   "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4987035085713",
+   "online": {
+    "median": 1183,
+    "min": 798,
+    "sellers": 25
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "muhi",
+   "cat": "med",
+   "query": "ムヒアルファEX 15g",
+   "jan": "4987426002138",
+   "name_ja": "≪15日はP2%≫【指定第2類医薬品】ムヒアルファEX 15g ※セルフメディケーション税制対象〔虫さされ〕",
+   "brand": "MUHI",
+   "image": "https://item-shopping.c.yimg.jp/i/j/jetdrug_4987426002138-01",
+   "online": {
+    "median": 970,
+    "min": 740,
+    "sellers": 20
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "seirogan",
+   "cat": "med",
+   "query": "正露丸 100粒",
+   "jan": "4987110001737",
+   "name_ja": "正露丸 100粒 大幸薬品 下痢止め薬 軟便 下痢 食あたり 水あたり むし歯痛【第2類医薬品】",
+   "brand": "正露丸",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_ra18486",
+   "online": {
+    "median": 1188,
+    "min": 908,
+    "sellers": 27
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "dhclip",
+   "cat": "cos",
+   "query": "DHC 薬用リップクリーム 1.5g",
+   "jan": "4511413310625",
+   "name_ja": "DHC　薬用リップクリーム　1.5g　1個　ディーエイチシー　無香料　保湿リップスティック",
+   "brand": "DHC",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_8366417",
+   "online": {
+    "median": 770,
+    "min": 598,
+    "sellers": 15
+   },
+   "reviews": 149,
+   "needs_review": []
+  },
+  {
+   "id": "senka",
+   "cat": "cos",
+   "query": "専科 パーフェクトホイップ 120g",
+   "jan": "4550516474568",
+   "name_ja": "ファイントゥデイ 専科 パーフェクトホイップ 120G",
+   "brand": "専科",
+   "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4550516474568",
+   "online": {
+    "median": 574,
+    "min": 490,
+    "sellers": 18
+   },
+   "reviews": 36,
+   "needs_review": []
+  },
+  {
+   "id": "anessa",
+   "cat": "cos",
+   "query": "アネッサ パーフェクトUV スキンケアミルク 60ml",
+   "jan": "4909978147105",
+   "name_ja": "★資生堂認定店 アネッサ パーフェクトＵＶ スキンケアミルク ＮＡ SPF50+ PA++++ 60mL【送料無料】",
+   "brand": "アネッサ",
+   "image": "https://item-shopping.c.yimg.jp/i/j/matsuya-cosme_14710-1",
+   "online": {
+    "median": 2240,
+    "min": 752,
+    "sellers": 22
+   },
+   "reviews": 918,
+   "needs_review": []
+  },
+  {
+   "id": "lululun",
+   "cat": "cos",
+   "query": "ルルルン プレシャス GREEN 32枚",
+   "jan": "4580794012534",
+   "name_ja": "LuLuLun ルルルン プレシャスグリーン グローアップ 32枚 シートマスク フェイスパック[ギフトラッピング対応]",
+   "brand": "LuLuLun",
+   "image": "https://item-shopping.c.yimg.jp/i/j/ohgiri-store_lululun2534",
+   "online": {
+    "median": 2295,
+    "min": 1879,
+    "sellers": 15
+   },
+   "reviews": 5,
+   "needs_review": []
+  },
+  {
+   "id": "heroine",
+   "cat": "cos",
+   "query": "ヒロインメイク ロング&カールマスカラ アドバンストフィルム 01",
+   "jan": "4901433036962",
+   "name_ja": "ヒロインメイク ロング＆カール マスカラ アドバンストフィルム 01 漆黒ブラック ポスト投函",
+   "brand": "ヒロインメイク",
+   "image": "https://item-shopping.c.yimg.jp/i/j/aaa83900_4901433036962",
+   "online": {
+    "median": 1320,
+    "min": 1072,
+    "sellers": 25
+   },
+   "reviews": 255,
+   "needs_review": []
+  },
+  {
+   "id": "nameraka",
+   "cat": "cos",
+   "query": "なめらか本舗 リンクル化粧水 N 200mL",
+   "jan": "4964596485763",
+   "name_ja": "なめらか本舗　リンクル化粧水　Ｎ　200mL　常盤薬品工業",
+   "brand": "なめらか本舗",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_p824797",
+   "online": {
+    "median": 917,
+    "min": 773,
+    "sellers": 28
+   },
+   "reviews": 81,
+   "needs_review": []
+  },
+  {
+   "id": "saborino",
+   "cat": "cos",
+   "query": "サボリーノ 目ざまシート 32枚",
+   "jan": "4515061190202",
+   "name_ja": "Saborino サボリーノ 目ざまシート N 32枚 朝用シートマスク BCLカンパニー おまけ付き",
+   "brand": "サボリーノ",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_6120534",
+   "online": {
+    "median": 1540,
+    "min": 1092,
+    "sellers": 22
+   },
+   "reviews": 155,
+   "needs_review": []
+  },
+  {
+   "id": "alfort",
+   "cat": "food",
+   "query": "アルフォートミニチョコレート リッチミルク",
+   "jan": "4901360364169",
+   "name_ja": "アルフォートミニチョコレートリッチミルク チョコレート菓子  1箱 ブルボン",
+   "brand": "アルフォート",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_ane6512",
+   "online": {
+    "median": 194,
+    "min": 194,
+    "sellers": 3
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "jagarico",
+   "cat": "food",
+   "query": "じゃがりこ サラダ 57g",
+   "jan": "4901330578909",
+   "name_ja": "じゃがりこ サラダ チーズ じゃがバター たらこバター カルビー カリッとサクサク スナック菓子 じゃがいも お菓子 おやつ おつまみ Calbee *",
+   "brand": "じゃがりこ",
+   "image": "https://item-shopping.c.yimg.jp/i/j/irisplaza_7276879f",
+   "online": {
+    "median": 201,
+    "min": 159,
+    "sellers": 6
+   },
+   "reviews": 24,
+   "needs_review": []
+  },
+  {
+   "id": "breathcare",
+   "cat": "life",
+   "query": "噛むブレスケア レモンミント 100粒",
+   "jan": "4987072034026",
+   "name_ja": "噛むブレスケア 息リフレッシュグミ レモンミント パウチタイプ お得な大容量 100粒 1パック 小林製薬",
+   "brand": "ブレスケア",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_1616269",
+   "online": {
+    "median": 916,
+    "min": 753,
+    "sellers": 21
+   },
+   "reviews": 76,
    "needs_review": []
   }
  ]

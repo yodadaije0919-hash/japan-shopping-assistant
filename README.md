@@ -3,7 +3,7 @@
 일본에 여행 가는 한국·대만 여행자를 위한 쇼핑 앱 시제품입니다.
 "어디가 제일 싼지, 아직 남아있는지"를 한 화면에서 보여주는 것이 목표입니다.
 
-> **시제품**입니다. 상품 22개의 이름, JAN 코드, 사진, 온라인 참고가는 [Yahoo!ショッピング 商品検索API](https://developer.yahoo.co.jp/webapi/shopping/v3/itemsearch.html)에서 가져온 실제 데이터입니다. 매장별 가격과 재고, 인기 순위는 아직 화면과 흐름을 보여주기 위한 예시입니다.
+> **시제품**입니다. 상품 39개의 이름, JAN 코드, 사진, 온라인 참고가는 [Yahoo!ショッピング 商品検索API](https://developer.yahoo.co.jp/webapi/shopping/v3/itemsearch.html)에서 가져온 실제 데이터입니다. 매장별 가격과 재고, 인기 순위는 아직 화면과 흐름을 보여주기 위한 예시입니다.
 
 **바로 써보기**: https://claude.ai/artifact/QapKecHZtx8vicivu6bsKf (Claude 아티팩트, 휴대폰 화면 기준)
 ※ 링크를 열려면 **Claude 계정으로 로그인**해야 합니다. 로그인하지 않으면 로그인 화면만 보입니다. 계정이 없다면 `japan-shopping/index.html`을 내려받아 브라우저에서 바로 열 수 있습니다 (사진 읽기·제보 공유 제외).
@@ -60,14 +60,14 @@
 
 | 데이터 | 출처 |
 |---|---|
-| 상품 정보 (JAN 코드, 이름, 이미지) | [Yahoo!ショッピング 商品検索API v3](https://developer.yahoo.co.jp/webapi/shopping/v3/itemsearch.html) + 번역·검수 (**22개 반영 완료**) |
+| 상품 정보 (JAN 코드, 이름, 이미지) | [Yahoo!ショッピング 商品検索API v3](https://developer.yahoo.co.jp/webapi/shopping/v3/itemsearch.html) + 번역·검수 (**39개 반영 완료**) |
 | 매장 가격 | 직접 조사로 초기 데이터 확보 → 가격표 사진 제보 → 영수증 촬영 → 전단 서비스·체인 제휴 |
 | 재고 | 여행자 제보 (시간이 지나면 신뢰도 낮춤) |
 | 관광객 인기 | 앱 안의 검색·장바구니 기록 |
 | 현지인 인기 | 일본 온라인몰 판매 순위 등 (확인 필요) |
 
 단계
-1. 상품 300개 정보 정리 (22개 완료), 신주쿠 6개 매장 직접 조사
+1. 상품 300개 정보 정리 (39개 완료), 신주쿠 6개 매장 직접 조사
 2. 출시: 가격표 제보, 재고 버튼, 면세한도 트래커
 3. 영수증 촬영, 지역 확대, 현지인 순위 연동
 4. 전단 서비스·체인 제휴, 쿠폰 수익화
@@ -86,11 +86,11 @@ data/
 ### 상품 데이터 다시 받기
 
 1. [Yahoo!デベロッパーネットワーク](https://e.developer.yahoo.co.jp/dashboard/)에서 Client ID를 발급받아 `.env`에 `YAHOO_APP_ID=...`로 저장합니다. `.env`는 git에 올라가지 않습니다.
-2. 실행합니다 (1초에 1번씩 요청해서 22개에 30초쯤 걸립니다).
+2. 실행합니다 (1초에 1번씩 요청해서 39개에 50초쯤 걸립니다). 30개쯤 넘으면 야후가 잠시 요청을 막을 수 있습니다(HTTP 429). 그럴 때는 1분쯤 뒤에 빠진 상품만 `node data/fetch-products.mjs <id> <id>`로 다시 받습니다.
    ```bash
    set -a; . ./.env; set +a; node data/fetch-products.mjs
    ```
-3. 22개 상품의 JAN은 `data/catalog.json`에 모두 확정해 두었습니다. 새 상품을 추가하면 `needs_review`가 붙으니, 정확한 JAN을 적고 다시 실행합니다. 같은 JAN만 쓰도록 고정됩니다.
+3. 39개 상품의 JAN은 `data/catalog.json`에 모두 확정해 두었습니다. 새 상품을 추가하면 `needs_review`가 붙으니, 정확한 JAN을 적고 다시 실행합니다. 같은 JAN만 쓰도록 고정됩니다.
 4. `products.json` 내용을 `index.html`의 `YDATA`에 반영합니다.
 
 야후 API를 쓰는 화면에는 이용 조건에 따라 아래쪽에 "Webサービス by Yahoo! JAPAN" 크레딧을 표시합니다.
