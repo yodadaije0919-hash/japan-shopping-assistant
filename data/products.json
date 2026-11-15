@@ -1,6 +1,6 @@
 {
  "source": "Yahoo!ショッピング 商品検索API v3",
- "fetchedAt": "2026-11-15T12:51:04.191Z",
+ "fetchedAt": "2026-11-15T13:11:00.886Z",
  "products": [
   {
    "id": "roihi",
@@ -627,6 +627,346 @@
    },
    "reviews": 76,
    "needs_review": []
+  },
+  {
+   "id": "transino",
+   "cat": "med",
+   "query": "トランシーノ ホワイトCクリア 120錠",
+   "jan": "4987107619792",
+   "name_ja": "≪15日はP2%≫【第3類医薬品】トランシーノホワイトCクリア 120錠〔そばかす〕",
+   "brand": "TRANSINO",
+   "image": "https://item-shopping.c.yimg.jp/i/j/jetdrug_4987107619792-01",
+   "online": {
+    "median": 2257,
+    "min": 1798,
+    "sellers": 14
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "chocola",
+   "cat": "med",
+   "query": "チョコラBBプラス 180錠",
+   "jan": "4987028123392",
+   "name_ja": "≪15日はP2%≫【第3類医薬品】チョコラBBプラス 180錠 ×1個〔肌荒れ〕",
+   "brand": "チョコラBBプラス",
+   "image": "https://item-shopping.c.yimg.jp/i/j/jetdrug_4987028123392-01",
+   "online": {
+    "median": 3518,
+    "min": 2880,
+    "sellers": 15
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "alinamin",
+   "cat": "med",
+   "query": "アリナミンEXプラス 270錠",
+   "jan": "4987123145428",
+   "name_ja": "第三類医薬品　アリナミンＥＸプラス　270錠　お一人様5点まででお願いします。",
+   "brand": "アリナミン製薬",
+   "image": "https://item-shopping.c.yimg.jp/i/j/narikawa-ph_4987123145428",
+   "online": {
+    "median": 6112,
+    "min": 5698,
+    "sellers": 16
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "vrohto",
+   "cat": "med",
+   "query": "Vロートプレミアム 15mL",
+   "jan": "4987241174454",
+   "name_ja": "第２類医薬品 Vロート プレミアム 15ml 目薬  (1個)",
+   "brand": "Vロート",
+   "image": "https://item-shopping.c.yimg.jp/i/j/tsuhan-okusuri_1758932603-1-d",
+   "online": {
+    "median": 1212,
+    "min": 969,
+    "sellers": 8
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "bufferin",
+   "cat": "med",
+   "query": "バファリンA 80錠",
+   "jan": "4903301010944",
+   "name_ja": "2980円以上で注文可能  指定第２類医薬品 バファリンA 80錠 頭痛 熱 眠くなりにくい アスピリン (1個)",
+   "brand": "バファリン",
+   "image": "https://item-shopping.c.yimg.jp/i/j/minoku-max_105-1-b",
+   "online": {
+    "median": 1472,
+    "min": 918,
+    "sellers": 20
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "feitas",
+   "cat": "med",
+   "query": "フェイタス5.0",
+   "jan": "4987188124437",
+   "name_ja": "【第2類医薬品】フェイタス5.0 50枚 【セルフメディケーション税制対象】",
+   "brand": null,
+   "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4987188124437",
+   "online": {
+    "median": 2780,
+    "min": 2413,
+    "sellers": 4
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "unakowa",
+   "cat": "med",
+   "query": "ウナコーワクールα 30mL",
+   "jan": "4987067295401",
+   "name_ja": "2980円以上で注文可能  指定第２類医薬品 ウナコーワクールα 30mL かゆみ止め 塗り薬 虫刺され 蚊 ダニ ブヨ 湿疹 かぶれ 皮膚炎 汗疹 市販 子供 (1個)",
+   "brand": "Kowa",
+   "image": "https://item-shopping.c.yimg.jp/i/j/minoku-max_1758909822-1-b",
+   "online": {
+    "median": 435,
+    "min": 329,
+    "sellers": 18
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "fino",
+   "cat": "cos",
+   "query": "フィーノ プレミアムタッチ 浸透美容液ヘアマスク 230g",
+   "jan": "4901872837144",
+   "name_ja": "フィーノ プレミアムタッチ 浸透美容液ヘアマスク 230g ヘアトリートメント つや髪 ヘアマスク 艶 潤い しっとり トリートメント fin",
+   "brand": "フィーノ",
+   "image": "https://item-shopping.c.yimg.jp/i/j/lamp_kzft-163",
+   "online": {
+    "median": 1339,
+    "min": 898,
+    "sellers": 5
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "yuskin",
+   "cat": "cos",
+   "query": "ユースキン 120g",
+   "jan": "4987353190311",
+   "name_ja": "【指定医薬部外品】ユースキン　ボトル　120g",
+   "brand": "yuskin",
+   "image": "https://item-shopping.c.yimg.jp/i/j/ladydrugheartshop_4987353190311",
+   "online": {
+    "median": 1094,
+    "min": 978,
+    "sellers": 24
+   },
+   "reviews": 52,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "kate",
+   "cat": "cos",
+   "query": "ケイト リップモンスター 03",
+   "jan": "4973167820193",
+   "name_ja": "カネボウ認定ショップ|ケイト　リップモンスター　03（陽炎）3g　  KATE|爆買",
+   "brand": "KATE",
+   "image": "https://item-shopping.c.yimg.jp/i/j/sian_820193",
+   "online": {
+    "median": 1530,
+    "min": 1474,
+    "sellers": 10
+   },
+   "reviews": 229,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "cezanne",
+   "cat": "cos",
+   "query": "セザンヌ パールグロウハイライト 01",
+   "jan": "4939553041122",
+   "name_ja": "CEZANNE（セザンヌ） パールグロウハイライト 01 セザンヌ化粧品",
+   "brand": "CEZANNE",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_j974501",
+   "online": {
+    "median": 660,
+    "min": 660,
+    "sellers": 10
+   },
+   "reviews": 205,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "rosette",
+   "cat": "cos",
+   "query": "ロゼット 洗顔パスタ 海泥スムース 120g",
+   "jan": "4901696541845",
+   "name_ja": "ロゼット 洗顔パスタ 海泥スムース（毛穴対策） 120g 角質 皮脂汚れ 引き締め 吸着 無香料 無着色料 無鉱物油",
+   "brand": "ROSETTE（コスメ）",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_8367540",
+   "online": {
+    "median": 580,
+    "min": 504,
+    "sellers": 18
+   },
+   "reviews": 931,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "keana",
+   "cat": "cos",
+   "query": "毛穴撫子 お米のマスク 10枚",
+   "jan": "4992440034713",
+   "name_ja": "毛穴撫子 お米のマスク 10枚入 石澤研究所",
+   "brand": "毛穴撫子",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_2058879",
+   "online": {
+    "median": 715,
+    "min": 572,
+    "sellers": 14
+   },
+   "reviews": 619,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "meltylip",
+   "cat": "cos",
+   "query": "メンソレータム メルティクリームリップ 無香料",
+   "jan": "4987241156337",
+   "name_ja": "ロート製薬 メンソレータム メルティクリームリップ 無香料 2.4g",
+   "brand": "メンソレータム",
+   "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4987241156337",
+   "online": {
+    "median": 463,
+    "min": 366,
+    "sellers": 18
+   },
+   "reviews": 118,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "nodoame",
+   "cat": "food",
+   "query": "龍角散ののどすっきり飴 100g",
+   "jan": "4987240631415",
+   "name_ja": "龍角散の　のどすっきり飴　100g",
+   "brand": "龍角散",
+   "image": "https://item-shopping.c.yimg.jp/i/j/ladydrugheartshop_4987240631415",
+   "online": {
+    "median": 276,
+    "min": 237,
+    "sellers": 10
+   },
+   "reviews": 261,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "mintia",
+   "cat": "food",
+   "query": "ミンティア ワイルド&クール 50粒",
+   "jan": "4946842501908",
+   "name_ja": "アサヒグループ食品　ミンティア　ワイルド＆クール　５０粒　１個",
+   "brand": "アサヒグループ食品",
+   "image": "https://item-shopping.c.yimg.jp/i/j/tanomail_5665310",
+   "online": {
+    "median": 133,
+    "min": 133,
+    "sellers": 1
+   },
+   "reviews": 5,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)",
+    "같은 JAN 판매처 1곳뿐"
+   ]
+  },
+  {
+   "id": "onnetsu",
+   "cat": "life",
+   "query": "めぐりズム 蒸気の温熱シート 肌に直接貼るタイプ 16枚",
+   "jan": "4901301471932",
+   "name_ja": "花王　めぐりズム　蒸気の温熱シート　肌に直接貼るタイプ　１６枚入【イージャパンモール】",
+   "brand": "Kao",
+   "image": "https://item-shopping.c.yimg.jp/i/j/ejapan_4901301471932ks",
+   "online": {
+    "median": 1564,
+    "min": 1564,
+    "sellers": 1
+   },
+   "reviews": 0,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)",
+    "같은 JAN 판매처 1곳뿐"
+   ]
+  },
+  {
+   "id": "apagard",
+   "cat": "life",
+   "query": "アパガードプレミオ 105g",
+   "jan": "4987643122183",
+   "name_ja": "アパガード プレミオ 105g  (1個)",
+   "brand": "APAGARD",
+   "image": "https://item-shopping.c.yimg.jp/i/j/tsuhan-okusuri_1758943875-1-d",
+   "online": {
+    "median": 1517,
+    "min": 1399,
+    "sellers": 8
+   },
+   "reviews": 47,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
+  },
+  {
+   "id": "itoyoji",
+   "cat": "life",
+   "query": "糸ようじ 60本",
+   "jan": "4987072025895",
+   "name_ja": "デンタルフロス 小林製薬の糸ようじ フロス＆ピック 60本入",
+   "brand": "小林製薬",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_8360351",
+   "online": {
+    "median": 589,
+    "min": 522,
+    "sellers": 7
+   },
+   "reviews": 325,
+   "needs_review": [
+    "JAN 미확정 (검색 결과 최다 JAN)"
+   ]
   }
  ]
 }
