@@ -59,9 +59,9 @@ h3{font-size:15px;margin:0}
 .rank-name{font-weight:500;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-height:1.3;overflow-wrap:anywhere}
 :lang(ko) .rank-name,:lang(ko) .rank-side,:lang(ko) h2,:lang(ko) h3{word-break:keep-all;overflow-wrap:anywhere}
 .jp{word-break:keep-all;overflow-wrap:anywhere}
-.thumb{width:44px;height:44px;border-radius:8px;object-fit:contain;background:#fff;border:1px solid var(--line);flex:none}
-.thumb.ph{display:block}
-.hero-img{width:96px;height:96px}
+.thumb{width:44px;height:44px;border-radius:8px;background:var(--bg);border:1px solid var(--line);flex:none;display:grid;place-items:center;position:relative;overflow:hidden;font-size:22px;line-height:1}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
+.hero-img{width:96px;height:96px;font-size:44px}
 .online{display:flex;gap:12px;align-items:center;padding:12px 14px}
 .credit{text-align:center;font-size:11px;color:var(--muted);padding:18px 0 4px}
 .credit a{color:inherit}
@@ -262,7 +262,8 @@ const PRODUCTS=[
 const YDATA_AT='2026-11-13';
 const YDATA={"roihi":{"jan":"4987167007263","img":"https://item-shopping.c.yimg.jp/i/j/kusuri-hagakure_1287-1-a","onl":795,"n":19},"kyusoku":{"jan":"4903301138525","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_3184959","onl":1155,"n":16},"eyebon":{"jan":"4987072032893","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_1381743","onl":968,"n":25},"sante":{"jan":"4987084410443","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987084410443","onl":534,"n":19},"cabbagin":{"jan":"4987973126226","img":"https://item-shopping.c.yimg.jp/i/j/kusuri-hagakure_1758964736-1-a","onl":2180,"n":18},"ryukaku":{"jan":"4987240210535","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987240210535","onl":669,"n":14},"melano":{"jan":"4987241169658","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_u877925","onl":1090,"n":25},"biore":{"jan":"4901301447647","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_hk42790","onl":924,"n":23},"kitkat":{"jan":"4902201183031","img":"https://item-shopping.c.yimg.jp/i/j/quickfactory_8603","onl":504,"n":10},"meguri":{"jan":"4901301460547","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_j930212","onl":1186,"n":13},"canmake":{"jan":"4901008304533","img":"https://item-shopping.c.yimg.jp/i/j/zagzag_4901008304533-m","onl":1034,"n":18},"ohta":{"jan":"4987033904016","img":"https://item-shopping.c.yimg.jp/i/j/maidora_4987033904016","onl":1313,"n":2},"hadalabo":{"jan":"4987241155712","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_6167719","onl":968,"n":29},"hatomugi":{"jan":"4903335693601","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_9783183","onl":688,"n":22},"loxonin":{"jan":"4987107610867","img":"https://item-shopping.c.yimg.jp/i/j/papamama_me4987107610867-00-000","onl":786,"n":12},"kairo":{"jan":"4987067827008","img":"https://item-shopping.c.yimg.jp/i/j/scbmitsuokun1972_4987067827008","onl":961,"n":19},"lulu":{"jan":"4987107609205","img":"https://item-shopping.c.yimg.jp/i/j/minoku-beauty_136-1-b","onl":1865,"n":27},"netsu":{"jan":"4987072087725","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_1662083","onl":606,"n":17},"curel":{"jan":"4901301236210","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4901301236210","onl":2560,"n":18},"calorie":{"jan":"4987035090113","img":"https://item-shopping.c.yimg.jp/i/j/rashiku-shop_4987035090113","onl":239,"n":13},"minon":{"jan":"4987107670335","img":"https://item-shopping.c.yimg.jp/i/j/jetdrug_4987107670335-01","onl":2116,"n":27},"lipo":{"jan":"4987306003491","img":"https://item-shopping.c.yimg.jp/i/j/soukai_4987306003491","onl":1551,"n":17}};
 PRODUCTS.forEach(p=>{const y=YDATA[p.id];if(y)Object.assign(p,y);});
-const thumb=(p,cls='')=>p.img&&/^https:\/\/item-shopping\.c\.yimg\.jp\//.test(p.img)?`<img class="thumb ${cls}" src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">`:`<span class="thumb ph ${cls}"></span>`;
+const CAT_ICON={med:'💊',cos:'🧴',food:'🍫',life:'🧺'};
+const thumb=(p,cls='')=>`<span class="thumb ${cls}" aria-hidden="true">${CAT_ICON[p.cat]||'🛍️'}${p.img&&/^https:\/\/item-shopping\.c\.yimg\.jp\//.test(p.img)?`<img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}</span>`;
 
 const P=Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
 const CHAINS=[
