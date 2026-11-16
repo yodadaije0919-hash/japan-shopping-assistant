@@ -1,6 +1,6 @@
 {
  "source": "Yahoo!ショッピング 商品検索API v3",
- "fetchedAt": "2026-11-16T03:47:42.358Z",
+ "fetchedAt": "2026-11-16T04:13:24.984Z",
  "products": [
   {
    "id": "roihi",
@@ -1238,6 +1238,278 @@
     "JAN 미확정 (검색 결과 최다 JAN)",
     "같은 JAN 판매처 2곳뿐"
    ]
+  },
+  {
+   "id": "naron",
+   "cat": "med",
+   "query": "ナロンエースT 84錠",
+   "jan": "4987306040892",
+   "name_ja": "【第(2)類医薬品】　　ナロンエースＴ　84錠　　セルフメディケーション税制対象　大正製薬株式会社",
+   "brand": "大正製薬",
+   "image": "https://item-shopping.c.yimg.jp/i/j/azumiyafuu-store-2_4987306040892-1",
+   "online": {
+    "median": 1759,
+    "min": 1478,
+    "sellers": 14
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "colac",
+   "cat": "med",
+   "query": "コーラック 120錠",
+   "jan": "4987306021310",
+   "name_ja": "コーラックII 120錠 1個 便秘 慢性便秘 第2類医薬品",
+   "brand": "コーラック",
+   "image": "https://item-shopping.c.yimg.jp/i/j/nakayoshi-pharmacy_korakku2-1",
+   "online": {
+    "median": 1700,
+    "min": 1480,
+    "sellers": 10
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "rohtoz",
+   "cat": "med",
+   "query": "ロートジーb 12mL",
+   "jan": "4987241150175",
+   "name_ja": "【第2類医薬品】 ロート製薬 ロートジーｂ  １２ｍｌ /ロートジー 目薬 疲れ目",
+   "brand": "ロート製薬",
+   "image": "https://item-shopping.c.yimg.jp/i/j/v-drug_0270030-4987241150175-1",
+   "online": {
+    "median": 378,
+    "min": 327,
+    "sellers": 13
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "beautye",
+   "cat": "med",
+   "query": "サンテ ボーティエ 12mL",
+   "jan": "4987084410979",
+   "name_ja": "≪15日はP2%≫【第2類医薬品】サンテボーティエ 12mL ※セルフメディケーション税制対象〔目薬・つかれ・充血〕",
+   "brand": "サンテ",
+   "image": "https://item-shopping.c.yimg.jp/i/j/jetdrug_4987084410979-01",
+   "online": {
+    "median": 1048,
+    "min": 915,
+    "sellers": 11
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "mentholatum",
+   "cat": "med",
+   "query": "メンソレータム軟膏c 75g",
+   "jan": "4987241104246",
+   "name_ja": "第3類医薬品 メンソレータム軟膏c 75g",
+   "brand": null,
+   "image": "https://item-shopping.c.yimg.jp/i/j/goodsania_4987241104246",
+   "online": {
+    "median": 731,
+    "min": 588,
+    "sellers": 19
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "voltaren",
+   "cat": "med",
+   "query": "ボルタレンEXテープ 21枚",
+   "jan": "4987443351721",
+   "name_ja": "≪15日はP2%≫【第2類医薬品】ボルタレンEXテープ 21枚 ※セルフメディケーション税制対象〔肩こり・腰痛・筋肉痛〕",
+   "brand": "ボルタレン",
+   "image": "https://item-shopping.c.yimg.jp/i/j/jetdrug_4987443351721-01",
+   "online": {
+    "median": 1682,
+    "min": 1548,
+    "sellers": 15
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "stoppa",
+   "cat": "med",
+   "query": "ストッパ下痢止めEX 12錠",
+   "jan": "4903301177050",
+   "name_ja": "第２類医薬品 ストッパ下痢止めEX グレープフルーツ味 12回分 12錠 (1個)",
+   "brand": "LION",
+   "image": "https://item-shopping.c.yimg.jp/i/j/minoku-beauty_1122-1-b",
+   "online": {
+    "median": 898,
+    "min": 682,
+    "sellers": 12
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "evequick",
+   "cat": "med",
+   "query": "イブクイック頭痛薬DX 40錠",
+   "jan": "4987300058824",
+   "name_ja": "【第2類医薬品】エスエス製薬 イブクイック頭痛薬DX 40錠【4987300058824】",
+   "brand": "EVE（エスエス製薬）",
+   "image": "https://item-shopping.c.yimg.jp/i/j/kwry001-store_4987300058824-1",
+   "online": {
+    "median": 1315,
+    "min": 990,
+    "sellers": 16
+   },
+   "reviews": 0,
+   "needs_review": []
+  },
+  {
+   "id": "curelfoam",
+   "cat": "cos",
+   "query": "キュレル 泡洗顔料 150mL",
+   "jan": "4901301269348",
+   "name_ja": "Curel（キュレル） 泡洗顔料 本体 150mL 花王　敏感肌",
+   "brand": "Curel",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_8350749",
+   "online": {
+    "median": 1500,
+    "min": 1140,
+    "sellers": 15
+   },
+   "reviews": 197,
+   "needs_review": []
+  },
+  {
+   "id": "shirojun",
+   "cat": "cos",
+   "query": "肌ラボ 白潤プレミアム 薬用浸透美白化粧水 170mL",
+   "jan": "4987241168491",
+   "name_ja": "肌ラボ 白潤プレミアム 薬用浸透美白化粧水しっとり 170mL ロート製薬",
+   "brand": "肌ラボ",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_u861620",
+   "online": {
+    "median": 1100,
+    "min": 972,
+    "sellers": 5
+   },
+   "reviews": 95,
+   "needs_review": []
+  },
+  {
+   "id": "lucidol",
+   "cat": "cos",
+   "query": "ルシードエル オイルトリートメント EXヘアオイル 60mL",
+   "jan": "4902806407211",
+   "name_ja": "マンダム ルシードエル オイルトリートメント EXヘアオイルスムース 60ml",
+   "brand": "ルシードエル",
+   "image": "https://item-shopping.c.yimg.jp/i/j/sundrugec_4902806407211",
+   "online": {
+    "median": 1123,
+    "min": 945,
+    "sellers": 11
+   },
+   "reviews": 47,
+   "needs_review": []
+  },
+  {
+   "id": "cezannebase",
+   "cat": "cos",
+   "query": "セザンヌ 皮脂テカリ防止下地 ピンクベージュ 30mL",
+   "jan": "4939553040057",
+   "name_ja": "セザンヌ 皮脂テカリ防止下地 ピンクベージュ ( 30ml )/ セザンヌ(CEZANNE) ( プチプラ 下地 くずれ ベース ピンク ノンケミカル )",
+   "brand": "CEZANNE",
+   "image": "https://item-shopping.c.yimg.jp/i/j/soukai_4939553040057",
+   "online": {
+    "median": 660,
+    "min": 660,
+    "sellers": 9
+   },
+   "reviews": 83,
+   "needs_review": []
+  },
+  {
+   "id": "mermaid",
+   "cat": "cos",
+   "query": "キャンメイク マーメイドスキンジェルUV 01",
+   "jan": "4901008306957",
+   "name_ja": "CANMAKE（キャンメイク）　マーメイドスキンジェルUV　01透明　40g　SPF50+・PA++++　井田ラボラトリーズ",
+   "brand": "CANMAKE",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_j678923",
+   "online": {
+    "median": 770,
+    "min": 770,
+    "sellers": 12
+   },
+   "reviews": 56,
+   "needs_review": []
+  },
+  {
+   "id": "katebrow",
+   "cat": "cos",
+   "query": "ケイト デザイニングアイブロウ3D EX-5",
+   "jan": "4973167208397",
+   "name_ja": "KATE（ケイト） デザイニングアイブロウ3D EX-5 ブラウン系　Kanebo（カネボウ）",
+   "brand": "KATE",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_6134825",
+   "online": {
+    "median": 1210,
+    "min": 978,
+    "sellers": 16
+   },
+   "reviews": 419,
+   "needs_review": []
+  },
+  {
+   "id": "hatomugigel",
+   "cat": "cos",
+   "query": "ハトムギ保湿ジェル 180g",
+   "jan": "4903335695551",
+   "name_ja": "ナチュリエ スキンコンディショニングジェル ハトムギ保湿ジェル 180g イミュ",
+   "brand": "naturie",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_2999736",
+   "online": {
+    "median": 853,
+    "min": 724,
+    "sellers": 16
+   },
+   "reviews": 693,
+   "needs_review": []
+  },
+  {
+   "id": "avene",
+   "cat": "cos",
+   "query": "アベンヌ ウオーター 300g",
+   "jan": "4964259399574",
+   "name_ja": "アベンヌ ウオーター 300g",
+   "brand": "Avene",
+   "image": "https://item-shopping.c.yimg.jp/i/j/wlb_av001",
+   "online": {
+    "median": 2420,
+    "min": 1990,
+    "sellers": 19
+   },
+   "reviews": 57,
+   "needs_review": []
+  },
+  {
+   "id": "bub",
+   "cat": "life",
+   "query": "バブ ゆずの香り 20錠",
+   "jan": "4901301024688",
+   "name_ja": "バブ ゆずの香り 1箱（20錠入） 花王 (透明タイプ)",
+   "brand": "バブ",
+   "image": "https://item-shopping.c.yimg.jp/i/j/rd-lohaco_n811364",
+   "online": {
+    "median": 838,
+    "min": 650,
+    "sellers": 15
+   },
+   "reviews": 67,
+   "needs_review": []
   }
  ]
 }
