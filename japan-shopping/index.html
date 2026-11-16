@@ -127,6 +127,7 @@ h3{font-size:15px;margin:0}
 .photo:focus-within{outline:2px solid var(--accent);outline-offset:2px}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .empty{padding:28px 16px;text-align:center;color:var(--muted)}
+.empty .btn{width:auto;margin-top:14px}
 @media (prefers-reduced-motion:no-preference){.rank-row,.cats button,.seg button{transition:background .15s,color .15s}}
 </style>
 
@@ -169,7 +170,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  example:'예시',clearEx:'예시 지우기',purchases:'구매 기록',noPurch:'기록된 구매가 없어요.',
  lang:'언어',home:'국적 (입국 기준)',city:'쇼핑 지역',rates:'환율 (예시값, 직접 수정)',rKRW:'1엔 = 원',rTWD:'1엔 = 대만달러',rUSD:'1달러 = 엔',close:'닫기',
  korea:'한국',taiwan:'대만',tokyo:'도쿄 신주쿠',osaka:'오사카 난바',disclaim:'세금 계산은 참고용이에요. 정확한 금액은 세관에서 확정돼요.',m:'m',
- snapBtn:'가격표 찍어서 제보',snapTitle:'가격표 제보',snapDesc:'가격표나 선반 라벨을 찍으면 상품과 가격을 읽어서 채워줘요. 틀린 부분은 고쳐서 올려주세요.',
+ snapBtn:'가격표 찍어서 제보',snapFind:'가격표 찍어서 찾기',snapTitle:'가격표 제보',snapDesc:'가격표나 선반 라벨을 찍으면 상품과 가격을 읽어서 채워줘요. 틀린 부분은 고쳐서 올려주세요.',
  store:'매장',photo:'가격표 사진 찍기 또는 고르기',photoAgain:'다시 찍기',readTag:'사진에서 읽기',reading:'읽는 중… (10~30초)',stop:'중지',
  noAuto:'이 화면에서는 자동 읽기를 쓸 수 없어요. 직접 입력해 주세요.',product:'상품',choose:'상품 고르기',priceExcl:'세전 가격 (엔)',inclIs:'세금 포함 {p}',stockNow:'지금 재고',
  warnDiff:'평소 가격({p})과 차이가 커요. 숫자를 한 번 더 확인해 주세요.',submitRep:'제보하기',localOnly:'시제품에서는 제보가 이 기기에만 저장돼요.',
@@ -208,7 +209,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  example:'範例',clearEx:'清除範例',purchases:'購買紀錄',noPurch:'還沒有購買紀錄。',
  lang:'語言',home:'國籍（入境標準）',city:'購物地區',rates:'匯率（範例值，可自行修改）',rKRW:'1日圓 = 韓元',rTWD:'1日圓 = 新台幣',rUSD:'1美元 = 日圓',close:'關閉',
  korea:'韓國',taiwan:'台灣',tokyo:'東京 新宿',osaka:'大阪 難波',disclaim:'稅額僅供參考，實際金額以海關為準。',m:'m',
- snapBtn:'拍價格標籤回報',snapTitle:'價格標籤回報',snapDesc:'拍下價格標籤或貨架標示，會自動讀取商品與價格。有錯請修正後再送出。',
+ snapBtn:'拍價格標籤回報',snapFind:'拍價格標籤搜尋',snapTitle:'價格標籤回報',snapDesc:'拍下價格標籤或貨架標示，會自動讀取商品與價格。有錯請修正後再送出。',
  store:'店家',photo:'拍攝或選擇價格標籤照片',photoAgain:'重拍',readTag:'從照片讀取',reading:'讀取中…（約10~30秒）',stop:'停止',
  noAuto:'此畫面無法自動讀取，請手動輸入。',product:'商品',choose:'選擇商品',priceExcl:'未稅價格（日圓）',inclIs:'含稅 {p}',stockNow:'目前庫存',
  warnDiff:'與平常價格（{p}）差距大，請再確認一次。',submitRep:'送出回報',localOnly:'原型中回報只存在這台裝置。',
@@ -481,7 +482,7 @@ function filtered(){
 let SHOWN=20;
 function resultsHTML(){
   const all=filtered();
-  if(!all.length)return `<div class="empty">${t('noResult')}</div>`;
+  if(!all.length)return `<div class="empty">${t('noResult')}<br><button class="btn ghost" data-a="snap" data-v="">${t('snapFind')}</button></div>`;
   // The full catalog is long, so the unfiltered list grows 20 at a time; a search or category shows everything.
   const list=!S.q.trim()&&S.cat==='all'?all.slice(0,SHOWN):all;const rest=all.length-list.length;
   return list.map(p=>{const lo=lowestOf(p);return `<button class="rank-row" style="grid-template-columns:44px 1fr auto" data-a="open" data-v="${p.id}">
