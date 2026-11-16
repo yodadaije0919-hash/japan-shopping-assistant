@@ -8,6 +8,17 @@
 **바로 써보기**: https://claude.ai/artifact/QapKecHZtx8vicivu6bsKf (Claude 아티팩트, 휴대폰 화면 기준)
 ※ 링크를 열려면 **Claude 계정으로 로그인**해야 합니다. 로그인하지 않으면 로그인 화면만 보입니다. 계정이 없다면 `japan-shopping/index.html`을 내려받아 브라우저에서 바로 열 수 있습니다 (사진 읽기·제보 공유 제외).
 
+## 화면
+
+<p>
+<img src="docs/screen-popular.jpg" width="190" alt="인기 탭: 관광객 인기 순위">
+<img src="docs/screen-compare.jpg" width="190" alt="가격비교: 매장별 가격과 재고">
+<img src="docs/screen-cart.jpg" width="190" alt="장바구니: 추천 쇼핑 동선">
+<img src="docs/screen-allowance.jpg" width="190" alt="면세한도: 입국 면세한도 추적">
+</p>
+
+왼쪽부터 인기, 가격비교, 장바구니, 면세한도 화면입니다 (한국어, 도쿄 신주쿠 기준, 예시 데이터). 캡처에는 상품 사진 대신 분류 아이콘이 나옵니다. 파일로 직접 열면 야후 쇼핑의 상품 사진이 보입니다.
+
 ## 주요 기능
 
 | 탭 | 하는 일 |
