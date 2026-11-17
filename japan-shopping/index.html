@@ -474,11 +474,14 @@ function viewHome(){
    <div class="notice"><b>${t('refundTitle')}</b><span>${t('refundBody')}</span></div>`;
 }
 
+const SEARCH_SKIP=['파스타','パスタ'];
 function filtered(){
   const nz=x=>String(x||'').normalize('NFKC').toLowerCase().replace(/\s+/g,'');
   const words=S.q.normalize('NFKC').toLowerCase().split(/\s+/).filter(Boolean);
   return PRODUCTS.filter(p=>{if(S.cat!=='all'&&p.cat!==S.cat)return false;if(!words.length)return true;
-    const hay=nz([p.ko,p.zh,p.ja,p.jan,p.id,ALIAS[p.id]].join('|'));const all=nz(S.q);
+    const all=nz(S.q);let hay=nz([p.ko,p.zh,p.ja,p.jan,p.id,ALIAS[p.id]].join('|'));
+    // Longer words that contain a common search word (파스타 holds 파스) are hidden unless typed in full.
+    for(const f of SEARCH_SKIP)if(!all.includes(f))hay=hay.split(f).join('|');
     return hay.includes(all)||words.every(w=>hay.includes(w));});
 }
 let SHOWN=20;
