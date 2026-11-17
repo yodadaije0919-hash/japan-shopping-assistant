@@ -12,7 +12,7 @@
 
 <p>
 <img src="docs/screen-popular.jpg" width="190" alt="인기 탭: 관광객 인기 순위">
-<img src="docs/screen-compare.jpg" width="190" alt="가격비교: 매장별 가격과 재고">
+<img src="docs/screen-compare.jpg" width="190" alt="가격비교: 상품 검색과 최저가">
 <img src="docs/screen-cart.jpg" width="190" alt="장바구니: 추천 쇼핑 동선">
 <img src="docs/screen-allowance.jpg" width="190" alt="면세한도: 입국 면세한도 추적">
 </p>
