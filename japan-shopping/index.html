@@ -100,6 +100,7 @@ h3{font-size:15px;margin:0}
 .cats{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
 .cats button{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:6px 9px;font-size:13px;white-space:nowrap;flex:none}
 .cats button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.maplink{display:inline-block;font-size:12.5px;font-weight:500;color:var(--accent-text);text-underline-offset:2px;padding:6px 4px;margin:-6px 0 -6px 4px}
 .back{border:0;background:transparent;padding:0;color:var(--accent-text);font-weight:500;align-self:flex-start}
 .store{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
 .store:first-of-type{border-top:0}
@@ -189,7 +190,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  example:'예시',clearEx:'예시 지우기',purchases:'구매 기록',noPurch:'기록된 구매가 없어요.',
  lang:'언어',home:'국적 (입국 기준)',city:'쇼핑 지역',rates:'환율 (예시값, 직접 수정)',rKRW:'1엔 = 원',rTWD:'1엔 = 대만달러',rUSD:'1달러 = 엔',close:'닫기',
  korea:'한국',taiwan:'대만',tokyo:'도쿄 신주쿠',osaka:'오사카 난바',disclaim:'세금 계산은 참고용이에요. 정확한 금액은 세관에서 확정돼요.',m:'m',
- snapBtn:'가격표 찍어서 제보',snapFind:'가격표 찍어서 찾기',quickLabel:'자주 찾는 말',seenLabel:'최근 본 상품',staffBtn:'점원에게 보여주기',staffMean:'이 상품 어디 있어요?|이 상품 재고 있어요?|면세로 살 수 있어요?',staffTabs:'어디 있어요?|재고 있어요?|면세 돼요?',staffClose:'화면을 누르면 닫혀요',quick:'파스,선크림,감기약,안약,위장약,진통제,마스크팩,립밤',findTitle:'가격표로 찾기',viewFound:'이 상품 보기',findDesc:'가격표나 선반 라벨을 찍으면 어떤 상품인지 찾아줘요. 가격이 맞으면 그대로 제보할 수도 있어요.',snapTitle:'가격표 제보',snapDesc:'가격표나 선반 라벨을 찍으면 상품과 가격을 읽어서 채워줘요. 틀린 부분은 고쳐서 올려주세요.',
+ snapBtn:'가격표 찍어서 제보',snapFind:'가격표 찍어서 찾기',quickLabel:'자주 찾는 말',seenLabel:'최근 본 상품',staffBtn:'점원에게 보여주기',map:'지도',staffMean:'이 상품 어디 있어요?|이 상품 재고 있어요?|면세로 살 수 있어요?',staffTabs:'어디 있어요?|재고 있어요?|면세 돼요?',staffClose:'화면을 누르면 닫혀요',quick:'파스,선크림,감기약,안약,위장약,진통제,마스크팩,립밤',findTitle:'가격표로 찾기',viewFound:'이 상품 보기',findDesc:'가격표나 선반 라벨을 찍으면 어떤 상품인지 찾아줘요. 가격이 맞으면 그대로 제보할 수도 있어요.',snapTitle:'가격표 제보',snapDesc:'가격표나 선반 라벨을 찍으면 상품과 가격을 읽어서 채워줘요. 틀린 부분은 고쳐서 올려주세요.',
  store:'매장',photo:'가격표 사진 찍기 또는 고르기',photoAgain:'다시 찍기',readTag:'사진에서 읽기',reading:'읽는 중… (10~30초)',stop:'중지',
  noAuto:'이 화면에서는 자동 읽기를 쓸 수 없어요. 직접 입력해 주세요.',product:'상품',choose:'상품 고르기',priceExcl:'세전 가격 (엔)',inclIs:'세금 포함 {p}',stockNow:'지금 재고',
  warnDiff:'평소 가격({p})과 차이가 커요. 숫자를 한 번 더 확인해 주세요.',submitRep:'제보하기',localOnly:'시제품에서는 제보가 이 기기에만 저장돼요.',
@@ -228,7 +229,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  example:'範例',clearEx:'清除範例',purchases:'購買紀錄',noPurch:'還沒有購買紀錄。',
  lang:'語言',home:'國籍（入境標準）',city:'購物地區',rates:'匯率（範例值，可自行修改）',rKRW:'1日圓 = 韓元',rTWD:'1日圓 = 新台幣',rUSD:'1美元 = 日圓',close:'關閉',
  korea:'韓國',taiwan:'台灣',tokyo:'東京 新宿',osaka:'大阪 難波',disclaim:'稅額僅供參考，實際金額以海關為準。',m:'m',
- snapBtn:'拍價格標籤回報',snapFind:'拍價格標籤搜尋',quickLabel:'常用關鍵字',seenLabel:'最近看過',staffBtn:'給店員看',staffMean:'這個商品在哪裡？|這個商品還有庫存嗎？|可以免稅購買嗎？',staffTabs:'在哪裡？|有庫存嗎？|可以免稅嗎？',staffClose:'點一下畫面即可關閉',quick:'貼布,防曬,感冒藥,眼藥水,胃藥,止痛,面膜,護唇膏',findTitle:'用價格標籤搜尋',viewFound:'查看此商品',findDesc:'拍下價格標籤或貨架標示，會幫你找出是哪個商品。價格正確的話也可以直接回報。',snapTitle:'價格標籤回報',snapDesc:'拍下價格標籤或貨架標示，會自動讀取商品與價格。有錯請修正後再送出。',
+ snapBtn:'拍價格標籤回報',snapFind:'拍價格標籤搜尋',quickLabel:'常用關鍵字',seenLabel:'最近看過',staffBtn:'給店員看',map:'地圖',staffMean:'這個商品在哪裡？|這個商品還有庫存嗎？|可以免稅購買嗎？',staffTabs:'在哪裡？|有庫存嗎？|可以免稅嗎？',staffClose:'點一下畫面即可關閉',quick:'貼布,防曬,感冒藥,眼藥水,胃藥,止痛,面膜,護唇膏',findTitle:'用價格標籤搜尋',viewFound:'查看此商品',findDesc:'拍下價格標籤或貨架標示，會幫你找出是哪個商品。價格正確的話也可以直接回報。',snapTitle:'價格標籤回報',snapDesc:'拍下價格標籤或貨架標示，會自動讀取商品與價格。有錯請修正後再送出。',
  store:'店家',photo:'拍攝或選擇價格標籤照片',photoAgain:'重拍',readTag:'從照片讀取',reading:'讀取中…（約10~30秒）',stop:'停止',
  noAuto:'此畫面無法自動讀取，請手動輸入。',product:'商品',choose:'選擇商品',priceExcl:'未稅價格（日圓）',inclIs:'含稅 {p}',stockNow:'目前庫存',
  warnDiff:'與平常價格（{p}）差距大，請再確認一次。',submitRep:'送出回報',localOnly:'原型中回報只存在這台裝置。',
@@ -447,6 +448,9 @@ const yen=n=>'¥'+Math.round(n).toLocaleString('ja-JP');
 const homeAmt=n=>S.home==='KR'?'≈ '+Math.round(n*S.rates.krw).toLocaleString('ko-KR')+'원':'≈ NT$'+Math.round(n*S.rates.twd).toLocaleString('zh-TW');
 const pname=p=>p[S.lang]||p.ko;
 const sname=s=>s[S.lang]||s.ko;
+// "Map" link that searches Google Maps for the chain's Japanese name in the shopping area. Only the store and area names go in the URL.
+const CITY_JA={tokyo:'新宿',osaka:'難波'};
+const mapLink=st=>`<a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(st.ja+' '+(CITY_JA[S.city]||''))}" target="_blank" rel="noopener noreferrer" aria-label="${esc(sname(st)+' '+t('map'))}">${t('map')}</a>`;
 const ago=m=>m<60?t('agoMin',{m}):t('agoH',{h:Math.round(m/60)});
 function lowestOf(p){let best=null,any=null;for(const st of stores()){const b=priceAt(st,p);if(b==null)continue;if(!any||b<any.b)any={b,st};if(stockOf(st,p).st!=='out'&&(!best||b<best.b))best={b,st};}return best||any;}
 function stockPill(s){const cls={ok:'good',low:'warn',out:'bad'}[s.st];
@@ -554,7 +558,7 @@ function viewDetail(p){
     const best=r.b===minB&&r.s.st!=='out';
     const cp=r.st.cp?(r.st.cp.min?t('coupon',{p:r.st.cp.p,min:yen(r.st.cp.min)}):t('couponAny',{p:r.st.cp.p})):'';
     return `<div class="store ${best?'best':''}">
-     <div class="between"><div><h3>${esc(sname(r.st))}</h3><span class="small muted num">${r.st.dist}${t('m')}</span>${cp?` <span class="pill line">${cp}</span>`:''}</div>
+     <div class="between"><div><h3>${esc(sname(r.st))}</h3><span class="small muted num">${r.st.dist}${t('m')}</span>${mapLink(r.st)}${cp?` <span class="pill line">${cp}</span>`:''}</div>
       <div style="text-align:right">${r.b==null?`<span class="small muted">${t('notCarried')}</span>`:
         `${best?`<span class="tag">${yen(withTax(r.b,p))}</span>`:`<span class="price">${yen(withTax(r.b,p))}</span>`}
          <div class="small muted">${t('afterRefund')} <span class="num">${yen(r.b)}</span></div>
@@ -626,7 +630,7 @@ function viewList(){
     const need=Math.ceil(5000-g.sub);const shown=g.lines.reduce((n,l)=>n+withTax(l.b,l.p)*l.q,0);
     const cpnIn=Math.max(0,shown-Math.round(g.paid)),refIn=Math.round(g.paid)-Math.round(g.net);
     return `<div class="group">
-      <div class="between"><div class="row"><span class="stop">${i+1}</span><h3>${esc(sname(g.st))}</h3><span class="small muted num">${g.st.dist}${t('m')}</span></div>
+      <div class="between"><div class="row"><span class="stop">${i+1}</span><h3>${esc(sname(g.st))}</h3><span class="small muted num">${g.st.dist}${t('m')}</span>${mapLink(g.st)}</div>
         <span class="price">${yen(g.net)}</span></div>
       ${g.lines.map(l=>`<div class="between small"><span style="min-width:0">${esc(pname(l.p))} × ${l.q}</span><span class="num muted">${yen(withTax(l.b,l.p)*l.q)}</span></div>`).join('')}
       <div class="row">${g.elig?`<span class="pill good">${t('taxfreeOk')}</span><span class="pill line">${t('refund',{r:refIn.toLocaleString('ja-JP')})}</span>`:
