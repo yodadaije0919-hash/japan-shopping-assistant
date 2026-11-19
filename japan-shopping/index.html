@@ -48,6 +48,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 .staff-mean{font-size:15px;color:#555}
 .staff-p{display:flex;flex-direction:column;align-items:center;gap:12px;font-size:clamp(20px,6vw,28px);font-weight:600;line-height:1.4;border-top:1px solid #ddd;padding-top:20px;width:100%;max-width:440px}
 .staff-p .thumb{width:96px;height:96px;font-size:44px;background:#f3f3f3}
+.staff-bar{display:block;width:234px;max-width:100%;height:auto;margin-bottom:-8px}
 .staff-jan{font-size:18px;letter-spacing:.04em;color:#333}
 .staff-close{font-size:13px;color:#888}
 .seen{display:flex;flex-direction:column;gap:6px}.seen .chip-btn{max-width:180px;overflow:hidden;text-overflow:ellipsis}
@@ -493,6 +494,20 @@ function viewHome(){
 
 // Questions for the show-to-staff card (where is it / in stock / tax-free), in the same order as staffTabs.
 const STAFF_Q=['この商品は<br>どこにありますか？','この商品の<br>在庫はありますか？','免税で<br>購入できますか？'];
+// EAN-13 (JAN) barcode drawn as SVG so store staff can scan the phone screen. Returns '' when the code is not a valid 13-digit JAN.
+function janBarcode(code){
+  const d=String(code||'');if(!/^\d{13}$/.test(d))return '';
+  const n=[...d].map(Number);const sum=n.slice(0,12).reduce((a,v,i)=>a+v*(i%2?3:1),0);
+  if((10-sum%10)%10!==n[12])return '';
+  const L=['0001101','0011001','0010011','0111101','0100011','0110001','0101111','0111011','0110111','0001011'];
+  const R=L.map(x=>[...x].map(b=>b==='1'?'0':'1').join('')),G=R.map(x=>[...x].reverse().join(''));
+  const par=['LLLLLL','LLGLGG','LLGGLG','LLGGGL','LGLLGG','LGGLLG','LGGGLL','LGLGLG','LGLGGL','LGGLGL'][n[0]];
+  let bits='101';for(let i=1;i<7;i++)bits+=(par[i-1]==='L'?L:G)[n[i]];bits+='01010';for(let i=7;i<13;i++)bits+=R[n[i]];bits+='101';
+  // Guard bars (start, middle, end) run a little longer, like a printed label.
+  const guard=i=>i<3||(i>=45&&i<50)||i>=92;const q=11;let bars='';
+  for(let i=0;i<95;i++)if(bits[i]==='1')bars+=`<rect x="${q+i}" y="0" width="1" height="${guard(i)?56:50}"/>`;
+  return `<svg class="staff-bar" viewBox="0 0 ${95+q*2} 56" role="img" aria-label="JAN ${d}" shape-rendering="crispEdges"><rect width="${95+q*2}" height="56" fill="#fff"/><g fill="#000">${bars}</g></svg>`;
+}
 const SEARCH_SKIP=['파스타','パスタ'];
 function filtered(){
   const nz=x=>String(x||'').normalize('NFKC').toLowerCase().replace(/\s+/g,'');
@@ -915,7 +930,7 @@ const A={
    sh.innerHTML=`<div class="staff" role="dialog" aria-modal="true" aria-label="${t('staffBtn')}">
      <div class="staff-tabs" role="group">${tabs.map((x,i)=>`<button data-a="staff" data-v="${id}|${i}" aria-pressed="${i===n}">${esc(x)}</button>`).join('')}</div>
      <button class="staff-body" data-a="closeSheet"><span class="staff-q" lang="ja">${STAFF_Q[n]}</span><span class="staff-mean">${esc(t('staffMean').split('|')[n])}</span>
-     <span class="staff-p">${thumb(p)}<span lang="ja">${esc(p.ja)}</span></span>${p.jan?`<span class="staff-jan num">JAN ${esc(p.jan)}</span>`:''}
+     <span class="staff-p">${thumb(p)}<span lang="ja">${esc(p.ja)}</span></span>${p.jan?`${janBarcode(p.jan)}<span class="staff-jan num">JAN ${esc(p.jan)}</span>`:''}
      <span class="staff-close">${t('staffClose')}</span></button></div>`;
    sh.hidden=false;sh.querySelector('.staff-tabs [aria-pressed="true"]').focus();},
 };
