@@ -85,6 +85,7 @@ h3{font-size:15px;margin:0}
 .online{display:flex;gap:12px;align-items:center;padding:12px 14px}
 .credit{text-align:center;font-size:11px;color:var(--muted);padding:18px 0 4px}
 .credit a{color:inherit}
+.hm{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .rank-side{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;max-width:96px}
 .pill{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:500;padding:2px 7px;border-radius:3px;white-space:nowrap}
 .pill.accent{background:var(--accent-soft);color:var(--accent-text)}
@@ -449,6 +450,8 @@ function save(){try{localStorage.setItem('jsa-v1',JSON.stringify(S));}catch(e){}
 /* ---------- formatting ---------- */
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const yen=n=>'¥'+Math.round(n).toLocaleString('ja-JP');
+// Rough amount in the traveler's home currency, shown under yen prices.
+const hm=n=>`<span class="hm">${homeAmt(n)}</span>`;
 const homeAmt=n=>S.home==='KR'?'≈ '+Math.round(n*S.rates.krw).toLocaleString('ko-KR')+'원':'≈ NT$'+Math.round(n*S.rates.twd).toLocaleString('zh-TW');
 const pname=p=>p[S.lang]||p.ko;
 const sname=s=>s[S.lang]||s.ko;
@@ -492,7 +495,7 @@ function viewHome(){
         ${note?`<span class="small muted">${esc(note)}</span>`:''}
         <span class="row">${tour?`<span class="pill line">${t('localRank',{n:p.lr})}</span>`:`<span class="pill line">${t('tourRank',{n:p.tr})}</span>`}
         ${hidden?`<span class="pill accent">${t('hidden')}</span>`:''}${p.hot?`<span class="pill bad">${t('rising')}</span>`:''}</span></span>
-      <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span><span class="small muted">${t('lowest')} · ${esc(sname(lo.st))}</span>`:''}</span>
+      <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span>${hm(withTax(lo.b,p))}<span class="small muted">${t('lowest')} · ${esc(sname(lo.st))}</span>`:''}</span>
     </button>`;}).join('');
   return `<div class="seg" role="group"><button data-a="rank" data-v="tourist" aria-pressed="${tour}">${t('tourist')}</button><button data-a="rank" data-v="local" aria-pressed="${!tour}">${t('local')}</button></div>
    <p class="small muted" style="margin:-6px 0 0">${tour?t('touristDesc'):t('localDesc')}</p>
@@ -536,7 +539,7 @@ function resultsHTML(){
   const list=!S.q.trim()&&S.cat==='all'?all.slice(0,SHOWN):all;const rest=all.length-list.length;
   return list.map(p=>{const lo=lowestOf(p);return `<button class="rank-row" style="grid-template-columns:44px 1fr auto" data-a="open" data-v="${p.id}">
    ${thumb(p)}<span class="rank-main"><span class="rank-name">${esc(pname(p))}</span><span class="jp">${esc(p.ja)}</span></span>
-   <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span><span class="small muted">${esc(sname(lo.st))}</span>`:''}</span></button>`;}).join('')
+   <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span>${hm(withTax(lo.b,p))}<span class="small muted">${esc(sname(lo.st))}</span>`:''}</span></button>`;}).join('')
    +(rest>0?`<button class="more" data-a="more">${t('more',{n:rest})}</button>`:'');
 }
 function viewCompare(){
@@ -567,7 +570,7 @@ function viewDetail(p){
     return `<div class="store ${best?'best':''}">
      <div class="between"><div><h3>${esc(sname(r.st))}</h3><span class="small muted num">${r.st.dist}${t('m')}</span>${mapLink(r.st)}${cp?` <span class="pill line">${cp}</span>`:''}</div>
       <div style="text-align:right">${r.b==null?`<span class="small muted">${t('notCarried')}</span>`:
-        `${best?`<span class="tag">${yen(withTax(r.b,p))}</span>`:`<span class="price">${yen(withTax(r.b,p))}</span>`}
+        `${best?`<span class="tag">${yen(withTax(r.b,p))}</span>`:`<span class="price">${yen(withTax(r.b,p))}</span>`}<div>${hm(withTax(r.b,p))}</div>
          <div class="small muted">${t('afterRefund')} <span class="num">${yen(r.b)}</span></div>
          ${(()=>{const lp=latestPrice(r.st.sid+'|'+p.id);if(!lp)return'';const a=ago(Math.max(0,Math.round((Date.now()-lp.at)/60000)));
            return lp.mine?`<span class="pill accent">${t('myPrice',{a})}</span>`:`<span class="pill good">${t('people',{n:1})} · ${a}</span>`;})()}`}</div></div>
