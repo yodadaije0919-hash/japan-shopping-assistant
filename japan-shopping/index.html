@@ -100,6 +100,10 @@ h3{font-size:15px;margin:0}
 .cats{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
 .cats button{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:6px 9px;font-size:13px;white-space:nowrap;flex:none}
 .cats button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.sort{display:flex;justify-content:flex-end;align-items:center;gap:2px;margin:-4px 0 -6px}
+.sort button{background:none;border:0;padding:8px 6px;font-size:13px;color:var(--muted)}
+.sort button[aria-pressed="true"]{color:var(--accent-text);font-weight:700}
+.sort i{color:var(--line);font-style:normal}
 .maplink{display:inline-block;font-size:12.5px;font-weight:500;color:var(--accent-text);text-underline-offset:2px;padding:6px 4px;margin:-6px 0 -6px 4px}
 .back{border:0;background:transparent;padding:0;color:var(--accent-text);font-weight:500;align-self:flex-start}
 .store{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
@@ -167,7 +171,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  tourist:'관광객 인기',local:'현지인 인기',touristDesc:'한국·대만 여행자가 이번 주 많이 찾은 상품',localDesc:'일본 현지인이 실제로 많이 사는 상품',
  lowest:'최저',localRank:'현지 {n}위',tourRank:'관광객 {n}위',hidden:'관광객은 잘 모르는 템',rising:'시즌 급상승',
  refundTitle:'11월 1일부터 일본 면세가 환급 방식으로 바뀌었어요',refundBody:'매장에서는 세금 포함 가격을 내고, 출국할 때 공항 세관에서 확인받은 뒤 소비세를 돌려받아요. 한 매장에서 하루 5,000엔(세전) 이상 사야 대상이에요. 환급 수수료는 매장마다 달라요. 과자·화장품·약 같은 소모품은 일본에서 조금이라도 쓰면 환급받지 못해요. 세관 확인은 짐을 부치기 전에 받아야 해요.',
- search:'상품 이름으로 찾기 (예: 동전파스)',noResult:'찾는 상품이 없어요. 다른 이름이나 분류로 찾아보세요.',more:'더 보기 · 남은 {n}개',all:'전체',med:'의약품',cos:'화장품',food:'과자·식품',life:'생활용품',
+ search:'상품 이름으로 찾기 (예: 동전파스)',noResult:'찾는 상품이 없어요. 다른 이름이나 분류로 찾아보세요.',more:'더 보기 · 남은 {n}개',sortLabel:'정렬',sortPop:'인기순',sortCheap:'싼 순',all:'전체',med:'의약품',cos:'화장품',food:'과자·식품',life:'생활용품',
  back:'← 목록',storesNear:'{city} 근처 매장',taxIn:'세금 포함',afterRefund:'면세 환급 후',notCarried:'취급 안 함',
  ok:'재고 있음',low:'얼마 안 남음',out:'품절',agoMin:'{m}분 전',agoH:'{h}시간 전',people:'{n}명 제보',mine:'내 제보',
  have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',coupon:'쿠폰 {p}% ({min} 이상)',couponAny:'쿠폰 {p}%',
@@ -206,7 +210,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  tourist:'觀光客熱門',local:'在地人熱門',touristDesc:'本週韓國、台灣旅客最常找的商品',localDesc:'日本在地人實際常買的商品',
  lowest:'最低',localRank:'在地第{n}名',tourRank:'觀光客第{n}名',hidden:'觀光客少知道',rising:'季節熱賣',
  refundTitle:'11月1日起日本免稅改為退稅制',refundBody:'在店內先付含稅價，出境時經機場海關確認後退還消費稅。同一店家同一天購買滿5,000日圓（未稅）才適用。退稅手續費依店家而異。零食、化妝品、藥品等消耗品在日本用過（即使只用一部分）就不能退稅。海關確認要在托運行李之前完成。',
- search:'搜尋商品名稱（例：樂膚貼）',noResult:'找不到商品，請換個名稱或分類試試。',more:'顯示更多・還有 {n} 項',all:'全部',med:'醫藥品',cos:'美妝',food:'零食食品',life:'生活用品',
+ search:'搜尋商品名稱（例：樂膚貼）',noResult:'找不到商品，請換個名稱或分類試試。',more:'顯示更多・還有 {n} 項',sortLabel:'排序',sortPop:'熱門',sortCheap:'最便宜',all:'全部',med:'醫藥品',cos:'美妝',food:'零食食品',life:'生活用品',
  back:'← 列表',storesNear:'{city}附近店家',taxIn:'含稅',afterRefund:'退稅後',notCarried:'未販售',
  ok:'有貨',low:'剩不多',out:'缺貨',agoMin:'{m}分鐘前',agoH:'{h}小時前',people:'{n}人回報',mine:'我的回報',
  have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',coupon:'優惠券 {p}%（滿{min}）',couponAny:'優惠券 {p}%',
@@ -524,7 +528,9 @@ function filtered(){
 }
 let SHOWN=20;
 function resultsHTML(){
-  const all=filtered();
+  let all=filtered();
+  // Cheapest first uses the same nearby lowest price as the yellow tag; products with no price go last.
+  if(S.sort==='cheap'){const pr=p=>{const lo=lowestOf(p);return lo?withTax(lo.b,p):Infinity;};all=all.map(p=>[pr(p),p]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);}
   if(!all.length)return `<div class="empty">${t('noResult')}<br><button class="btn ghost" data-a="snapFind">${t('snapFind')}</button></div>`;
   // The full catalog is long, so the unfiltered list grows 20 at a time; a search or category shows everything.
   const list=!S.q.trim()&&S.cat==='all'?all.slice(0,SHOWN):all;const rest=all.length-list.length;
@@ -547,6 +553,7 @@ function viewCompare(){
    <input class="search" id="q" type="search" placeholder="${t('search')}" value="${esc(S.q)}" autocomplete="off">
    <div class="quick" role="group" aria-label="${t('quickLabel')}">${t('quick').split(',').map(w=>`<button class="chip-btn" data-a="quick" data-v="${w}" aria-pressed="${S.q.trim()===w}">${w}</button>`).join('')}</div>
    <div class="cats" role="group">${cats.map(c=>`<button data-a="cat" data-v="${c}" aria-pressed="${S.cat===c}">${t(c)}</button>`).join('')}</div>
+   <div class="sort" role="group" aria-label="${t('sortLabel')}">${['pop','cheap'].map((k,i)=>`${i?'<i aria-hidden="true">·</i>':''}<button data-a="sort" data-v="${k}" aria-pressed="${(S.sort||'pop')===k}">${t(k==='pop'?'sortPop':'sortCheap')}</button>`).join('')}</div>
    <div class="card rank" id="results">${resultsHTML()}</div>`;
 }
 function viewDetail(p){
@@ -906,6 +913,7 @@ const A={
  open:v=>{S.tab='compare';S.detail=v;S._dq=1;window.scrollTo(0,0);render();},
  back:()=>{S.detail=null;render();},
  cat:v=>{S.cat=v;SHOWN=20;render();},
+ sort:v=>{S.sort=v==='cheap'?'cheap':'pop';SHOWN=20;save();render();},
  // Shortcut words fill the search box; tapping the active one clears it.
  quick:v=>{S.q=S.q.trim()===v?'':v;S.cat='all';SHOWN=20;save();render();},
  more:()=>{SHOWN+=20;document.getElementById('results').innerHTML=resultsHTML();},
