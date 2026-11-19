@@ -36,7 +36,11 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 .brand small{display:block;font-family:var(--f-body);font-size:12px;color:var(--muted);letter-spacing:0;margin-top:3px}
 .chip-btn{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 12px;font-size:13px;white-space:nowrap}
 .quick{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}.quick::-webkit-scrollbar{display:none}
-.staff{position:fixed;inset:0;z-index:25;border:0;background:#fff;color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:24px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.staff{position:fixed;inset:0;z-index:25;background:#fff;color:#111;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:24px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.staff-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.staff-tabs button{font:inherit;font-size:15px;min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid #ccc;background:#fff;color:#111;cursor:pointer}
+.staff-tabs button[aria-pressed="true"]{background:#111;border-color:#111;color:#fff;font-weight:700}
+.staff-body{flex:1;width:100%;border:0;background:transparent;color:inherit;font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;cursor:pointer;padding:0}
 .staff-q{font-size:clamp(24px,7.5vw,40px);font-weight:700;line-height:1.35;max-width:100%;overflow-wrap:anywhere}
 .staff-mean{font-size:15px;color:#555}
 .staff-p{display:flex;flex-direction:column;align-items:center;gap:12px;font-size:clamp(20px,6vw,28px);font-weight:600;line-height:1.4;border-top:1px solid #ddd;padding-top:20px;width:100%;max-width:440px}
@@ -180,7 +184,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  example:'예시',clearEx:'예시 지우기',purchases:'구매 기록',noPurch:'기록된 구매가 없어요.',
  lang:'언어',home:'국적 (입국 기준)',city:'쇼핑 지역',rates:'환율 (예시값, 직접 수정)',rKRW:'1엔 = 원',rTWD:'1엔 = 대만달러',rUSD:'1달러 = 엔',close:'닫기',
  korea:'한국',taiwan:'대만',tokyo:'도쿄 신주쿠',osaka:'오사카 난바',disclaim:'세금 계산은 참고용이에요. 정확한 금액은 세관에서 확정돼요.',m:'m',
- snapBtn:'가격표 찍어서 제보',snapFind:'가격표 찍어서 찾기',quickLabel:'자주 찾는 말',seenLabel:'최근 본 상품',staffBtn:'점원에게 보여주기',staffMean:'이 상품 어디 있어요?',staffClose:'화면을 누르면 닫혀요',quick:'파스,선크림,감기약,안약,위장약,진통제,마스크팩,립밤',findTitle:'가격표로 찾기',viewFound:'이 상품 보기',findDesc:'가격표나 선반 라벨을 찍으면 어떤 상품인지 찾아줘요. 가격이 맞으면 그대로 제보할 수도 있어요.',snapTitle:'가격표 제보',snapDesc:'가격표나 선반 라벨을 찍으면 상품과 가격을 읽어서 채워줘요. 틀린 부분은 고쳐서 올려주세요.',
+ snapBtn:'가격표 찍어서 제보',snapFind:'가격표 찍어서 찾기',quickLabel:'자주 찾는 말',seenLabel:'최근 본 상품',staffBtn:'점원에게 보여주기',staffMean:'이 상품 어디 있어요?|이 상품 재고 있어요?|면세로 살 수 있어요?',staffTabs:'어디 있어요?|재고 있어요?|면세 돼요?',staffClose:'화면을 누르면 닫혀요',quick:'파스,선크림,감기약,안약,위장약,진통제,마스크팩,립밤',findTitle:'가격표로 찾기',viewFound:'이 상품 보기',findDesc:'가격표나 선반 라벨을 찍으면 어떤 상품인지 찾아줘요. 가격이 맞으면 그대로 제보할 수도 있어요.',snapTitle:'가격표 제보',snapDesc:'가격표나 선반 라벨을 찍으면 상품과 가격을 읽어서 채워줘요. 틀린 부분은 고쳐서 올려주세요.',
  store:'매장',photo:'가격표 사진 찍기 또는 고르기',photoAgain:'다시 찍기',readTag:'사진에서 읽기',reading:'읽는 중… (10~30초)',stop:'중지',
  noAuto:'이 화면에서는 자동 읽기를 쓸 수 없어요. 직접 입력해 주세요.',product:'상품',choose:'상품 고르기',priceExcl:'세전 가격 (엔)',inclIs:'세금 포함 {p}',stockNow:'지금 재고',
  warnDiff:'평소 가격({p})과 차이가 커요. 숫자를 한 번 더 확인해 주세요.',submitRep:'제보하기',localOnly:'시제품에서는 제보가 이 기기에만 저장돼요.',
@@ -219,7 +223,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  example:'範例',clearEx:'清除範例',purchases:'購買紀錄',noPurch:'還沒有購買紀錄。',
  lang:'語言',home:'國籍（入境標準）',city:'購物地區',rates:'匯率（範例值，可自行修改）',rKRW:'1日圓 = 韓元',rTWD:'1日圓 = 新台幣',rUSD:'1美元 = 日圓',close:'關閉',
  korea:'韓國',taiwan:'台灣',tokyo:'東京 新宿',osaka:'大阪 難波',disclaim:'稅額僅供參考，實際金額以海關為準。',m:'m',
- snapBtn:'拍價格標籤回報',snapFind:'拍價格標籤搜尋',quickLabel:'常用關鍵字',seenLabel:'最近看過',staffBtn:'給店員看',staffMean:'這個商品在哪裡？',staffClose:'點一下畫面即可關閉',quick:'貼布,防曬,感冒藥,眼藥水,胃藥,止痛,面膜,護唇膏',findTitle:'用價格標籤搜尋',viewFound:'查看此商品',findDesc:'拍下價格標籤或貨架標示，會幫你找出是哪個商品。價格正確的話也可以直接回報。',snapTitle:'價格標籤回報',snapDesc:'拍下價格標籤或貨架標示，會自動讀取商品與價格。有錯請修正後再送出。',
+ snapBtn:'拍價格標籤回報',snapFind:'拍價格標籤搜尋',quickLabel:'常用關鍵字',seenLabel:'最近看過',staffBtn:'給店員看',staffMean:'這個商品在哪裡？|這個商品還有庫存嗎？|可以免稅購買嗎？',staffTabs:'在哪裡？|有庫存嗎？|可以免稅嗎？',staffClose:'點一下畫面即可關閉',quick:'貼布,防曬,感冒藥,眼藥水,胃藥,止痛,面膜,護唇膏',findTitle:'用價格標籤搜尋',viewFound:'查看此商品',findDesc:'拍下價格標籤或貨架標示，會幫你找出是哪個商品。價格正確的話也可以直接回報。',snapTitle:'價格標籤回報',snapDesc:'拍下價格標籤或貨架標示，會自動讀取商品與價格。有錯請修正後再送出。',
  store:'店家',photo:'拍攝或選擇價格標籤照片',photoAgain:'重拍',readTag:'從照片讀取',reading:'讀取中…（約10~30秒）',stop:'停止',
  noAuto:'此畫面無法自動讀取，請手動輸入。',product:'商品',choose:'選擇商品',priceExcl:'未稅價格（日圓）',inclIs:'含稅 {p}',stockNow:'目前庫存',
  warnDiff:'與平常價格（{p}）差距大，請再確認一次。',submitRep:'送出回報',localOnly:'原型中回報只存在這台裝置。',
@@ -482,6 +486,8 @@ function viewHome(){
    <div class="notice"><b>${t('refundTitle')}</b><span>${t('refundBody')}</span></div>`;
 }
 
+// Questions for the show-to-staff card (where is it / in stock / tax-free), in the same order as staffTabs.
+const STAFF_Q=['この商品は<br>どこにありますか？','この商品の<br>在庫はありますか？','免税で<br>購入できますか？'];
 const SEARCH_SKIP=['파스타','パスタ'];
 function filtered(){
   const nz=x=>String(x||'').normalize('NFKC').toLowerCase().replace(/\s+/g,'');
@@ -898,13 +904,15 @@ const A={
  nStock:v=>{if(SN){SN.stock=v;document.querySelectorAll('[data-a="nStock"]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));}},
  submitRep:()=>submitRep(),
  closeSheet:()=>{document.getElementById('sheet').hidden=true;render();},
- // Full-screen Japanese card a traveler can hold up to store staff; a tap anywhere closes it.
- staff:id=>{const p=P[id];if(!p)return;const sh=document.getElementById('sheet');
-   sh.innerHTML=`<button class="staff" data-a="closeSheet" role="dialog" aria-modal="true" aria-label="${t('staffBtn')}">
-     <span class="staff-q" lang="ja">この商品は<br>どこにありますか？</span><span class="staff-mean">${t('staffMean')}</span>
+ // Full-screen Japanese card a traveler can hold up to store staff. The top buttons switch the question; a tap anywhere else closes it.
+ staff:v=>{const [id,n0]=String(v).split('|');const p=P[id];if(!p)return;const n=Math.min(2,Math.max(0,+n0||0));
+   const sh=document.getElementById('sheet');const tabs=t('staffTabs').split('|');
+   sh.innerHTML=`<div class="staff" role="dialog" aria-modal="true" aria-label="${t('staffBtn')}">
+     <div class="staff-tabs" role="group">${tabs.map((x,i)=>`<button data-a="staff" data-v="${id}|${i}" aria-pressed="${i===n}">${esc(x)}</button>`).join('')}</div>
+     <button class="staff-body" data-a="closeSheet"><span class="staff-q" lang="ja">${STAFF_Q[n]}</span><span class="staff-mean">${esc(t('staffMean').split('|')[n])}</span>
      <span class="staff-p">${thumb(p)}<span lang="ja">${esc(p.ja)}</span></span>${p.jan?`<span class="staff-jan num">JAN ${esc(p.jan)}</span>`:''}
-     <span class="staff-close">${t('staffClose')}</span></button>`;
-   sh.hidden=false;sh.querySelector('.staff').focus();},
+     <span class="staff-close">${t('staffClose')}</span></button></div>`;
+   sh.hidden=false;sh.querySelector('.staff-tabs [aria-pressed="true"]').focus();},
 };
 document.addEventListener('click',e=>{
   const sh=document.getElementById('sheet');if(e.target===sh){if(SN)closeSnap();else{sh.hidden=true;render();}return;}
