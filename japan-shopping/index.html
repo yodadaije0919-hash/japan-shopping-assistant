@@ -2,27 +2,30 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+JP:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <style>
-/* Layout: phone-width app shell (max 480px) with sticky header and fixed bottom tab bar; price tags borrow Japanese drugstore POP yellow. */
+/* Layout: phone-width app shell (max 480px) with sticky header and fixed bottom tab bar.
+   Look: Japanese drugstore shelf. Near-white mint ground, bright mint fills with dark-green text on them (--accent-text for mint words), square yellow price cards, small corners. */
 :root{
-  --bg:#F3F5F9; --surface:#FFFFFF; --ink:#17203A; --muted:#5B6580; --line:#DFE3EC;
-  --accent:#2445D6; --accent-soft:#E6EBFF; --tag:#FFD43B; --tag-ink:#3A2B00;
-  --good:#1D8548; --good-soft:#E3F4EA; --warn:#A86A12; --warn-soft:#FBF0DC; --bad:#C9342A; --bad-soft:#FBE6E4;
+  --bg:#F4FBF8; --surface:#FFFFFF; --ink:#15302A; --muted:#526D66; --line:#D6EEE5;
+  --accent:#22CC9C; --on-accent:#04382B; --accent-text:#087C5F; --accent-soft:#DDF7EE; --tag:#FFD43B; --tag-ink:#2B2000;
+  --good:#1D7A45; --good-soft:#E2F2E8; --warn:#9A5F0C; --warn-soft:#FAEFDA; --bad:#B3261E; --bad-soft:#F9E3E0;
   --f-display:"Black Han Sans","Noto Sans KR",system-ui,sans-serif;
   --f-body:"Noto Sans KR","Noto Sans JP",-apple-system,"PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --f-jp:"Noto Sans JP","Hiragino Sans",system-ui,sans-serif;
-  --f-num:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --f-num:"Noto Sans KR","Noto Sans JP",-apple-system,system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0E1220; --surface:#171C2D; --ink:#E7EAF4; --muted:#98A1BB; --line:#283049;
-  --accent:#7D93FF; --accent-soft:#232C52; --tag:#FFD43B; --tag-ink:#2A1F00;
-  --good:#4CC47F; --good-soft:#15301F; --warn:#E5AA4B; --warn-soft:#33270F; --bad:#FF6F62; --bad-soft:#3A1916; color-scheme:dark}}
+  --bg:#0E1715; --surface:#15211D; --ink:#E4EFEB; --muted:#98B0A9; --line:#26372F;
+  --accent:#4FE0B5; --on-accent:#04382B; --accent-text:#4FE0B5; --accent-soft:#143A2F; --tag:#FFD43B; --tag-ink:#2A1F00;
+  --good:#4CC47F; --good-soft:#15301F; --warn:#E5AA4B; --warn-soft:#33270F; --bad:#FF8A7E; --bad-soft:#3A1916; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0E1220; --surface:#171C2D; --ink:#E7EAF4; --muted:#98A1BB; --line:#283049;
-  --accent:#7D93FF; --accent-soft:#232C52; --tag:#FFD43B; --tag-ink:#2A1F00;
-  --good:#4CC47F; --good-soft:#15301F; --warn:#E5AA4B; --warn-soft:#33270F; --bad:#FF6F62; --bad-soft:#3A1916; color-scheme:dark}
+  --bg:#0E1715; --surface:#15211D; --ink:#E4EFEB; --muted:#98B0A9; --line:#26372F;
+  --accent:#4FE0B5; --on-accent:#04382B; --accent-text:#4FE0B5; --accent-soft:#143A2F; --tag:#FFD43B; --tag-ink:#2A1F00;
+  --good:#4CC47F; --good-soft:#15301F; --warn:#E5AA4B; --warn-soft:#33270F; --bad:#FF8A7E; --bad-soft:#3A1916; color-scheme:dark}
 *{box-sizing:border-box}
+::selection{background:var(--tag);color:var(--tag-ink)}
+input,textarea{caret-color:var(--accent)}
 html,body{background:var(--bg);color:var(--ink)}
 body{font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
@@ -34,11 +37,11 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 .top-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
 .brand{font-family:var(--f-display);font-size:21px;letter-spacing:.01em;line-height:1.1}
 .brand small{display:block;font-family:var(--f-body);font-size:12px;color:var(--muted);letter-spacing:0;margin-top:3px}
-.chip-btn{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 12px;font-size:13px;white-space:nowrap}
+.chip-btn{border:1px solid var(--line);background:var(--bg);border-radius:4px;padding:6px 12px;font-size:13px;white-space:nowrap}
 .quick{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}.quick::-webkit-scrollbar{display:none}
 .staff{position:fixed;inset:0;z-index:25;background:#fff;color:#111;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:24px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
 .staff-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-.staff-tabs button{font:inherit;font-size:15px;min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid #ccc;background:#fff;color:#111;cursor:pointer}
+.staff-tabs button{font:inherit;font-size:15px;min-height:44px;padding:8px 14px;border-radius:4px;border:1px solid #ccc;background:#fff;color:#111;cursor:pointer}
 .staff-tabs button[aria-pressed="true"]{background:#111;border-color:#111;color:#fff;font-weight:700}
 .staff-body{flex:1;width:100%;border:0;background:transparent;color:inherit;font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;cursor:pointer;padding:0}
 .staff-q{font-size:clamp(24px,7.5vw,40px);font-weight:700;line-height:1.35;max-width:100%;overflow-wrap:anywhere}
@@ -48,7 +51,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 .staff-jan{font-size:18px;letter-spacing:.04em;color:#333}
 .staff-close{font-size:13px;color:#888}
 .seen{display:flex;flex-direction:column;gap:6px}.seen .chip-btn{max-width:180px;overflow:hidden;text-overflow:ellipsis}
-.quick button{flex:none;color:var(--muted)}.quick button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.quick button{flex:none;color:var(--muted)}.quick button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .sample{font-size:12px;color:var(--warn);background:var(--warn-soft);padding-block:6px;text-align:center}
 main{display:flex;flex-direction:column;gap:16px;padding-block:16px}
 h2{font-family:var(--f-display);font-weight:400;font-size:20px;margin:0;text-wrap:balance}
@@ -57,23 +60,24 @@ h3{font-size:15px;margin:0}
 .small{font-size:12.5px}
 .jp{font-family:var(--f-jp);font-size:12px;color:var(--muted)}
 .num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px}
 .pad{padding:14px}
-.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
-.seg button{border:0;background:transparent;border-radius:9px;padding:9px 6px;font-weight:500;color:var(--muted)}
-.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
-.notice{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:12px;background:var(--accent-soft);font-size:13.5px}
-.notice b{color:var(--accent)}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px;gap:3px}
+.seg button{border:0;background:transparent;border-radius:4px;padding:9px 6px;font-weight:500;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);font-weight:700}
+.notice{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:6px;background:var(--accent-soft);font-size:13.5px}
+.notice b{color:var(--accent-text)}
 .rank{display:flex;flex-direction:column}
 .rank-row{display:grid;grid-template-columns:22px 44px 1fr auto;gap:10px;align-items:center;padding:12px 14px;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;width:100%}
 .rank-row:first-child{border-top:0}
 .rank-n{font-family:var(--f-display);font-size:22px;text-align:center;color:var(--muted)}
-.rank-row:nth-child(-n+3) .rank-n{color:var(--accent)}
+.rank-row:nth-child(-n+3) .rank-n{color:var(--accent-text)}
 .rank-main{min-width:0;display:flex;flex-direction:column;gap:2px}
 .rank-name{font-weight:500;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-height:1.3;overflow-wrap:anywhere}
 :lang(ko) .rank-name,:lang(ko) .rank-side,:lang(ko) h2,:lang(ko) h3{word-break:keep-all;overflow-wrap:anywhere}
 .jp{word-break:keep-all;overflow-wrap:anywhere}
-.thumb{width:44px;height:44px;border-radius:8px;background:var(--bg);border:1px solid var(--line);flex:none;display:grid;place-items:center;position:relative;overflow:hidden;font-size:22px;line-height:1}
+.thumb{width:44px;height:44px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--line);flex:none;display:grid;place-items:center;position:relative;overflow:hidden;font-size:22px;line-height:1}
+.cat-mark{font-family:var(--f-jp);font-weight:700;font-size:.62em;letter-spacing:.02em;color:var(--accent-text)}
 .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;opacity:0}
 .thumb img.on{opacity:1}
 .hero-img{width:96px;height:96px;font-size:44px}
@@ -81,30 +85,30 @@ h3{font-size:15px;margin:0}
 .credit{text-align:center;font-size:11px;color:var(--muted);padding:18px 0 4px}
 .credit a{color:inherit}
 .rank-side{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;max-width:96px}
-.pill{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:500;padding:2px 8px;border-radius:999px;white-space:nowrap}
-.pill.accent{background:var(--accent-soft);color:var(--accent)}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:500;padding:2px 7px;border-radius:3px;white-space:nowrap}
+.pill.accent{background:var(--accent-soft);color:var(--accent-text)}
 .pill.good{background:var(--good-soft);color:var(--good)}
 .pill.warn{background:var(--warn-soft);color:var(--warn)}
 .pill.bad{background:var(--bad-soft);color:var(--bad)}
 .pill.line{border:1px solid var(--line);color:var(--muted)}
-.tag{display:inline-block;background:var(--tag);color:var(--tag-ink);font-family:var(--f-num);font-weight:600;padding:2px 8px;border-radius:4px;transform:rotate(-1.5deg)}
-.price{font-family:var(--f-num);font-weight:600;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;background:var(--tag);color:var(--tag-ink);font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em;padding:3px 8px 2px;border-radius:1px;border-bottom:2px solid color-mix(in srgb,var(--tag-ink) 22%,var(--tag));transform:rotate(-1.5deg)}
+.price{font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums}
 .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .between{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.search{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px;font:inherit;color:var(--ink)}
+.search{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:12px 14px;font:inherit;color:var(--ink)}
 .cats{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
-.cats button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 9px;font-size:13px;white-space:nowrap;flex:none}
-.cats button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
-.back{border:0;background:transparent;padding:0;color:var(--accent);font-weight:500;align-self:flex-start}
+.cats button{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:6px 9px;font-size:13px;white-space:nowrap;flex:none}
+.cats button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.back{border:0;background:transparent;padding:0;color:var(--accent-text);font-weight:500;align-self:flex-start}
 .store{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
 .store:first-of-type{border-top:0}
 .store.best{background:color-mix(in srgb,var(--tag) 12%,transparent)}
 .report{display:flex;gap:6px;flex:none}
-.report button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 10px;font-size:12.5px;white-space:nowrap}
-.btn{border:0;background:var(--accent);color:#fff;border-radius:12px;padding:13px 16px;font-weight:700;width:100%}
-.more{display:block;width:100%;border:0;border-top:1px solid var(--line);background:transparent;color:var(--accent);font-weight:700;padding:14px;text-align:center}
-.btn.ghost{background:var(--surface);color:var(--accent);border:1px solid var(--accent)}
-.stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.report button{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:5px 10px;font-size:12.5px;white-space:nowrap}
+.btn{border:0;background:var(--accent);color:var(--on-accent);border-radius:6px;padding:13px 16px;font-weight:700;width:100%}
+.more{display:block;width:100%;border:0;border-top:1px solid var(--line);background:transparent;color:var(--accent-text);font-weight:700;padding:14px;text-align:center}
+.btn.ghost{background:var(--surface);color:var(--accent-text);border:1px solid var(--accent)}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:6px;overflow:hidden}
 .stepper button{border:0;background:var(--bg);width:34px;height:32px;font-size:17px}
 .stepper span{min-width:32px;text-align:center;font-family:var(--f-num)}
 .li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px 14px;border-top:1px solid var(--line)}
@@ -113,30 +117,30 @@ h3{font-size:15px;margin:0}
 .group{display:flex;flex-direction:column;gap:8px;padding:14px;border-top:1px dashed var(--line)}
 .group:first-of-type{border-top:0}
 .stop{font-family:var(--f-display);background:var(--ink);color:var(--surface);width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;font-size:13px;flex:none}
-.big{font-family:var(--f-num);font-size:28px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.bar{height:12px;background:var(--bg);border:1px solid var(--line);border-radius:999px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--good);border-radius:999px}
+.big{font-family:var(--f-num);font-size:28px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.bar{height:12px;background:var(--bg);border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--good)}
 .bar.over i{background:var(--bad)}
 .bar.near i{background:var(--warn)}
 .limits{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
-.limit{border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.limit{border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
 .form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .form label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted);min-width:0}
 .form .full{grid-column:1/-1}
-.form input,.form select,.sheet input,.sheet select{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px 12px;font:inherit;width:100%;min-width:0}
+.form input,.form select,.sheet input,.sheet select{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:10px 12px;font:inherit;width:100%;min-width:0}
 .del{border:0;background:transparent;color:var(--muted);font-size:13px;padding:4px}
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
 .tabbar-in{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
 .tabbar button{border:0;background:transparent;padding:9px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;color:var(--muted);position:relative}
 .tabbar button svg{width:22px;height:22px}
-.tabbar button[aria-current="page"]{color:var(--accent);font-weight:700}
+.tabbar button[aria-current="page"]{color:var(--accent-text);font-weight:700}
 .badge{position:absolute;top:5px;left:calc(50% + 6px);background:var(--bad);color:#fff;font-size:10.5px;font-family:var(--f-num);border-radius:999px;padding:0 5px;line-height:16px}
 [hidden]{display:none!important}
 .sheet{position:fixed;inset:0;z-index:20;background:rgba(10,14,28,.45);display:flex;align-items:flex-end;justify-content:center}
-.sheet-in{background:var(--surface);width:100%;max-width:480px;border-radius:18px 18px 0 0;padding-top:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px;max-height:88%;overflow:auto}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:999px;font-size:13.5px;max-width:calc(100% - 32px)}
-.photo{position:relative;border:1.5px dashed var(--line);border-radius:12px;padding:14px;align-items:center;justify-content:center;text-align:center;cursor:pointer;color:var(--accent)!important;font-weight:500;min-height:88px}
-.photo img{max-height:220px;width:auto;object-fit:contain;border-radius:8px}
+.sheet-in{background:var(--surface);width:100%;max-width:480px;border-radius:12px 12px 0 0;padding-top:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px;max-height:88%;overflow:auto}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:6px;font-size:13.5px;max-width:calc(100% - 32px)}
+.photo{position:relative;border:1.5px dashed var(--line);border-radius:6px;padding:14px;align-items:center;justify-content:center;text-align:center;cursor:pointer;color:var(--accent-text)!important;font-weight:500;min-height:88px}
+.photo img{max-height:220px;width:auto;object-fit:contain;border-radius:4px}
 .photo input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .photo:focus-within{outline:2px solid var(--accent);outline-offset:2px}
 .btn:disabled{opacity:.45;cursor:not-allowed}
@@ -381,8 +385,9 @@ const ALIAS={
 const YDATA_AT='2026-11-16';
 const YDATA={"roihi":{"jan":"4987167007263","img":"https://item-shopping.c.yimg.jp/i/j/kusuri-hagakure_1287-1-a","onl":793,"n":18},"kyusoku":{"jan":"4903301138525","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_3184959","onl":1155,"n":16},"eyebon":{"jan":"4987072032893","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987072032893","onl":968,"n":25},"sante":{"jan":"4987084410443","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987084410443","onl":534,"n":19},"cabbagin":{"jan":"4987973126226","img":"https://item-shopping.c.yimg.jp/i/j/kusuri-hagakure_1758964736-1-a","onl":2199,"n":19},"ryukaku":{"jan":"4987240210535","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987240210535","onl":678,"n":13},"melano":{"jan":"4987241169658","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_u877925","onl":1100,"n":25},"biore":{"jan":"4901301447647","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_hk42790","onl":1005,"n":23},"kitkat":{"jan":"4902201183031","img":"https://item-shopping.c.yimg.jp/i/j/quickfactory_8603","onl":504,"n":10},"meguri":{"jan":"4901301460547","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_j930212","onl":1220,"n":13},"canmake":{"jan":"4901008304533","img":"https://item-shopping.c.yimg.jp/i/j/zagzag_4901008304533-m","onl":1034,"n":18},"ohta":{"jan":"4987033904016","img":"https://item-shopping.c.yimg.jp/i/j/maidora_4987033904016","onl":1313,"n":2},"hadalabo":{"jan":"4987241155712","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_6167719","onl":968,"n":29},"hatomugi":{"jan":"4903335693601","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_9783183","onl":697,"n":24},"loxonin":{"jan":"4987107610867","img":"https://item-shopping.c.yimg.jp/i/j/papamama_me4987107610867-00-000","onl":761,"n":12},"kairo":{"jan":"4987067827008","img":"https://item-shopping.c.yimg.jp/i/j/scbmitsuokun1972_4987067827008","onl":905,"n":17},"lulu":{"jan":"4987107609205","img":"https://item-shopping.c.yimg.jp/i/j/minoku-beauty_136-1-b","onl":1865,"n":27},"netsu":{"jan":"4987072087725","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_1662083","onl":591,"n":19},"curel":{"jan":"4901301236210","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4901301236210","onl":2526,"n":16},"calorie":{"jan":"4987035090113","img":"https://item-shopping.c.yimg.jp/i/j/rashiku-shop_4987035090113","onl":239,"n":13},"minon":{"jan":"4987107670335","img":"https://item-shopping.c.yimg.jp/i/j/jetdrug_4987107670335-01","onl":2108,"n":28},"lipo":{"jan":"4987306003491","img":"https://item-shopping.c.yimg.jp/i/j/soukai_4987306003491","onl":1551,"n":17},"salonpas":{"jan":"4987188100325","img":"https://item-shopping.c.yimg.jp/i/j/azumiyafuu-store_4987188100325-011","onl":1768,"n":23},"pabron":{"jan":"4987306045156","img":"https://item-shopping.c.yimg.jp/i/j/azumiyafuu-store-2_4987306045156-1","onl":1887,"n":12},"eve":{"jan":"4987300058510","img":"https://item-shopping.c.yimg.jp/i/j/minoku-beauty_368-1-b","onl":849,"n":15},"biofermin":{"jan":"4987306054783","img":"https://item-shopping.c.yimg.jp/i/j/kenkoo-life_103-4987306054783","onl":2188,"n":28},"oronine":{"jan":"4987035085713","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987035085713","onl":1183,"n":25},"muhi":{"jan":"4987426002138","img":"https://item-shopping.c.yimg.jp/i/j/jetdrug_4987426002138-01","onl":970,"n":20},"seirogan":{"jan":"4987110001737","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_ra18486","onl":1188,"n":27},"dhclip":{"jan":"4511413310625","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_8366417","onl":770,"n":15},"senka":{"jan":"4550516474568","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4550516474568","onl":574,"n":18},"anessa":{"jan":"4909978147105","img":"https://item-shopping.c.yimg.jp/i/j/matsuya-cosme_14710-1","onl":2240,"n":22},"lululun":{"jan":"4580794012534","img":"https://item-shopping.c.yimg.jp/i/j/ohgiri-store_lululun2534","onl":2295,"n":15},"heroine":{"jan":"4901433036962","img":"https://item-shopping.c.yimg.jp/i/j/aaa83900_4901433036962","onl":1320,"n":25},"nameraka":{"jan":"4964596485763","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_p824797","onl":917,"n":28},"saborino":{"jan":"4515061190202","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_6120534","onl":1540,"n":22},"alfort":{"jan":"4901360364169","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_ane6512","onl":194,"n":3},"jagarico":{"jan":"4901330578909","img":"https://item-shopping.c.yimg.jp/i/j/irisplaza_7276879f","onl":201,"n":6},"breathcare":{"jan":"4987072034026","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_1616269","onl":916,"n":21},"transino":{"jan":"4987107619792","img":"https://item-shopping.c.yimg.jp/i/j/jetdrug_4987107619792-01","onl":2257,"n":14},"chocola":{"jan":"4987028123392","img":"https://item-shopping.c.yimg.jp/i/j/jetdrug_4987028123392-01","onl":3518,"n":15},"alinamin":{"jan":"4987123145428","img":"https://item-shopping.c.yimg.jp/i/j/narikawa-ph_4987123145428","onl":6112,"n":16},"vrohto":{"jan":"4987241174454","img":"https://item-shopping.c.yimg.jp/i/j/tsuhan-okusuri_1758932603-1-d","onl":1212,"n":8},"bufferin":{"jan":"4903301010944","img":"https://item-shopping.c.yimg.jp/i/j/minoku-max_105-1-b","onl":1472,"n":20},"feitas":{"jan":"4987188124437","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987188124437","onl":2780,"n":4},"unakowa":{"jan":"4987067295401","img":"https://item-shopping.c.yimg.jp/i/j/minoku-max_1758909822-1-b","onl":435,"n":18},"fino":{"jan":"4901872837144","img":"https://item-shopping.c.yimg.jp/i/j/lamp_kzft-163","onl":1339,"n":5},"yuskin":{"jan":"4987353190311","img":"https://item-shopping.c.yimg.jp/i/j/ladydrugheartshop_4987353190311","onl":1094,"n":24},"kate":{"jan":"4973167820193","img":"https://item-shopping.c.yimg.jp/i/j/sian_820193","onl":1530,"n":10},"cezanne":{"jan":"4939553041122","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_j974501","onl":660,"n":10},"rosette":{"jan":"4901696541845","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_8367540","onl":580,"n":18},"keana":{"jan":"4992440034713","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_2058879","onl":715,"n":14},"meltylip":{"jan":"4987241156337","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987241156337","onl":463,"n":18},"nodoame":{"jan":"4987240631415","img":"https://item-shopping.c.yimg.jp/i/j/ladydrugheartshop_4987240631415","onl":276,"n":10},"mintia":{"jan":"4946842501908","img":"https://item-shopping.c.yimg.jp/i/j/tanomail_5665310","onl":133,"n":1},"onnetsu":{"jan":"4901301471932","img":"https://item-shopping.c.yimg.jp/i/j/ejapan_4901301471932ks","onl":1564,"n":1},"apagard":{"jan":"4987643122183","img":"https://item-shopping.c.yimg.jp/i/j/tsuhan-okusuri_1758943875-1-d","onl":1517,"n":8},"itoyoji":{"jan":"4987072025895","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_8360351","onl":589,"n":7},"pansiron":{"jan":"4987241199624","img":"https://item-shopping.c.yimg.jp/i/j/ladydrugheartshop_4987241199624","onl":1573,"n":18},"taishoi":{"jan":"4987306009486","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4987306009486","onl":2120,"n":21},"lycee":{"jan":"4987241135653","img":"https://item-shopping.c.yimg.jp/i/j/jetdrug_4987241135653-01","onl":621,"n":12},"sakamu":{"jan":"4987072086926","img":"https://item-shopping.c.yimg.jp/i/j/azumiyafuu-store-2_4987072086926","onl":759,"n":20},"nodonuru":{"jan":"4987072004708","img":"https://item-shopping.c.yimg.jp/i/j/minoku-max_2165-1-b","onl":957,"n":6},"anmerutsu":{"jan":"4987072001264","img":"https://item-shopping.c.yimg.jp/i/j/beisia_4987072001264","onl":679,"n":19},"skinaqua":{"jan":"4987241190850","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_hk77287","onl":797,"n":13},"minonmask":{"jan":"4987107670724","img":"https://item-shopping.c.yimg.jp/i/j/jeune101_4987107670724","onl":1062,"n":13},"clearturn":{"jan":"4971710521580","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_ae81749","onl":591,"n":4},"cancheek":{"jan":"4901008310879","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_j979231","onl":638,"n":7},"ettusais":{"jan":"4932554989233","img":"https://item-shopping.c.yimg.jp/i/j/nekogoro2021_4932554989233-1a","onl":1100,"n":9},"opera":{"jan":"4903335261053","img":"https://item-shopping.c.yimg.jp/i/j/kaityanomise_opera1053","onl":1750,"n":5},"andhoney":{"jan":"4589546890796","img":"https://item-shopping.c.yimg.jp/i/j/cosmecom_1000110787","onl":1595,"n":1},"nivealip":{"jan":"4901301253545","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_9085742","onl":483,"n":9},"elekiban":{"jan":"4902522672641","img":"https://item-shopping.c.yimg.jp/i/j/online-3_ne3-1","onl":1614,"n":2},"naron":{"jan":"4987306040892","img":"https://item-shopping.c.yimg.jp/i/j/azumiyafuu-store-2_4987306040892-1","onl":1759,"n":14},"colac":{"jan":"4987306021310","img":"https://item-shopping.c.yimg.jp/i/j/nakayoshi-pharmacy_korakku2-1","onl":1700,"n":10},"rohtoz":{"jan":"4987241150175","img":"https://item-shopping.c.yimg.jp/i/j/v-drug_0270030-4987241150175-1","onl":378,"n":13},"beautye":{"jan":"4987084410979","img":"https://item-shopping.c.yimg.jp/i/j/jetdrug_4987084410979-01","onl":1048,"n":11},"mentholatum":{"jan":"4987241104246","img":"https://item-shopping.c.yimg.jp/i/j/goodsania_4987241104246","onl":731,"n":19},"voltaren":{"jan":"4987443351721","img":"https://item-shopping.c.yimg.jp/i/j/jetdrug_4987443351721-01","onl":1682,"n":15},"stoppa":{"jan":"4903301177050","img":"https://item-shopping.c.yimg.jp/i/j/minoku-beauty_1122-1-b","onl":898,"n":12},"evequick":{"jan":"4987300058824","img":"https://item-shopping.c.yimg.jp/i/j/kwry001-store_4987300058824-1","onl":1315,"n":16},"curelfoam":{"jan":"4901301269348","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_8350749","onl":1500,"n":15},"shirojun":{"jan":"4987241168491","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_u861620","onl":1100,"n":5},"lucidol":{"jan":"4902806407211","img":"https://item-shopping.c.yimg.jp/i/j/sundrugec_4902806407211","onl":1123,"n":11},"cezannebase":{"jan":"4939553040057","img":"https://item-shopping.c.yimg.jp/i/j/soukai_4939553040057","onl":660,"n":9},"mermaid":{"jan":"4901008306957","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_j678923","onl":770,"n":12},"katebrow":{"jan":"4973167208397","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_6134825","onl":1210,"n":16},"hatomugigel":{"jan":"4903335695551","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_2999736","onl":853,"n":16},"avene":{"jan":"4964259399574","img":"https://item-shopping.c.yimg.jp/i/j/wlb_av001","onl":2420,"n":19},"bub":{"jan":"4901301024688","img":"https://item-shopping.c.yimg.jp/i/j/rd-lohaco_n811364","onl":838,"n":15}};
 PRODUCTS.forEach(p=>{const y=YDATA[p.id];if(y)Object.assign(p,y);});
-const CAT_ICON={med:'💊',cos:'🧴',food:'🍪',life:'🧺'};
-const thumb=(p,cls='')=>`<span class="thumb ${cls}" aria-hidden="true">${CAT_ICON[p.cat]||'🛍️'}${p.img&&/^https:\/\/item-shopping\.c\.yimg\.jp\//.test(p.img)?`<img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onload="this.classList.add('on')" onerror="this.remove()">`:''}</span>`;
+// Shelf-section marks shown until a product photo loads, written like the kanji signs above drugstore aisles.
+const CAT_ICON={med:'薬',cos:'美容',food:'食品',life:'日用'};
+const thumb=(p,cls='')=>`<span class="thumb ${cls}" aria-hidden="true"><span class="cat-mark" lang="ja">${CAT_ICON[p.cat]||'品'}</span>${p.img&&/^https:\/\/item-shopping\.c\.yimg\.jp\//.test(p.img)?`<img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onload="this.classList.add('on')" onerror="this.remove()">`:''}</span>`;
 
 const P=Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
 const CHAINS=[
