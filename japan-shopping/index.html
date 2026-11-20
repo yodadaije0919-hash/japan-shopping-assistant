@@ -179,7 +179,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  addList:'장바구니에 담기',added:'장바구니에 담았어요',inList:'장바구니에 {q}개 있어요',
  listTitle:'내 장바구니',listEmpty:'아직 담은 상품이 없어요. 인기나 가격비교 탭에서 담아보세요.',
  planTitle:'추천 쇼핑 동선',planDesc:'품절 제보가 있는 매장은 빼고, 면세와 쿠폰을 계산해서 골랐어요.',
- totalNet:'예상 실결제 (환급 후)',stores:'매장 {n}곳',
+ totalNet:'예상 실결제 (환급 후)',shareList:'목록 공유',shareHead:'일본 쇼핑 목록',copied:'목록을 복사했어요. 메신저에 붙여 넣으세요.',copyFail:'복사하지 못했어요',stores:'매장 {n}곳',
  taxfreeOk:'면세 대상',taxfreeNo:'면세 기준 미달',needMore:'¥{need} 더 사면 약 ¥{ref} 환급',refund:'환급 예정 ¥{r}',couponApplied:'쿠폰 -¥{c}',
  altCheap:'각 상품 최저가 매장만 골라 사기',altOne:'한 곳에서 다 사기 ({s})',altNone:'한 곳에서 다 살 수 있는 매장 없음',save:'¥{s} 절약',
  unavailable:'근처에서 구할 수 없음: {names}',done:'구매 완료로 면세한도에 기록',recorded:'면세한도에 기록했어요',
@@ -218,7 +218,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  addList:'加入購物清單',added:'已加入購物清單',inList:'清單裡有{q}個',
  listTitle:'我的購物清單',listEmpty:'還沒有加入商品，到熱門或比價頁加入吧。',
  planTitle:'推薦購物路線',planDesc:'排除有缺貨回報的店家，計算免稅與優惠券後挑選。',
- totalNet:'預估實付（退稅後）',stores:'{n}間店',
+ totalNet:'預估實付（退稅後）',shareList:'分享清單',shareHead:'日本購物清單',copied:'已複製清單，貼到聊天軟體即可。',copyFail:'無法複製',stores:'{n}間店',
  taxfreeOk:'可免稅',taxfreeNo:'未達免稅門檻',needMore:'再買¥{need}約可退¥{ref}',refund:'預計退稅 ¥{r}',couponApplied:'優惠券 -¥{c}',
  altCheap:'每樣都去最便宜的店買',altOne:'全部在同一家買（{s}）',altNone:'沒有一家能買齊',save:'省 ¥{s}',
  unavailable:'附近買不到：{names}',done:'標記已購買並記入免稅額度',recorded:'已記入免稅額度',
@@ -662,7 +662,23 @@ function viewList(){
      ${missing.length?`<span class="small" style="color:var(--bad)">${t('unavailable',{names:missing.map(pname).join(', ')})}</span>`:''}
     </div>
    </div>
+   <button class="btn ghost" data-a="shareList">${t('shareList')}</button>
    <button class="btn ghost" data-a="done">${t('done')}</button>`;
+}
+// Plain-text version of the shopping route, for sending to travel companions in a messenger.
+function listText(){
+  const {plan,missing}=computePlan();
+  const out=[t('shareHead')+' · '+t(S.city)];
+  plan.groups.forEach((g,i)=>{out.push('',`${i+1}. ${sname(g.st)} (${g.st.ja})`);
+    g.lines.forEach(l=>out.push(`- ${pname(l.p)} (${l.p.ja}) × ${l.q} · ${yen(withTax(l.b,l.p)*l.q)}`));});
+  out.push('',`${t('totalNet')}: ${yen(plan.total)} ${homeAmt(plan.total)}`);
+  if(missing.length)out.push(t('unavailable',{names:missing.map(pname).join(', ')}));
+  return out.join('\n');
+}
+function copyText(txt){
+  const fallback=()=>{const ta=document.createElement('textarea');ta.value=txt;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();
+    let ok=false;try{ok=document.execCommand('copy');}catch(e){}ta.remove();toast(ok?t('copied'):t('copyFail'));};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(()=>toast(t('copied')),fallback);else fallback();
 }
 
 /* ---------- tracker ---------- */
@@ -921,6 +937,9 @@ const A={
  quick:v=>{S.q=S.q.trim()===v?'':v;S.cat='all';SHOWN=20;save();render();},
  more:()=>{SHOWN+=20;document.getElementById('results').innerHTML=resultsHTML();},
  dq:v=>{S._dq=Math.max(1,(S._dq||1)+(+v));document.getElementById('dq').textContent=S._dq;},
+ shareList:()=>{const txt=listText();
+   // The phone's share sheet when the page may use it; otherwise copy (a cancelled share stays cancelled).
+   if(navigator.share)navigator.share({text:txt}).catch(e=>{if(e&&e.name!=='AbortError')copyText(txt);});else copyText(txt);},
  add:v=>{const q=S._dq||1;const l=S.list.find(x=>x.id===v);if(l)l.q+=q;else S.list.push({id:v,q});toast(t('added'));render();},
  lq:v=>{const[id,d]=v.split('|');const l=S.list.find(x=>x.id===id);if(!l)return;l.q+=(+d);if(l.q<=0)S.list=S.list.filter(x=>x.id!==id);render();},
  report:v=>{const[sid,pid,st]=v.split('|');const k=sid+'|'+pid;S.reports[k]={st,at:Date.now()};
