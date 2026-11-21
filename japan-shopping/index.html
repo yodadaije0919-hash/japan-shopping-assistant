@@ -139,6 +139,12 @@ h3{font-size:15px;margin:0}
 .cap.near>span:first-child{color:var(--warn)}
 .cap.over>span:first-child{color:var(--bad)}
 .sub-h{margin:6px 2px -4px}
+.cpn-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px}
+.cpn-row+.cpn-row{border-top:1px solid var(--line)}
+.cpn-meta{display:flex;flex-direction:column;gap:3px;min-width:0}
+.cpn-open{flex:none;font-size:13px;font-weight:700;color:var(--accent-text);border:1px solid var(--accent);border-radius:6px;padding:9px 12px;text-decoration:none}
+.nw{white-space:nowrap}
+.cpn-tips{border-top:1px solid var(--line);margin:0}
 .stop{font-family:var(--f-display);background:var(--ink);color:var(--surface);width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;font-size:13px;flex:none}
 .big{font-family:var(--f-num);font-size:28px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .bar{height:12px;background:var(--bg);border:1px solid var(--line);border-radius:2px;overflow:hidden}
@@ -191,7 +197,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  search:'상품 이름으로 찾기 (예: 동전파스)',noResult:'찾는 상품이 없어요. 다른 이름이나 분류로 찾아보세요.',more:'더 보기 · 남은 {n}개',sortLabel:'정렬',sortPop:'인기순',sortCheap:'싼 순',all:'전체',med:'의약품',cos:'화장품',food:'과자·식품',life:'생활용품',
  back:'← 목록',storesNear:'{city} 근처 매장',taxIn:'세금 포함',afterRefund:'면세 환급 후',notCarried:'취급 안 함',
  ok:'재고 있음',low:'얼마 안 남음',out:'품절',agoMin:'{m}분 전',agoH:'{h}시간 전',people:'{n}명 제보',mine:'내 제보',
- have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',couponUpTo:'쿠폰 최대 {p}%',couponAny:'쿠폰 {p}%',couponUntil:'{d}까지',couponEst:'조건 추정',couponTerms:'쿠폰 조건',couponNext:'¥{need} 더 사면 쿠폰 {p}%',
+ have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',couponUpTo:'쿠폰 최대 {p}%',couponAny:'쿠폰 {p}%',couponUntil:'{d}까지',couponEst:'조건 추정',couponTerms:'쿠폰 조건',couponNext:'¥{need} 더 사면 쿠폰 {p}%',cpHead:'쓸 수 있는 쿠폰',cpOpen:'쿠폰 열기',cpInPlan:'동선에 있음',cpTier:'¥{min} 이상 {p}%',cpAfter:'할인 후 ¥{n} 이상',cpBicScope:'약·화장품·생활용품',cpTips:'계산대에서: 결제 전에 쿠폰 화면을 보여 주세요. 결제한 뒤에는 적용이 안 되고, 다른 할인과는 같이 못 써요. 돈키호테는 스크린샷이 안 돼요.',
  addList:'장바구니에 담기',added:'장바구니에 담았어요',inList:'장바구니에 {q}개 있어요',
  listTitle:'내 장바구니',listEmpty:'아직 담은 상품이 없어요. 인기나 가격비교 탭에서 담아보세요.',
  planTitle:'추천 쇼핑 동선',planDesc:'품절 제보가 있는 매장은 빼고, 면세와 쿠폰을 계산해서 골랐어요.',gotAll:'다 담았어요',emptyPicks:'관광객이 많이 사는 상품',findMore:'가격비교에서 더 찾기',capUse:'다 사면 면세한도 {lim} 중 {use}',capPrev:'이미 산 것 {p} 포함',capOver:'{n} 넘어요',gotMark:'집었어요',
@@ -230,7 +236,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  search:'搜尋商品名稱（例：樂膚貼）',noResult:'找不到商品，請換個名稱或分類試試。',more:'顯示更多・還有 {n} 項',sortLabel:'排序',sortPop:'熱門',sortCheap:'最便宜',all:'全部',med:'醫藥品',cos:'美妝',food:'零食食品',life:'生活用品',
  back:'← 列表',storesNear:'{city}附近店家',taxIn:'含稅',afterRefund:'退稅後',notCarried:'未販售',
  ok:'有貨',low:'剩不多',out:'缺貨',agoMin:'{m}分鐘前',agoH:'{h}小時前',people:'{n}人回報',mine:'我的回報',
- have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',couponUpTo:'優惠券最高 {p}%',couponAny:'優惠券 {p}%',couponUntil:'至 {d}',couponEst:'條件推估',couponTerms:'優惠券條件',couponNext:'再買¥{need}可用優惠券 {p}%',
+ have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',couponUpTo:'優惠券最高 {p}%',couponAny:'優惠券 {p}%',couponUntil:'至 {d}',couponEst:'條件推估',couponTerms:'優惠券條件',couponNext:'再買¥{need}可用優惠券 {p}%',cpHead:'可用優惠券',cpOpen:'打開優惠券',cpInPlan:'在路線中',cpTier:'滿¥{min} {p}%',cpAfter:'折扣後滿¥{n}',cpBicScope:'藥品・化妝品・日用品',cpTips:'結帳時：請在付款前出示優惠券畫面，付款後無法套用，也不能與其他折扣併用。唐吉訶德不接受截圖。',
  addList:'加入購物清單',added:'已加入購物清單',inList:'清單裡有{q}個',
  listTitle:'我的購物清單',listEmpty:'還沒有加入商品，到熱門或比價頁加入吧。',
  planTitle:'推薦購物路線',planDesc:'排除有缺貨回報的店家，計算免稅與優惠券後挑選。',gotAll:'全部拿齊了',emptyPicks:'觀光客常買的商品',findMore:'到比價頁找更多',capUse:'全部買下後，免稅額度 {lim} 已用 {use}',capPrev:'含已購買 {p}',capOver:'超過 {n}',gotMark:'已拿',
@@ -419,7 +425,7 @@ const CHAINS=[
  {id:'cocokara',ko:'코코카라파인',zh:'Cocokara Fine',ja:'ココカラファイン',f:1.01,cp:{tiers:[[10000,3],[30000,5],[50000,7]],until:'2027-03-31',src:'https://app.likejapan.com/en-us/coupon/cocokarafine-coupon-en'}},
  {id:'sugi',ko:'스기약국',zh:'杉藥局',ja:'スギ薬局',f:.95,cp:{tiers:[[10000,4],[30000,6],[50000,8]],until:'2027-02-28',src:'https://app.likejapan.com/en-us/coupon/sugi-pharmacy-en'}},
  {id:'daikoku',ko:'다이코쿠드럭',zh:'大國藥妝',ja:'ダイコクドラッグ',f:.93,cp:null},
- {id:'bic',ko:'빅카메라',zh:'Bic Camera',ja:'ビックカメラ',f:1.03,cp:{tiers:[[0,5]],after:5000,until:'2027-04-30',src:{ko:'https://livejapan.com/public/operation/coupon/biccamera/ko.html',zh:'https://livejapan.com/public/operation/coupon/biccamera/zh-tw.html'}}},
+ {id:'bic',ko:'빅카메라',zh:'Bic Camera',ja:'ビックカメラ',f:1.03,cp:{tiers:[[0,5]],after:5000,scope:'cpBicScope',until:'2027-04-30',src:{ko:'https://livejapan.com/public/operation/coupon/biccamera/ko.html',zh:'https://livejapan.com/public/operation/coupon/biccamera/zh-tw.html'}}},
 ];
 // Tourist coupons from coupon sites, checked 2026-11-22 (no chain publishes official terms we could find).
 // tiers are [tax-included total, % off]: since the 2026-11-01 refund method, tourists pay tax at the register.
@@ -513,6 +519,18 @@ function renderTabs(){
    `<button data-a="tab" data-v="${k}" ${S.tab===k?'aria-current="page"':''}>${ICONS[k]}<span>${t(l)}</span>${k==='list'&&n?`<span class="badge">${n}</span>`:''}</button>`).join('');
 }
 
+// Every live coupon in one place, so it can be opened at the register; chains on the current route come first.
+function couponsHTML(){
+  const inPlan=new Set(S.list.length?computePlan().plan.groups.map(g=>g.st.id):[]);
+  const maxP=c=>c.tiers[c.tiers.length-1][1];
+  const rows=CHAINS.filter(cpLive).sort((a,b)=>(inPlan.has(b.id)-inPlan.has(a.id))||(maxP(b.cp)-maxP(a.cp))).map(st=>{const c=st.cp;
+    const tiers=c.tiers.map(([min,p])=>`<span class="nw">${min?t('cpTier',{min:min.toLocaleString('ja-JP'),p}):`${p}%`}</span>`).join(' · ');
+    const extra=[c.scope?t(c.scope):'',c.after?t('cpAfter',{n:c.after.toLocaleString('ja-JP')}):'',c.until?t('couponUntil',{d:c.until.replace(/-/g,'.')}):'',c.est?t('couponEst'):''].filter(Boolean).join(' · ');
+    return `<div class="cpn-row"><div class="cpn-meta"><span class="row"><b>${esc(sname(st))}</b>${inPlan.has(st.id)?`<span class="pill accent">${t('cpInPlan')}</span>`:''}</span>
+      <span class="small num">${tiers}</span>${extra?`<span class="small muted">${extra}</span>`:''}</div>
+      <a class="cpn-open" href="${cpSrc(c)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(sname(st)+' '+t('cpOpen'))}">${t('cpOpen')}</a></div>`;}).join('');
+  return rows?`<h3 class="sub-h">${t('cpHead')}</h3><div class="card">${rows}<p class="small muted pad cpn-tips">${t('cpTips')}</p></div>`:'';
+}
 function viewHome(){
   const tour=S.rank==='tourist';
   const items=[...PRODUCTS].sort((a,b)=>tour?a.tr-b.tr:a.lr-b.lr).slice(0,12);
@@ -531,6 +549,7 @@ function viewHome(){
   return `<div class="seg" role="group"><button data-a="rank" data-v="tourist" aria-pressed="${tour}">${t('tourist')}</button><button data-a="rank" data-v="local" aria-pressed="${!tour}">${t('local')}</button></div>
    <p class="small muted" style="margin:-6px 0 0">${tour?t('touristDesc'):t('localDesc')}</p>
    <div class="card rank">${rows}</div>
+   ${couponsHTML()}
    <div class="notice"><b>${t('refundTitle')}</b><span>${t('refundBody')}</span></div>`;
 }
 
