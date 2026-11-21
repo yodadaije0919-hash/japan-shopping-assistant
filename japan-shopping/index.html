@@ -138,6 +138,7 @@ h3{font-size:15px;margin:0}
 .cap{display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .cap.near>span:first-child{color:var(--warn)}
 .cap.over>span:first-child{color:var(--bad)}
+.sub-h{margin:6px 2px -4px}
 .stop{font-family:var(--f-display);background:var(--ink);color:var(--surface);width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;font-size:13px;flex:none}
 .big{font-family:var(--f-num);font-size:28px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .bar{height:12px;background:var(--bg);border:1px solid var(--line);border-radius:2px;overflow:hidden}
@@ -193,7 +194,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',coupon:'쿠폰 {p}% ({min} 이상)',couponAny:'쿠폰 {p}%',
  addList:'장바구니에 담기',added:'장바구니에 담았어요',inList:'장바구니에 {q}개 있어요',
  listTitle:'내 장바구니',listEmpty:'아직 담은 상품이 없어요. 인기나 가격비교 탭에서 담아보세요.',
- planTitle:'추천 쇼핑 동선',planDesc:'품절 제보가 있는 매장은 빼고, 면세와 쿠폰을 계산해서 골랐어요.',gotAll:'다 담았어요',capUse:'다 사면 면세한도 {lim} 중 {use}',capPrev:'이미 산 것 {p} 포함',capOver:'{n} 넘어요',gotMark:'집었어요',
+ planTitle:'추천 쇼핑 동선',planDesc:'품절 제보가 있는 매장은 빼고, 면세와 쿠폰을 계산해서 골랐어요.',gotAll:'다 담았어요',emptyPicks:'관광객이 많이 사는 상품',findMore:'가격비교에서 더 찾기',capUse:'다 사면 면세한도 {lim} 중 {use}',capPrev:'이미 산 것 {p} 포함',capOver:'{n} 넘어요',gotMark:'집었어요',
  totalNet:'예상 실결제 (환급 후)',shareList:'목록 공유',shareHead:'일본 쇼핑 목록',copied:'목록을 복사했어요. 메신저에 붙여 넣으세요.',copyFail:'복사하지 못했어요',stores:'매장 {n}곳',
  taxfreeOk:'면세 대상',taxfreeNo:'면세 기준 미달',needMore:'¥{need} 더 사면 약 ¥{ref} 환급',refund:'환급 예정 ¥{r}',couponApplied:'쿠폰 -¥{c}',
  altCheap:'각 상품 최저가 매장만 골라 사기',altOne:'한 곳에서 다 사기 ({s})',altNone:'한 곳에서 다 살 수 있는 매장 없음',save:'¥{s} 절약',
@@ -232,7 +233,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',coupon:'優惠券 {p}%（滿{min}）',couponAny:'優惠券 {p}%',
  addList:'加入購物清單',added:'已加入購物清單',inList:'清單裡有{q}個',
  listTitle:'我的購物清單',listEmpty:'還沒有加入商品，到熱門或比價頁加入吧。',
- planTitle:'推薦購物路線',planDesc:'排除有缺貨回報的店家，計算免稅與優惠券後挑選。',gotAll:'全部拿齊了',capUse:'全部買下後，免稅額度 {lim} 已用 {use}',capPrev:'含已購買 {p}',capOver:'超過 {n}',gotMark:'已拿',
+ planTitle:'推薦購物路線',planDesc:'排除有缺貨回報的店家，計算免稅與優惠券後挑選。',gotAll:'全部拿齊了',emptyPicks:'觀光客常買的商品',findMore:'到比價頁找更多',capUse:'全部買下後，免稅額度 {lim} 已用 {use}',capPrev:'含已購買 {p}',capOver:'超過 {n}',gotMark:'已拿',
  totalNet:'預估實付（退稅後）',shareList:'分享清單',shareHead:'日本購物清單',copied:'已複製清單，貼到聊天軟體即可。',copyFail:'無法複製',stores:'{n}間店',
  taxfreeOk:'可免稅',taxfreeNo:'未達免稅門檻',needMore:'再買¥{need}約可退¥{ref}',refund:'預計退稅 ¥{r}',couponApplied:'優惠券 -¥{c}',
  altCheap:'每樣都去最便宜的店買',altOne:'全部在同一家買（{s}）',altNone:'沒有一家能買齊',save:'省 ¥{s}',
@@ -547,6 +548,9 @@ function filtered(){
 let SHOWN=20;
 function qaddBtn(p){const l=S.list.find(x=>x.id===p.id);
   return `<button class="qadd${l?' on':''}" data-a="qadd" data-v="${p.id}" aria-label="${esc(pname(p))} · ${l?t('inList',{q:l.q}):t('addList')}">${l?`✓ ${l.q}`:'+'}</button>`;}
+function itemRow(p){const lo=lowestOf(p);return `<div class="rank-item"><button class="rank-row" style="grid-template-columns:44px 1fr auto" data-a="open" data-v="${p.id}">
+   ${thumb(p)}<span class="rank-main"><span class="rank-name">${esc(pname(p))}</span><span class="jp">${esc(p.ja)}</span></span>
+   <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span>${hm(withTax(lo.b,p))}<span class="small muted">${esc(sname(lo.st))}</span>`:''}</span></button>${qaddBtn(p)}</div>`;}
 function resultsHTML(){
   let all=filtered();
   // Cheapest first uses the same nearby lowest price as the yellow tag; products with no price go last.
@@ -555,9 +559,7 @@ function resultsHTML(){
   // The full catalog is long, so the unfiltered list grows 20 at a time; a search or category shows everything.
   const list=!S.q.trim()&&S.cat==='all'?all.slice(0,SHOWN):all;const rest=all.length-list.length;
   // Each row opens the product; the button beside it puts one in the cart without leaving the list.
-  return list.map(p=>{const lo=lowestOf(p);return `<div class="rank-item"><button class="rank-row" style="grid-template-columns:44px 1fr auto" data-a="open" data-v="${p.id}">
-   ${thumb(p)}<span class="rank-main"><span class="rank-name">${esc(pname(p))}</span><span class="jp">${esc(p.ja)}</span></span>
-   <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span>${hm(withTax(lo.b,p))}<span class="small muted">${esc(sname(lo.st))}</span>`:''}</span></button>${qaddBtn(p)}</div>`;}).join('')
+  return list.map(itemRow).join('')
    +(rest>0?`<button class="more" data-a="more">${t('more',{n:rest})}</button>`:'');
 }
 function viewCompare(){
@@ -654,7 +656,11 @@ function capLine(cartYen){const c=capInfo();const before=c.conv(c.gen),use=c.con
   const cls=use>c.limit?'over':use>c.limit*.8?'near':'';
   return `<div class="cap ${cls}"><span>${t('capUse',{lim:c.fmt(c.limit),use:c.fmt(use)})}${use>c.limit?` · <b>${t('capOver',{n:c.fmt(use-c.limit)})}</b>`:''}</span>${c.gen?`<span class="small muted">${t('capPrev',{p:c.fmt(before)})}</span>`:''}</div>`;}
 function viewList(){
-  if(!S.list.length)return `<h2>${t('listTitle')}</h2><div class="card empty">${t('listEmpty')}</div>`;
+  // An empty cart offers the top tourist picks so a first purchase is one tap away.
+  if(!S.list.length)return `<h2>${t('listTitle')}</h2><div class="card empty">${t('listEmpty')}</div>
+   <h3 class="sub-h">${t('emptyPicks')}</h3>
+   <div class="card rank">${[...PRODUCTS].sort((a,b)=>a.tr-b.tr).slice(0,5).map(itemRow).join('')}</div>
+   <button class="btn ghost" data-a="tab" data-v="compare">${t('findMore')}</button>`;
   const items=S.list.map(l=>`<div class="li"><div><div class="rank-name">${esc(pname(P[l.id]))}</div><div class="jp">${P[l.id].ja}</div></div>
     <div class="stepper"><button data-a="lq" data-v="${l.id}|-1" aria-label="-">−</button><span>${l.q}</span><button data-a="lq" data-v="${l.id}|1" aria-label="+">+</button></div></div>`).join('');
   const {plan,cheapEval,single,missing}=computePlan();
@@ -971,7 +977,9 @@ const A={
  shareList:()=>{const txt=listText();
    // The phone's share sheet when the page may use it; otherwise copy (a cancelled share stays cancelled).
    if(navigator.share)navigator.share({text:txt}).catch(e=>{if(e&&e.name!=='AbortError')copyText(txt);});else copyText(txt);},
- qadd:(v,el)=>{const l=S.list.find(x=>x.id===v);if(l)l.q+=1;else S.list.push({id:v,q:1});save();renderTabs();toast(t('added'));if(el&&P[v])el.outerHTML=qaddBtn(P[v]);},
+ qadd:(v,el)=>{const l=S.list.find(x=>x.id===v);if(l)l.q+=1;else S.list.push({id:v,q:1});toast(t('added'));
+   // In the cart the route appears at once; in the list only the button changes, keeping scroll and search focus.
+   if(S.tab==='list'){render();return;}save();renderTabs();if(el&&P[v])el.outerHTML=qaddBtn(P[v]);},
  add:v=>{const q=S._dq||1;const l=S.list.find(x=>x.id===v);if(l)l.q+=q;else S.list.push({id:v,q});toast(t('added'));render();},
  lq:v=>{const[id,d]=v.split('|');const l=S.list.find(x=>x.id===id);if(!l)return;l.q+=(+d);if(l.q<=0){S.list=S.list.filter(x=>x.id!==id);S.got=(S.got||[]).filter(x=>x!==id);}render();},
  got:v=>{const g=new Set(S.got||[]);g.has(v)?g.delete(v):g.add(v);S.got=[...g];const y=window.scrollY;render();window.scrollTo(0,y);},
