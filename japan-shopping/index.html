@@ -191,7 +191,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  search:'상품 이름으로 찾기 (예: 동전파스)',noResult:'찾는 상품이 없어요. 다른 이름이나 분류로 찾아보세요.',more:'더 보기 · 남은 {n}개',sortLabel:'정렬',sortPop:'인기순',sortCheap:'싼 순',all:'전체',med:'의약품',cos:'화장품',food:'과자·식품',life:'생활용품',
  back:'← 목록',storesNear:'{city} 근처 매장',taxIn:'세금 포함',afterRefund:'면세 환급 후',notCarried:'취급 안 함',
  ok:'재고 있음',low:'얼마 안 남음',out:'품절',agoMin:'{m}분 전',agoH:'{h}시간 전',people:'{n}명 제보',mine:'내 제보',
- have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',coupon:'쿠폰 {p}% ({min} 이상)',couponAny:'쿠폰 {p}%',
+ have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',couponUpTo:'쿠폰 최대 {p}%',couponAny:'쿠폰 {p}%',couponUntil:'{d}까지',couponEst:'조건 추정',couponTerms:'쿠폰 조건',couponNext:'¥{need} 더 사면 쿠폰 {p}%',
  addList:'장바구니에 담기',added:'장바구니에 담았어요',inList:'장바구니에 {q}개 있어요',
  listTitle:'내 장바구니',listEmpty:'아직 담은 상품이 없어요. 인기나 가격비교 탭에서 담아보세요.',
  planTitle:'추천 쇼핑 동선',planDesc:'품절 제보가 있는 매장은 빼고, 면세와 쿠폰을 계산해서 골랐어요.',gotAll:'다 담았어요',emptyPicks:'관광객이 많이 사는 상품',findMore:'가격비교에서 더 찾기',capUse:'다 사면 면세한도 {lim} 중 {use}',capPrev:'이미 산 것 {p} 포함',capOver:'{n} 넘어요',gotMark:'집었어요',
@@ -230,7 +230,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  search:'搜尋商品名稱（例：樂膚貼）',noResult:'找不到商品，請換個名稱或分類試試。',more:'顯示更多・還有 {n} 項',sortLabel:'排序',sortPop:'熱門',sortCheap:'最便宜',all:'全部',med:'醫藥品',cos:'美妝',food:'零食食品',life:'生活用品',
  back:'← 列表',storesNear:'{city}附近店家',taxIn:'含稅',afterRefund:'退稅後',notCarried:'未販售',
  ok:'有貨',low:'剩不多',out:'缺貨',agoMin:'{m}分鐘前',agoH:'{h}小時前',people:'{n}人回報',mine:'我的回報',
- have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',coupon:'優惠券 {p}%（滿{min}）',couponAny:'優惠券 {p}%',
+ have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',couponUpTo:'優惠券最高 {p}%',couponAny:'優惠券 {p}%',couponUntil:'至 {d}',couponEst:'條件推估',couponTerms:'優惠券條件',couponNext:'再買¥{need}可用優惠券 {p}%',
  addList:'加入購物清單',added:'已加入購物清單',inList:'清單裡有{q}個',
  listTitle:'我的購物清單',listEmpty:'還沒有加入商品，到熱門或比價頁加入吧。',
  planTitle:'推薦購物路線',planDesc:'排除有缺貨回報的店家，計算免稅與優惠券後挑選。',gotAll:'全部拿齊了',emptyPicks:'觀光客常買的商品',findMore:'到比價頁找更多',capUse:'全部買下後，免稅額度 {lim} 已用 {use}',capPrev:'含已購買 {p}',capOver:'超過 {n}',gotMark:'已拿',
@@ -414,13 +414,28 @@ const thumb=(p,cls='')=>`<span class="thumb ${cls}" aria-hidden="true"><span cla
 
 const P=Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
 const CHAINS=[
- {id:'donki',ko:'돈키호테',zh:'唐吉訶德',ja:'ドン・キホーテ',f:.97,cp:{p:5,min:10000}},
- {id:'matsukiyo',ko:'마츠모토키요시',zh:'松本清',ja:'マツモトキヨシ',f:1.0,cp:{p:7,min:10000}},
- {id:'cocokara',ko:'코코카라파인',zh:'Cocokara Fine',ja:'ココカラファイン',f:1.01,cp:{p:5,min:5000}},
- {id:'sugi',ko:'스기약국',zh:'杉藥局',ja:'スギ薬局',f:.95,cp:null},
+ {id:'donki',ko:'돈키호테',zh:'唐吉訶德',ja:'ドン・キホーテ',f:.97,cp:{tiers:[[11000,5],[33000,7]],src:{ko:'https://livejapan.com/public/operation/coupon/donki/ko.html',zh:'https://livejapan.com/public/operation/coupon/donki/zh-tw.html'}}},
+ {id:'matsukiyo',ko:'마츠모토키요시',zh:'松本清',ja:'マツモトキヨシ',f:1.0,cp:{tiers:[[10000,3],[30000,5],[50000,7]],est:true,until:'2027-03-31',src:{ko:'https://www.fun-japan.jp/en/articles/14664',zh:'https://www.fun-japan.jp/tw/articles/14664'}}},
+ {id:'cocokara',ko:'코코카라파인',zh:'Cocokara Fine',ja:'ココカラファイン',f:1.01,cp:{tiers:[[10000,3],[30000,5],[50000,7]],until:'2027-03-31',src:'https://app.likejapan.com/en-us/coupon/cocokarafine-coupon-en'}},
+ {id:'sugi',ko:'스기약국',zh:'杉藥局',ja:'スギ薬局',f:.95,cp:{tiers:[[10000,4],[30000,6],[50000,8]],until:'2027-02-28',src:'https://app.likejapan.com/en-us/coupon/sugi-pharmacy-en'}},
  {id:'daikoku',ko:'다이코쿠드럭',zh:'大國藥妝',ja:'ダイコクドラッグ',f:.93,cp:null},
- {id:'bic',ko:'빅카메라',zh:'Bic Camera',ja:'ビックカメラ',f:1.03,cp:{p:7,min:0}},
+ {id:'bic',ko:'빅카메라',zh:'Bic Camera',ja:'ビックカメラ',f:1.03,cp:{tiers:[[0,5]],after:5000,until:'2027-04-30',src:{ko:'https://livejapan.com/public/operation/coupon/biccamera/ko.html',zh:'https://livejapan.com/public/operation/coupon/biccamera/zh-tw.html'}}},
 ];
+// Tourist coupons from coupon sites, checked 2026-11-22 (no chain publishes official terms we could find).
+// tiers are [tax-included total, % off]: since the 2026-11-01 refund method, tourists pay tax at the register.
+// Matsumoto Kiyoshi only states "3-7% by amount", so it borrows Cocokara's tiers (same group) and says so.
+// Bic Camera gives 5% on drugs/cosmetics/daily goods when the total after the coupon is 5,000 yen or more.
+const CP_HINT=10000; // only nudge toward the next coupon tier when it is within reach
+const today=()=>new Date().toLocaleDateString('sv-SE');
+const cpLive=st=>st.cp&&(!st.cp.until||st.cp.until>=today())?st.cp:null;
+function cpRate(st,gross){const c=cpLive(st);if(!c)return 0;let p=0;for(const[min,r]of c.tiers)if(gross>=min)p=r;
+  return c.after&&gross*(1-p/100)<c.after?0:p;}
+function cpNext(st,gross){const c=cpLive(st);const n=c&&c.tiers.find(([min])=>gross<min);return n?{need:n[0]-gross,p:n[1]}:null;}
+const cpSrc=c=>typeof c.src==='string'?c.src:c.src[S.lang]||c.src.ko;
+const cpLink=(c,label)=>`<a class="maplink" href="${cpSrc(c)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+function cpLabel(st){const c=cpLive(st);if(!c)return'';const max=c.tiers[c.tiers.length-1][1];
+  const head=c.tiers.length>1?t('couponUpTo',{p:max}):t('couponAny',{p:max});
+  return [head,c.until?t('couponUntil',{d:c.until.replace(/-/g,'.')}):'',c.est?t('couponEst'):''].filter(Boolean).join(' · ');}
 const DIST={tokyo:{donki:240,matsukiyo:120,cocokara:410,sugi:650,daikoku:880,bic:330},
             osaka:{donki:180,matsukiyo:300,cocokara:520,sugi:760,daikoku:140,bic:610}};
 
@@ -586,9 +601,9 @@ function viewDetail(p){
   const inList=S.list.find(l=>l.id===p.id);
   const body=rows.sort((a,b)=>(a.b??1e9)-(b.b??1e9)).map(r=>{
     const best=r.b===minB&&r.s.st!=='out';
-    const cp=r.st.cp?(r.st.cp.min?t('coupon',{p:r.st.cp.p,min:yen(r.st.cp.min)}):t('couponAny',{p:r.st.cp.p})):'';
+    const cp=cpLabel(r.st);
     return `<div class="store ${best?'best':''}">
-     <div class="between"><div><h3>${esc(sname(r.st))}</h3><span class="small muted num">${r.st.dist}${t('m')}</span>${mapLink(r.st)}${cp?` <span class="pill line">${cp}</span>`:''}</div>
+     <div class="between"><div><h3>${esc(sname(r.st))}</h3><span class="small muted num">${r.st.dist}${t('m')}</span>${mapLink(r.st)}${cp?` <span class="pill line">${cp}</span>${cpLink(cpLive(r.st),t('couponTerms'))}`:''}</div>
       <div style="text-align:right">${r.b==null?`<span class="small muted">${t('notCarried')}</span>`:
         `${best?`<span class="tag">${yen(withTax(r.b,p))}</span>`:`<span class="price">${yen(withTax(r.b,p))}</span>`}<div>${hm(withTax(r.b,p))}</div>
          <div class="small muted">${t('afterRefund')} <span class="num">${yen(r.b)}</span></div>
@@ -623,10 +638,10 @@ function computePlan(){
     idx.forEach(i=>{const si=asg[i];const o=opts[i].find(o=>o.si===si);(g[si]=g[si]||{si,lines:[],sub:0,tax:0});
       g[si].lines.push({p:items[i].p,q:items[i].q,b:o.b});g[si].sub+=o.b*items[i].q;g[si].tax+=Math.floor(o.b*rate(items[i].p))*items[i].q;});
     let total=0;const groups=Object.values(g).map(x=>{
-      const st=sts[x.si];const cpn=st.cp&&x.sub>=st.cp.min?Math.floor(x.sub*st.cp.p/100):0;
-      const taxA=Math.floor(x.tax*(1-(cpn?st.cp.p/100:0)));const elig=x.sub>=5000;
+      const st=sts[x.si];const gross=x.sub+x.tax;const cp=cpRate(st,gross);const cpn=Math.floor(x.sub*cp/100);
+      const taxA=Math.floor(x.tax*(1-cp/100));const elig=x.sub>=5000;
       const paid=x.sub-cpn+taxA;const net=paid-(elig?taxA:0);total+=net;
-      return{...x,st,cpn,taxA,elig,paid,net};});
+      return{...x,st,gross,cpn,taxA,elig,paid,net};});
     return{total,groups:groups.sort((a,b)=>a.st.dist-b.st.dist)};
   }
   function improve(asg){
@@ -676,7 +691,9 @@ function viewList(){
       ${g.lines.map(l=>{const on=got.has(l.p.id);return `<button class="pick" role="checkbox" aria-checked="${on}" data-a="got" data-v="${l.p.id}"><span class="box" aria-hidden="true">✓</span><span class="pick-name" style="min-width:0">${esc(pname(l.p))} × ${l.q}</span><span class="num muted">${yen(withTax(l.b,l.p)*l.q)}</span></button>`;}).join('')}
       <div class="row">${g.elig?`<span class="pill good">${t('taxfreeOk')}</span><span class="pill line">${t('refund',{r:refIn.toLocaleString('ja-JP')})}</span>`:
         `<span class="pill warn">${t('taxfreeNo')}</span><span class="small muted">${t('needMore',{need:need.toLocaleString('ja-JP'),ref:Math.floor(5000*.1).toLocaleString('ja-JP')})}</span>`}
-        ${g.cpn?`<span class="pill accent">${t('couponApplied',{c:cpnIn.toLocaleString('ja-JP')})}</span>`:''}</div>
+        ${g.cpn?`<span class="pill accent">${t('couponApplied',{c:cpnIn.toLocaleString('ja-JP')})}</span>`:''}
+        ${(()=>{const n=cpNext(g.st,g.gross);return n&&n.need<=CP_HINT?`<span class="small muted">${t('couponNext',{need:Math.ceil(n.need).toLocaleString('ja-JP'),p:n.p})}</span>`:'';})()}
+        ${cpLive(g.st)?cpLink(cpLive(g.st),t('couponTerms')):''}</div>
     </div>`;}).join('');
   const alt=(label,total)=>`<div class="between small"><span class="muted" style="min-width:0">${label}</span><span class="num">${yen(total)}${total>plan.total?` <span class="pill good">${t('save',{s:Math.round(total-plan.total).toLocaleString('ja-JP')})}</span>`:''}</span></div>`;
   return `<h2>${t('listTitle')}</h2><div class="card">${items}</div>
