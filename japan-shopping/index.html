@@ -128,6 +128,13 @@ h3{font-size:15px;margin:0}
 .li>div:first-child{min-width:0}
 .group{display:flex;flex-direction:column;gap:8px;padding:14px;border-top:1px dashed var(--line)}
 .group:first-of-type{border-top:0}
+.pick{display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center;width:100%;background:none;border:0;padding:6px 0;margin:-6px 0;text-align:left;color:var(--ink);font-size:13px;min-height:40px}
+.pick .box{width:20px;height:20px;border:1.5px solid var(--muted);border-radius:5px;display:grid;place-items:center;font-size:13px;line-height:1;color:transparent}
+.pick[aria-checked="true"] .box{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.pick[aria-checked="true"] .pick-name{text-decoration:line-through;color:var(--muted)}
+.pick[aria-checked="true"] .num{opacity:.6}
+.got{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.got.all{color:var(--good);font-weight:700}
 .stop{font-family:var(--f-display);background:var(--ink);color:var(--surface);width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;font-size:13px;flex:none}
 .big{font-family:var(--f-num);font-size:28px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .bar{height:12px;background:var(--bg);border:1px solid var(--line);border-radius:2px;overflow:hidden}
@@ -183,7 +190,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',coupon:'쿠폰 {p}% ({min} 이상)',couponAny:'쿠폰 {p}%',
  addList:'장바구니에 담기',added:'장바구니에 담았어요',inList:'장바구니에 {q}개 있어요',
  listTitle:'내 장바구니',listEmpty:'아직 담은 상품이 없어요. 인기나 가격비교 탭에서 담아보세요.',
- planTitle:'추천 쇼핑 동선',planDesc:'품절 제보가 있는 매장은 빼고, 면세와 쿠폰을 계산해서 골랐어요.',
+ planTitle:'추천 쇼핑 동선',planDesc:'품절 제보가 있는 매장은 빼고, 면세와 쿠폰을 계산해서 골랐어요.',gotAll:'다 담았어요',gotMark:'집었어요',
  totalNet:'예상 실결제 (환급 후)',shareList:'목록 공유',shareHead:'일본 쇼핑 목록',copied:'목록을 복사했어요. 메신저에 붙여 넣으세요.',copyFail:'복사하지 못했어요',stores:'매장 {n}곳',
  taxfreeOk:'면세 대상',taxfreeNo:'면세 기준 미달',needMore:'¥{need} 더 사면 약 ¥{ref} 환급',refund:'환급 예정 ¥{r}',couponApplied:'쿠폰 -¥{c}',
  altCheap:'각 상품 최저가 매장만 골라 사기',altOne:'한 곳에서 다 사기 ({s})',altNone:'한 곳에서 다 살 수 있는 매장 없음',save:'¥{s} 절약',
@@ -222,7 +229,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',coupon:'優惠券 {p}%（滿{min}）',couponAny:'優惠券 {p}%',
  addList:'加入購物清單',added:'已加入購物清單',inList:'清單裡有{q}個',
  listTitle:'我的購物清單',listEmpty:'還沒有加入商品，到熱門或比價頁加入吧。',
- planTitle:'推薦購物路線',planDesc:'排除有缺貨回報的店家，計算免稅與優惠券後挑選。',
+ planTitle:'推薦購物路線',planDesc:'排除有缺貨回報的店家，計算免稅與優惠券後挑選。',gotAll:'全部拿齊了',gotMark:'已拿',
  totalNet:'預估實付（退稅後）',shareList:'分享清單',shareHead:'日本購物清單',copied:'已複製清單，貼到聊天軟體即可。',copyFail:'無法複製',stores:'{n}間店',
  taxfreeOk:'可免稅',taxfreeNo:'未達免稅門檻',needMore:'再買¥{need}約可退¥{ref}',refund:'預計退稅 ¥{r}',couponApplied:'優惠券 -¥{c}',
  altCheap:'每樣都去最便宜的店買',altOne:'全部在同一家買（{s}）',altNone:'沒有一家能買齊',save:'省 ¥{s}',
@@ -644,13 +651,16 @@ function viewList(){
   const items=S.list.map(l=>`<div class="li"><div><div class="rank-name">${esc(pname(P[l.id]))}</div><div class="jp">${P[l.id].ja}</div></div>
     <div class="stepper"><button data-a="lq" data-v="${l.id}|-1" aria-label="-">−</button><span>${l.q}</span><button data-a="lq" data-v="${l.id}|1" aria-label="+">+</button></div></div>`).join('');
   const {plan,cheapEval,single,missing}=computePlan();
+  // Items ticked off while shopping, kept by product so a re-planned route keeps the ticks.
+  const got=new Set((S.got||[]).filter(id=>S.list.some(l=>l.id===id)));
   const groups=plan.groups.map((g,i)=>{
     const need=Math.ceil(5000-g.sub);const shown=g.lines.reduce((n,l)=>n+withTax(l.b,l.p)*l.q,0);
     const cpnIn=Math.max(0,shown-Math.round(g.paid)),refIn=Math.round(g.paid)-Math.round(g.net);
+    const gotN=g.lines.filter(l=>got.has(l.p.id)).length;
     return `<div class="group">
-      <div class="between"><div class="row"><span class="stop">${i+1}</span><h3>${esc(sname(g.st))}</h3><span class="small muted num">${g.st.dist}${t('m')}</span>${mapLink(g.st)}</div>
+      <div class="between"><div class="row"><span class="stop">${i+1}</span><h3>${esc(sname(g.st))}</h3><span class="small muted num">${g.st.dist}${t('m')}</span>${mapLink(g.st)}${gotN?`<span class="got${gotN===g.lines.length?' all':''}">${gotN===g.lines.length?t('gotAll'):`${t('gotMark')} ${gotN}/${g.lines.length}`}</span>`:''}</div>
         <span class="price">${yen(g.net)}</span></div>
-      ${g.lines.map(l=>`<div class="between small"><span style="min-width:0">${esc(pname(l.p))} × ${l.q}</span><span class="num muted">${yen(withTax(l.b,l.p)*l.q)}</span></div>`).join('')}
+      ${g.lines.map(l=>{const on=got.has(l.p.id);return `<button class="pick" role="checkbox" aria-checked="${on}" data-a="got" data-v="${l.p.id}"><span class="box" aria-hidden="true">✓</span><span class="pick-name" style="min-width:0">${esc(pname(l.p))} × ${l.q}</span><span class="num muted">${yen(withTax(l.b,l.p)*l.q)}</span></button>`;}).join('')}
       <div class="row">${g.elig?`<span class="pill good">${t('taxfreeOk')}</span><span class="pill line">${t('refund',{r:refIn.toLocaleString('ja-JP')})}</span>`:
         `<span class="pill warn">${t('taxfreeNo')}</span><span class="small muted">${t('needMore',{need:need.toLocaleString('ja-JP'),ref:Math.floor(5000*.1).toLocaleString('ja-JP')})}</span>`}
         ${g.cpn?`<span class="pill accent">${t('couponApplied',{c:cpnIn.toLocaleString('ja-JP')})}</span>`:''}</div>
@@ -950,11 +960,12 @@ const A={
    if(navigator.share)navigator.share({text:txt}).catch(e=>{if(e&&e.name!=='AbortError')copyText(txt);});else copyText(txt);},
  qadd:(v,el)=>{const l=S.list.find(x=>x.id===v);if(l)l.q+=1;else S.list.push({id:v,q:1});save();renderTabs();toast(t('added'));if(el&&P[v])el.outerHTML=qaddBtn(P[v]);},
  add:v=>{const q=S._dq||1;const l=S.list.find(x=>x.id===v);if(l)l.q+=q;else S.list.push({id:v,q});toast(t('added'));render();},
- lq:v=>{const[id,d]=v.split('|');const l=S.list.find(x=>x.id===id);if(!l)return;l.q+=(+d);if(l.q<=0)S.list=S.list.filter(x=>x.id!==id);render();},
+ lq:v=>{const[id,d]=v.split('|');const l=S.list.find(x=>x.id===id);if(!l)return;l.q+=(+d);if(l.q<=0){S.list=S.list.filter(x=>x.id!==id);S.got=(S.got||[]).filter(x=>x!==id);}render();},
+ got:v=>{const g=new Set(S.got||[]);g.has(v)?g.delete(v):g.add(v);S.got=[...g];const y=window.scrollY;render();window.scrollTo(0,y);},
  report:v=>{const[sid,pid,st]=v.split('|');const k=sid+'|'+pid;S.reports[k]={st,at:Date.now()};
    const live=shareReport(k,{st});toast(live?t('reportedShared'):t('reported'));render();},
  done:()=>{const{plan}=computePlan();plan.groups.forEach(g=>{const n=g.lines.map(l=>pname(l.p)).join(', ');S.purchases.push({n:sname(g.st)+' · '+n,yen:Math.round(g.net),type:'general'});});
-   S.list=[];S.tab='track';toast(t('recorded'));window.scrollTo(0,0);render();},
+   S.list=[];S.got=[];S.tab='track';toast(t('recorded'));window.scrollTo(0,0);render();},
  delp:v=>{S.purchases.splice(+v,1);render();},
  clearex:()=>{S.purchases=S.purchases.filter(x=>!x.ex);render();},
  settings:()=>openSettings(),
