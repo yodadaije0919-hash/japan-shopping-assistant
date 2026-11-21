@@ -71,6 +71,11 @@ h3{font-size:15px;margin:0}
 .rank{display:flex;flex-direction:column}
 .rank-row{display:grid;grid-template-columns:22px 44px 1fr auto;gap:10px;align-items:center;padding:12px 14px;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;width:100%}
 .rank-row:first-child{border-top:0}
+.rank-item{display:flex;align-items:stretch;border-top:1px solid var(--line)}
+.rank-item:first-child{border-top:0}
+.rank-item .rank-row{border-top:0;flex:1;min-width:0;padding-right:6px}
+.qadd{flex:none;align-self:center;min-width:44px;height:44px;margin-right:10px;border:1px solid var(--line);border-radius:22px;background:transparent;color:var(--ink);font-size:20px;line-height:1;padding:0 10px;font-variant-numeric:tabular-nums}
+.qadd.on{font-size:13px;font-weight:700;color:var(--accent-text);border-color:currentColor}
 .rank-n{font-family:var(--f-display);font-size:22px;text-align:center;color:var(--muted)}
 .rank-row:nth-child(-n+3) .rank-n{color:var(--accent-text)}
 .rank-main{min-width:0;display:flex;flex-direction:column;gap:2px}
@@ -530,6 +535,8 @@ function filtered(){
     return hay.includes(all)||words.every(w=>hay.includes(w));});
 }
 let SHOWN=20;
+function qaddBtn(p){const l=S.list.find(x=>x.id===p.id);
+  return `<button class="qadd${l?' on':''}" data-a="qadd" data-v="${p.id}" aria-label="${esc(pname(p))} · ${l?t('inList',{q:l.q}):t('addList')}">${l?`✓ ${l.q}`:'+'}</button>`;}
 function resultsHTML(){
   let all=filtered();
   // Cheapest first uses the same nearby lowest price as the yellow tag; products with no price go last.
@@ -537,9 +544,10 @@ function resultsHTML(){
   if(!all.length)return `<div class="empty">${t('noResult')}<br><button class="btn ghost" data-a="snapFind">${t('snapFind')}</button></div>`;
   // The full catalog is long, so the unfiltered list grows 20 at a time; a search or category shows everything.
   const list=!S.q.trim()&&S.cat==='all'?all.slice(0,SHOWN):all;const rest=all.length-list.length;
-  return list.map(p=>{const lo=lowestOf(p);return `<button class="rank-row" style="grid-template-columns:44px 1fr auto" data-a="open" data-v="${p.id}">
+  // Each row opens the product; the button beside it puts one in the cart without leaving the list.
+  return list.map(p=>{const lo=lowestOf(p);return `<div class="rank-item"><button class="rank-row" style="grid-template-columns:44px 1fr auto" data-a="open" data-v="${p.id}">
    ${thumb(p)}<span class="rank-main"><span class="rank-name">${esc(pname(p))}</span><span class="jp">${esc(p.ja)}</span></span>
-   <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span>${hm(withTax(lo.b,p))}<span class="small muted">${esc(sname(lo.st))}</span>`:''}</span></button>`;}).join('')
+   <span class="rank-side">${lo?`<span class="tag">${yen(withTax(lo.b,p))}</span>${hm(withTax(lo.b,p))}<span class="small muted">${esc(sname(lo.st))}</span>`:''}</span></button>${qaddBtn(p)}</div>`;}).join('')
    +(rest>0?`<button class="more" data-a="more">${t('more',{n:rest})}</button>`:'');
 }
 function viewCompare(){
@@ -940,6 +948,7 @@ const A={
  shareList:()=>{const txt=listText();
    // The phone's share sheet when the page may use it; otherwise copy (a cancelled share stays cancelled).
    if(navigator.share)navigator.share({text:txt}).catch(e=>{if(e&&e.name!=='AbortError')copyText(txt);});else copyText(txt);},
+ qadd:(v,el)=>{const l=S.list.find(x=>x.id===v);if(l)l.q+=1;else S.list.push({id:v,q:1});save();renderTabs();toast(t('added'));if(el&&P[v])el.outerHTML=qaddBtn(P[v]);},
  add:v=>{const q=S._dq||1;const l=S.list.find(x=>x.id===v);if(l)l.q+=q;else S.list.push({id:v,q});toast(t('added'));render();},
  lq:v=>{const[id,d]=v.split('|');const l=S.list.find(x=>x.id===id);if(!l)return;l.q+=(+d);if(l.q<=0)S.list=S.list.filter(x=>x.id!==id);render();},
  report:v=>{const[sid,pid,st]=v.split('|');const k=sid+'|'+pid;S.reports[k]={st,at:Date.now()};
