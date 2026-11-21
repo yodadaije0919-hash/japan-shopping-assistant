@@ -135,6 +135,9 @@ h3{font-size:15px;margin:0}
 .pick[aria-checked="true"] .num{opacity:.6}
 .got{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .got.all{color:var(--good);font-weight:700}
+.cap{display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cap.near>span:first-child{color:var(--warn)}
+.cap.over>span:first-child{color:var(--bad)}
 .stop{font-family:var(--f-display);background:var(--ink);color:var(--surface);width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;font-size:13px;flex:none}
 .big{font-family:var(--f-num);font-size:28px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .bar{height:12px;background:var(--bg);border:1px solid var(--line);border-radius:2px;overflow:hidden}
@@ -190,7 +193,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',coupon:'쿠폰 {p}% ({min} 이상)',couponAny:'쿠폰 {p}%',
  addList:'장바구니에 담기',added:'장바구니에 담았어요',inList:'장바구니에 {q}개 있어요',
  listTitle:'내 장바구니',listEmpty:'아직 담은 상품이 없어요. 인기나 가격비교 탭에서 담아보세요.',
- planTitle:'추천 쇼핑 동선',planDesc:'품절 제보가 있는 매장은 빼고, 면세와 쿠폰을 계산해서 골랐어요.',gotAll:'다 담았어요',gotMark:'집었어요',
+ planTitle:'추천 쇼핑 동선',planDesc:'품절 제보가 있는 매장은 빼고, 면세와 쿠폰을 계산해서 골랐어요.',gotAll:'다 담았어요',capUse:'다 사면 면세한도 {lim} 중 {use}',capPrev:'이미 산 것 {p} 포함',capOver:'{n} 넘어요',gotMark:'집었어요',
  totalNet:'예상 실결제 (환급 후)',shareList:'목록 공유',shareHead:'일본 쇼핑 목록',copied:'목록을 복사했어요. 메신저에 붙여 넣으세요.',copyFail:'복사하지 못했어요',stores:'매장 {n}곳',
  taxfreeOk:'면세 대상',taxfreeNo:'면세 기준 미달',needMore:'¥{need} 더 사면 약 ¥{ref} 환급',refund:'환급 예정 ¥{r}',couponApplied:'쿠폰 -¥{c}',
  altCheap:'각 상품 최저가 매장만 골라 사기',altOne:'한 곳에서 다 사기 ({s})',altNone:'한 곳에서 다 살 수 있는 매장 없음',save:'¥{s} 절약',
@@ -229,7 +232,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',coupon:'優惠券 {p}%（滿{min}）',couponAny:'優惠券 {p}%',
  addList:'加入購物清單',added:'已加入購物清單',inList:'清單裡有{q}個',
  listTitle:'我的購物清單',listEmpty:'還沒有加入商品，到熱門或比價頁加入吧。',
- planTitle:'推薦購物路線',planDesc:'排除有缺貨回報的店家，計算免稅與優惠券後挑選。',gotAll:'全部拿齊了',gotMark:'已拿',
+ planTitle:'推薦購物路線',planDesc:'排除有缺貨回報的店家，計算免稅與優惠券後挑選。',gotAll:'全部拿齊了',capUse:'全部買下後，免稅額度 {lim} 已用 {use}',capPrev:'含已購買 {p}',capOver:'超過 {n}',gotMark:'已拿',
  totalNet:'預估實付（退稅後）',shareList:'分享清單',shareHead:'日本購物清單',copied:'已複製清單，貼到聊天軟體即可。',copyFail:'無法複製',stores:'{n}間店',
  taxfreeOk:'可免稅',taxfreeNo:'未達免稅門檻',needMore:'再買¥{need}約可退¥{ref}',refund:'預計退稅 ¥{r}',couponApplied:'優惠券 -¥{c}',
  altCheap:'每樣都去最便宜的店買',altOne:'全部在同一家買（{s}）',altNone:'沒有一家能買齊',save:'省 ¥{s}',
@@ -646,6 +649,10 @@ function computePlan(){
   return{plan:bestE,cheapEval,single,missing:items.filter((_,i)=>!ok[i]).map(x=>x.p)};
 }
 
+// What the allowance would look like if this cart were bought on top of what is already recorded.
+function capLine(cartYen){const c=capInfo();const before=c.conv(c.gen),use=c.conv(c.gen+cartYen);
+  const cls=use>c.limit?'over':use>c.limit*.8?'near':'';
+  return `<div class="cap ${cls}"><span>${t('capUse',{lim:c.fmt(c.limit),use:c.fmt(use)})}${use>c.limit?` · <b>${t('capOver',{n:c.fmt(use-c.limit)})}</b>`:''}</span>${c.gen?`<span class="small muted">${t('capPrev',{p:c.fmt(before)})}</span>`:''}</div>`;}
 function viewList(){
   if(!S.list.length)return `<h2>${t('listTitle')}</h2><div class="card empty">${t('listEmpty')}</div>`;
   const items=S.list.map(l=>`<div class="li"><div><div class="rank-name">${esc(pname(P[l.id]))}</div><div class="jp">${P[l.id].ja}</div></div>
@@ -672,6 +679,7 @@ function viewList(){
      <h2>${t('planTitle')}</h2><span class="small muted">${t('planDesc')}</span>
      <div class="between" style="margin-top:6px"><span class="small muted">${t('totalNet')} · ${t('stores',{n:plan.groups.length})}</span></div>
      <div class="row" style="align-items:baseline"><span class="big">${yen(plan.total)}</span><span class="muted">${homeAmt(plan.total)}</span></div>
+     ${capLine(plan.total)}
     </div>
     ${groups}
     <div class="pad" style="display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line)">
@@ -700,6 +708,11 @@ function copyText(txt){
 }
 
 /* ---------- tracker ---------- */
+// General-goods allowance at home customs, in home units (KR: USD, TW: NT$), for yen spent.
+function capInfo(){const KR=S.home==='KR';let gen=0;
+  S.purchases.forEach(x=>{if(x.type==='general'||(!KR&&x.type==='perfume'))gen+=x.yen;});
+  return {gen,limit:KR?800:35000,conv:y=>KR?y/S.rates.usd:y*S.rates.twd,
+    fmt:v=>KR?'$'+Math.round(v).toLocaleString('en-US'):'NT$'+Math.round(v).toLocaleString('zh-TW')};}
 function viewTrack(){
   const KR=S.home==='KR';let gen=0,alcMl=0,alcN=0,alcYen=0,tob=0,perf=0;
   S.purchases.forEach(x=>{if(x.type==='general')gen+=x.yen;else if(x.type==='alcohol'){alcMl+=x.vol||0;alcN++;alcYen+=x.yen;}else if(x.type==='tobacco')tob+=x.vol||0;else if(x.type==='perfume'){perf+=x.vol||0;if(!KR)gen+=x.yen;}});
