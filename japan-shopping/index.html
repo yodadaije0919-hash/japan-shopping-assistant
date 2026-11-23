@@ -133,6 +133,10 @@ h3{font-size:15px;margin:0}
 .pick[aria-checked="true"] .box{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .pick[aria-checked="true"] .pick-name{text-decoration:line-through;color:var(--muted)}
 .pick[aria-checked="true"] .num{opacity:.6}
+.fill{display:flex;flex-direction:column;gap:4px;margin-top:8px;padding:8px 10px;border:1px dashed var(--line);border-radius:10px}
+.fill-row{display:flex;align-items:center;gap:8px}
+.fill-name{flex:1;min-width:0;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fill-row .qadd{margin-right:0}
 .got{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .got.all{color:var(--good);font-weight:700}
 .cap{display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
@@ -197,7 +201,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  search:'상품 이름으로 찾기 (예: 동전파스)',noResult:'찾는 상품이 없어요. 다른 이름이나 분류로 찾아보세요.',more:'더 보기 · 남은 {n}개',sortLabel:'정렬',sortPop:'인기순',sortCheap:'싼 순',all:'전체',med:'의약품',cos:'화장품',food:'과자·식품',life:'생활용품',
  back:'← 목록',storesNear:'{city} 근처 매장',taxIn:'세금 포함',afterRefund:'면세 환급 후',notCarried:'취급 안 함',
  ok:'재고 있음',low:'얼마 안 남음',out:'품절',agoMin:'{m}분 전',agoH:'{h}시간 전',people:'{n}명 제보',mine:'내 제보',
- have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',couponUpTo:'쿠폰 최대 {p}%',couponAny:'쿠폰 {p}%',couponUntil:'{d}까지',couponEst:'조건 추정',couponTerms:'쿠폰 조건',couponNext:'¥{need} 더 사면 쿠폰 {p}%',cpHead:'쓸 수 있는 쿠폰',cpOpen:'쿠폰 열기',cpInPlan:'동선에 있음',cpTier:'¥{min} 이상 {p}%',cpAfter:'할인 후 ¥{n} 이상',cpBicScope:'약·화장품·생활용품',cpTips:'계산대에서: 결제 전에 쿠폰 화면을 보여 주세요. 결제한 뒤에는 적용이 안 되고, 다른 할인과는 같이 못 써요. 돈키호테는 스크린샷이 안 돼요.',
+ have:'있어요',soldout:'품절이에요',reported:'제보 고마워요. 시제품에서는 이 기기에만 저장돼요.',couponUpTo:'쿠폰 최대 {p}%',couponAny:'쿠폰 {p}%',couponUntil:'{d}까지',couponEst:'조건 추정',couponTerms:'쿠폰 조건',couponNext:'¥{need} 더 사면 쿠폰 {p}%',fillHead:'이걸 담으면 쿠폰 {p}%',fillCost:'실제 +¥{x}',fillNote:'실제 금액은 쿠폰·면세를 넣은 경로 합계가 늘어나는 만큼이에요. 필요한 물건일 때만 담으세요.',cpHead:'쓸 수 있는 쿠폰',cpOpen:'쿠폰 열기',cpInPlan:'동선에 있음',cpTier:'¥{min} 이상 {p}%',cpAfter:'할인 후 ¥{n} 이상',cpBicScope:'약·화장품·생활용품',cpTips:'계산대에서: 결제 전에 쿠폰 화면을 보여 주세요. 결제한 뒤에는 적용이 안 되고, 다른 할인과는 같이 못 써요. 돈키호테는 스크린샷이 안 돼요.',
  addList:'장바구니에 담기',added:'장바구니에 담았어요',inList:'장바구니에 {q}개 있어요',
  listTitle:'내 장바구니',listEmpty:'아직 담은 상품이 없어요. 인기나 가격비교 탭에서 담아보세요.',
  planTitle:'추천 쇼핑 동선',planDesc:'품절 제보가 있는 매장은 빼고, 면세와 쿠폰을 계산해서 골랐어요.',gotAll:'다 담았어요',emptyPicks:'관광객이 많이 사는 상품',findMore:'가격비교에서 더 찾기',capUse:'다 사면 면세한도 {lim} 중 {use}',capPrev:'이미 산 것 {p} 포함',capOver:'{n} 넘어요',gotMark:'집었어요',
@@ -236,7 +240,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  search:'搜尋商品名稱（例：樂膚貼）',noResult:'找不到商品，請換個名稱或分類試試。',more:'顯示更多・還有 {n} 項',sortLabel:'排序',sortPop:'熱門',sortCheap:'最便宜',all:'全部',med:'醫藥品',cos:'美妝',food:'零食食品',life:'生活用品',
  back:'← 列表',storesNear:'{city}附近店家',taxIn:'含稅',afterRefund:'退稅後',notCarried:'未販售',
  ok:'有貨',low:'剩不多',out:'缺貨',agoMin:'{m}分鐘前',agoH:'{h}小時前',people:'{n}人回報',mine:'我的回報',
- have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',couponUpTo:'優惠券最高 {p}%',couponAny:'優惠券 {p}%',couponUntil:'至 {d}',couponEst:'條件推估',couponTerms:'優惠券條件',couponNext:'再買¥{need}可用優惠券 {p}%',cpHead:'可用優惠券',cpOpen:'打開優惠券',cpInPlan:'在路線中',cpTier:'滿¥{min} {p}%',cpAfter:'折扣後滿¥{n}',cpBicScope:'藥品・化妝品・日用品',cpTips:'結帳時：請在付款前出示優惠券畫面，付款後無法套用，也不能與其他折扣併用。唐吉訶德不接受截圖。',
+ have:'有貨',soldout:'缺貨了',reported:'謝謝回報，原型中只存在這台裝置。',couponUpTo:'優惠券最高 {p}%',couponAny:'優惠券 {p}%',couponUntil:'至 {d}',couponEst:'條件推估',couponTerms:'優惠券條件',couponNext:'再買¥{need}可用優惠券 {p}%',fillHead:'加購這個可用優惠券 {p}%',fillCost:'實際 +¥{x}',fillNote:'實際金額是含優惠券與免稅後路線總額增加的部分。需要的東西再加購就好。',cpHead:'可用優惠券',cpOpen:'打開優惠券',cpInPlan:'在路線中',cpTier:'滿¥{min} {p}%',cpAfter:'折扣後滿¥{n}',cpBicScope:'藥品・化妝品・日用品',cpTips:'結帳時：請在付款前出示優惠券畫面，付款後無法套用，也不能與其他折扣併用。唐吉訶德不接受截圖。',
  addList:'加入購物清單',added:'已加入購物清單',inList:'清單裡有{q}個',
  listTitle:'我的購物清單',listEmpty:'還沒有加入商品，到熱門或比價頁加入吧。',
  planTitle:'推薦購物路線',planDesc:'排除有缺貨回報的店家，計算免稅與優惠券後挑選。',gotAll:'全部拿齊了',emptyPicks:'觀光客常買的商品',findMore:'到比價頁找更多',capUse:'全部買下後，免稅額度 {lim} 已用 {use}',capPrev:'含已購買 {p}',capOver:'超過 {n}',gotMark:'已拿',
@@ -646,9 +650,9 @@ function viewDetail(p){
 }
 
 /* ---------- planner ---------- */
-function computePlan(){
+function computePlan(list=S.list){
   const sts=stores();
-  const items=S.list.map(l=>({p:P[l.id],q:l.q})).filter(x=>x.p);
+  const items=list.map(l=>({p:P[l.id],q:l.q})).filter(x=>x.p);
   const opts=items.map(it=>sts.map((st,si)=>{const b=priceAt(st,it.p);const s=stockOf(st,it.p);return(b!=null&&s.st!=='out')?{si,b}:null;}).filter(Boolean));
   const ok=items.map((_,i)=>opts[i].length>0);
   const idx=items.map((_,i)=>i).filter(i=>ok[i]);
@@ -689,6 +693,26 @@ function computePlan(){
 function capLine(cartYen){const c=capInfo();const before=c.conv(c.gen),use=c.conv(c.gen+cartYen);
   const cls=use>c.limit?'over':use>c.limit*.8?'near':'';
   return `<div class="cap ${cls}"><span>${t('capUse',{lim:c.fmt(c.limit),use:c.fmt(use)})}${use>c.limit?` · <b>${t('capOver',{n:c.fmt(use-c.limit)})}</b>`:''}</span>${c.gen?`<span class="small muted">${t('capPrev',{p:c.fmt(before)})}</span>`:''}</div>`;}
+// Products that lift a route stop to its next coupon tier. Each one is checked by re-planning the whole cart with it added,
+// and kept only when the stop really reaches the higher tier and the route grows by less than the item's shelf price.
+const FILL_TRY=4,FILL_SHOW=2;
+function fillers(g,total){
+  const n=cpNext(g.st,g.gross);if(!n||n.need>CP_HINT)return[];
+  const before=cpRate(g.st,g.gross),inList=new Set(S.list.map(l=>l.id));
+  return PRODUCTS.filter(p=>!inList.has(p.id))
+    .map(p=>{const b=priceAt(g.st,p);return b==null||stockOf(g.st,p).st==='out'?null:{p,price:withTax(b,p)};})
+    .filter(c=>c&&c.price>=n.need).sort((a,b)=>a.price-b.price||a.p.tr-b.p.tr).slice(0,FILL_TRY)
+    .map(c=>{const next=computePlan([...S.list,{id:c.p.id,q:1}]).plan;
+      const stop=next.groups.find(x=>x.st.id===g.st.id&&x.lines.some(l=>l.p.id===c.p.id));
+      return stop&&cpRate(g.st,stop.gross)>before?{...c,extra:Math.max(0,Math.round(next.total-total))}:null;})
+    .filter(c=>c&&c.extra<c.price).slice(0,FILL_SHOW);
+}
+function fillHTML(g,total){
+  const list=fillers(g,total);if(!list.length)return'';
+  return `<div class="fill"><span class="small"><b>${t('fillHead',{p:cpNext(g.st,g.gross).p})}</b></span>
+    ${list.map(c=>`<div class="fill-row"><span class="fill-name">${esc(pname(c.p))}</span><span class="num small muted nw">${yen(c.price)} → ${t('fillCost',{x:c.extra.toLocaleString('ja-JP')})}</span>${qaddBtn(c.p)}</div>`).join('')}
+    <span class="small muted">${t('fillNote')}</span></div>`;
+}
 function viewList(){
   // An empty cart offers the top tourist picks so a first purchase is one tap away.
   if(!S.list.length)return `<h2>${t('listTitle')}</h2><div class="card empty">${t('listEmpty')}</div>
@@ -713,6 +737,7 @@ function viewList(){
         ${g.cpn?`<span class="pill accent">${t('couponApplied',{c:cpnIn.toLocaleString('ja-JP')})}</span>`:''}
         ${(()=>{const n=cpNext(g.st,g.gross);return n&&n.need<=CP_HINT?`<span class="small muted">${t('couponNext',{need:Math.ceil(n.need).toLocaleString('ja-JP'),p:n.p})}</span>`:'';})()}
         ${cpLive(g.st)?cpLink(cpLive(g.st),t('couponTerms')):''}</div>
+      ${fillHTML(g,plan.total)}
     </div>`;}).join('');
   const alt=(label,total)=>`<div class="between small"><span class="muted" style="min-width:0">${label}</span><span class="num">${yen(total)}${total>plan.total?` <span class="pill good">${t('save',{s:Math.round(total-plan.total).toLocaleString('ja-JP')})}</span>`:''}</span></div>`;
   return `<h2>${t('listTitle')}</h2><div class="card">${items}</div>
