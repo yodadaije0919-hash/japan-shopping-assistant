@@ -51,6 +51,18 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 .staff-bar{display:block;width:234px;max-width:100%;height:auto;margin-bottom:-8px}
 .staff-jan{font-size:18px;letter-spacing:.04em;color:#333}
 .staff-close{font-size:13px;color:#888}
+.ck{justify-content:flex-start;gap:12px}
+.ck .staff-q{font-size:clamp(22px,6.5vw,32px)}
+.ck-store{font-size:15px;color:#333}
+.ck-line{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;max-width:440px;padding:10px 0;border-bottom:1px solid #eee}
+.ck .btn.ck-open{display:block;margin-top:6px;max-width:440px;text-decoration:none;text-align:center;background:#111;color:#fff}
+.ck-items,.ck-steps{list-style:none;margin:0;padding:0;width:100%;max-width:440px;text-align:left;font-size:15px}
+.ck-items li{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid #eee}
+.ck-total{display:flex;justify-content:space-between;width:100%;max-width:440px;font-size:17px}
+.ck-steps{font-size:13.5px;color:#555;display:flex;flex-direction:column;gap:4px}
+.ck-steps li::before{content:"· "}
+.ck .ck-close{background:#fff;color:#111;border-color:#ccc;min-height:44px;padding:8px 24px}
+.ck-btn{padding:10px 14px}
 .seen{display:flex;flex-direction:column;gap:6px}.seen .chip-btn{max-width:180px;overflow:hidden;text-overflow:ellipsis}
 .quick button{flex:none;color:var(--muted)}.quick button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .sample{font-size:12px;color:var(--warn);background:var(--warn-soft);padding-block:6px;text-align:center}
@@ -221,7 +233,7 @@ ko:{app:'일본 쇼핑 비서',sub:'어디가 제일 싼지, 아직 남아있는
  example:'예시',clearEx:'예시 지우기',purchases:'구매 기록',noPurch:'기록된 구매가 없어요.',
  lang:'언어',home:'국적 (입국 기준)',city:'쇼핑 지역',rates:'환율 (예시값, 직접 수정)',rKRW:'1엔 = 원',rTWD:'1엔 = 대만달러',rUSD:'1달러 = 엔',close:'닫기',
  korea:'한국',taiwan:'대만',tokyo:'도쿄 신주쿠',osaka:'오사카 난바',disclaim:'세금 계산은 참고용이에요. 정확한 금액은 세관에서 확정돼요.',m:'m',
- snapBtn:'가격표 찍어서 제보',snapFind:'가격표 찍어서 찾기',quickLabel:'자주 찾는 말',seenLabel:'최근 본 상품',staffBtn:'점원에게 보여주기',map:'지도',staffMean:'이 상품 어디 있어요?|이 상품 재고 있어요?|면세로 살 수 있어요?',staffTabs:'어디 있어요?|재고 있어요?|면세 돼요?',staffClose:'화면을 누르면 닫혀요',quick:'파스,선크림,감기약,안약,위장약,진통제,마스크팩,립밤',findTitle:'가격표로 찾기',viewFound:'이 상품 보기',findDesc:'가격표나 선반 라벨을 찍으면 어떤 상품인지 찾아줘요. 가격이 맞으면 그대로 제보할 수도 있어요.',snapTitle:'가격표 제보',snapDesc:'가격표나 선반 라벨을 찍으면 상품과 가격을 읽어서 채워줘요. 틀린 부분은 고쳐서 올려주세요.',
+ snapBtn:'가격표 찍어서 제보',snapFind:'가격표 찍어서 찾기',quickLabel:'자주 찾는 말',seenLabel:'최근 본 상품',staffBtn:'점원에게 보여주기',ckBtn:'계산대에서 보여주기',ckCoupon:'이 쿠폰 쓸게요',ckTaxfree:'면세로 해 주세요',ckPassport:'여권 여기 있어요',ckTotal:'예상 결제 금액',ckSteps:'결제 전에 쿠폰 화면을 먼저 보여 주세요|면세는 여권 실물이 필요해요|결제한 뒤에는 쿠폰을 쓸 수 없어요',ckShot:'스크린샷 쿠폰은 안 돼요. 쿠폰 페이지를 열어서 보여 주세요.',map:'지도',staffMean:'이 상품 어디 있어요?|이 상품 재고 있어요?|면세로 살 수 있어요?',staffTabs:'어디 있어요?|재고 있어요?|면세 돼요?',staffClose:'화면을 누르면 닫혀요',quick:'파스,선크림,감기약,안약,위장약,진통제,마스크팩,립밤',findTitle:'가격표로 찾기',viewFound:'이 상품 보기',findDesc:'가격표나 선반 라벨을 찍으면 어떤 상품인지 찾아줘요. 가격이 맞으면 그대로 제보할 수도 있어요.',snapTitle:'가격표 제보',snapDesc:'가격표나 선반 라벨을 찍으면 상품과 가격을 읽어서 채워줘요. 틀린 부분은 고쳐서 올려주세요.',
  store:'매장',photo:'가격표 사진 찍기 또는 고르기',photoAgain:'다시 찍기',readTag:'사진에서 읽기',reading:'읽는 중… (10~30초)',stop:'중지',
  noAuto:'이 화면에서는 자동 읽기를 쓸 수 없어요. 직접 입력해 주세요.',product:'상품',choose:'상품 고르기',priceExcl:'세전 가격 (엔)',inclIs:'세금 포함 {p}',stockNow:'지금 재고',
  warnDiff:'평소 가격({p})과 차이가 커요. 숫자를 한 번 더 확인해 주세요.',submitRep:'제보하기',localOnly:'시제품에서는 제보가 이 기기에만 저장돼요.',
@@ -260,7 +272,7 @@ zh:{app:'日本購物小幫手',sub:'哪裡最便宜、還有沒有貨',sample:'
  example:'範例',clearEx:'清除範例',purchases:'購買紀錄',noPurch:'還沒有購買紀錄。',
  lang:'語言',home:'國籍（入境標準）',city:'購物地區',rates:'匯率（範例值，可自行修改）',rKRW:'1日圓 = 韓元',rTWD:'1日圓 = 新台幣',rUSD:'1美元 = 日圓',close:'關閉',
  korea:'韓國',taiwan:'台灣',tokyo:'東京 新宿',osaka:'大阪 難波',disclaim:'稅額僅供參考，實際金額以海關為準。',m:'m',
- snapBtn:'拍價格標籤回報',snapFind:'拍價格標籤搜尋',quickLabel:'常用關鍵字',seenLabel:'最近看過',staffBtn:'給店員看',map:'地圖',staffMean:'這個商品在哪裡？|這個商品還有庫存嗎？|可以免稅購買嗎？',staffTabs:'在哪裡？|有庫存嗎？|可以免稅嗎？',staffClose:'點一下畫面即可關閉',quick:'貼布,防曬,感冒藥,眼藥水,胃藥,止痛,面膜,護唇膏',findTitle:'用價格標籤搜尋',viewFound:'查看此商品',findDesc:'拍下價格標籤或貨架標示，會幫你找出是哪個商品。價格正確的話也可以直接回報。',snapTitle:'價格標籤回報',snapDesc:'拍下價格標籤或貨架標示，會自動讀取商品與價格。有錯請修正後再送出。',
+ snapBtn:'拍價格標籤回報',snapFind:'拍價格標籤搜尋',quickLabel:'常用關鍵字',seenLabel:'最近看過',staffBtn:'給店員看',ckBtn:'結帳時出示',ckCoupon:'我要用這張優惠券',ckTaxfree:'麻煩幫我辦免稅',ckPassport:'這是我的護照',ckTotal:'預估付款金額',ckSteps:'付款前先出示優惠券畫面|免稅需要護照正本|付款後就不能用優惠券了',ckShot:'不接受截圖的優惠券，請打開優惠券頁面出示。',map:'地圖',staffMean:'這個商品在哪裡？|這個商品還有庫存嗎？|可以免稅購買嗎？',staffTabs:'在哪裡？|有庫存嗎？|可以免稅嗎？',staffClose:'點一下畫面即可關閉',quick:'貼布,防曬,感冒藥,眼藥水,胃藥,止痛,面膜,護唇膏',findTitle:'用價格標籤搜尋',viewFound:'查看此商品',findDesc:'拍下價格標籤或貨架標示，會幫你找出是哪個商品。價格正確的話也可以直接回報。',snapTitle:'價格標籤回報',snapDesc:'拍下價格標籤或貨架標示，會自動讀取商品與價格。有錯請修正後再送出。',
  store:'店家',photo:'拍攝或選擇價格標籤照片',photoAgain:'重拍',readTag:'從照片讀取',reading:'讀取中…（約10~30秒）',stop:'停止',
  noAuto:'此畫面無法自動讀取，請手動輸入。',product:'商品',choose:'選擇商品',priceExcl:'未稅價格（日圓）',inclIs:'含稅 {p}',stockNow:'目前庫存',
  warnDiff:'與平常價格（{p}）差距大，請再確認一次。',submitRep:'送出回報',localOnly:'原型中回報只存在這台裝置。',
@@ -424,7 +436,7 @@ const thumb=(p,cls='')=>`<span class="thumb ${cls}" aria-hidden="true"><span cla
 
 const P=Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
 const CHAINS=[
- {id:'donki',ko:'돈키호테',zh:'唐吉訶德',ja:'ドン・キホーテ',f:.97,cp:{tiers:[[11000,5],[33000,7]],src:{ko:'https://livejapan.com/public/operation/coupon/donki/ko.html',zh:'https://livejapan.com/public/operation/coupon/donki/zh-tw.html'}}},
+ {id:'donki',ko:'돈키호테',zh:'唐吉訶德',ja:'ドン・キホーテ',f:.97,cp:{tiers:[[11000,5],[33000,7]],noShot:true,src:{ko:'https://livejapan.com/public/operation/coupon/donki/ko.html',zh:'https://livejapan.com/public/operation/coupon/donki/zh-tw.html'}}},
  {id:'matsukiyo',ko:'마츠모토키요시',zh:'松本清',ja:'マツモトキヨシ',f:1.0,cp:{tiers:[[10000,3],[30000,5],[50000,7]],est:true,until:'2027-03-31',src:{ko:'https://www.fun-japan.jp/en/articles/14664',zh:'https://www.fun-japan.jp/tw/articles/14664'}}},
  {id:'cocokara',ko:'코코카라파인',zh:'Cocokara Fine',ja:'ココカラファイン',f:1.01,cp:{tiers:[[10000,3],[30000,5],[50000,7]],until:'2027-03-31',src:'https://app.likejapan.com/en-us/coupon/cocokarafine-coupon-en'}},
  {id:'sugi',ko:'스기약국',zh:'杉藥局',ja:'スギ薬局',f:.95,cp:{tiers:[[10000,4],[30000,6],[50000,8]],until:'2027-02-28',src:'https://app.likejapan.com/en-us/coupon/sugi-pharmacy-en'}},
@@ -559,6 +571,24 @@ function viewHome(){
 
 // Questions for the show-to-staff card (where is it / in stock / tax-free), in the same order as staffTabs.
 const STAFF_Q=['この商品は<br>どこにありますか？','この商品の<br>在庫はありますか？','免税で<br>購入できますか？'];
+// Checkout card for one route stop: Japanese lines for the cashier (coupon, tax-free), the items in Japanese, and the
+// traveler's own reminders. Coupons only apply when shown before paying, so the coupon page is one tap away here.
+const CK_JA={coupon:'このクーポンを<br>使います',taxfree:'免税で<br>お願いします',passport:'パスポートは<br>こちらです'};
+function openCheckout(stId){
+  const g=computePlan().plan.groups.find(x=>x.st.id===stId);if(!g)return;
+  const c=g.cpn?cpLive(g.st):null,steps=t('ckSteps').split('|');
+  const lines=[c&&['coupon','ckCoupon'],g.elig&&['taxfree','ckTaxfree'],g.elig&&['passport','ckPassport']].filter(Boolean);
+  const sh=document.getElementById('sheet');
+  sh.innerHTML=`<div class="staff ck" role="dialog" aria-modal="true" aria-label="${esc(sname(g.st)+' · '+t('ckBtn'))}">
+    <div class="ck-store"><b>${esc(sname(g.st))}</b> <span lang="ja">${esc(g.st.ja)}</span></div>
+    ${lines.map(([k,m])=>`<div class="ck-line"><span class="staff-q" lang="ja">${CK_JA[k]}</span><span class="staff-mean">${esc(t(m))}</span>
+      ${k==='coupon'?`<a class="btn ck-open" href="${cpSrc(c)}" target="_blank" rel="noopener noreferrer">${t('cpOpen')}</a>`:''}</div>`).join('')}
+    <ul class="ck-items" lang="ja">${g.lines.map(l=>`<li><span>${esc(l.p.ja)}</span><span class="num">× ${l.q}</span></li>`).join('')}</ul>
+    <div class="ck-total"><span>${t('ckTotal')}</span><b class="num">${yen(g.paid)}</b></div>
+    <ul class="ck-steps">${[c&&steps[0],g.elig&&steps[1],c&&steps[2],c&&c.noShot&&t('ckShot')].filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+    <button class="chip-btn ck-close" data-a="closeSheet">${t('close')}</button></div>`;
+  sh.hidden=false;sh.querySelector('.ck').scrollTop=0;(sh.querySelector('.ck-open')||sh.querySelector('.ck-close')).focus({preventScroll:true});
+}
 // EAN-13 (JAN) barcode drawn as SVG so store staff can scan the phone screen. Returns '' when the code is not a valid 13-digit JAN.
 function janBarcode(code){
   const d=String(code||'');if(!/^\d{13}$/.test(d))return '';
@@ -738,6 +768,7 @@ function viewList(){
         ${(()=>{const n=cpNext(g.st,g.gross);return n&&n.need<=CP_HINT?`<span class="small muted">${t('couponNext',{need:Math.ceil(n.need).toLocaleString('ja-JP'),p:n.p})}</span>`:'';})()}
         ${cpLive(g.st)?cpLink(cpLive(g.st),t('couponTerms')):''}</div>
       ${fillHTML(g,plan.total)}
+      ${g.cpn||g.elig?`<button class="btn ghost ck-btn" data-a="checkout" data-v="${g.st.id}">${t('ckBtn')}</button>`:''}
     </div>`;}).join('');
   const alt=(label,total)=>`<div class="between small"><span class="muted" style="min-width:0">${label}</span><span class="num">${yen(total)}${total>plan.total?` <span class="pill good">${t('save',{s:Math.round(total-plan.total).toLocaleString('ja-JP')})}</span>`:''}</span></div>`;
   return `<h2>${t('listTitle')}</h2><div class="card">${items}</div>
@@ -1059,6 +1090,7 @@ const A={
  stopRead:()=>{if(snapCtl)snapCtl.abort();},
  nStock:v=>{if(SN){SN.stock=v;document.querySelectorAll('[data-a="nStock"]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));}},
  submitRep:()=>submitRep(),
+ checkout:v=>openCheckout(v),
  closeSheet:()=>{document.getElementById('sheet').hidden=true;render();},
  // Full-screen Japanese card a traveler can hold up to store staff. The top buttons switch the question; a tap anywhere else closes it.
  staff:v=>{const [id,n0]=String(v).split('|');const p=P[id];if(!p)return;const n=Math.min(2,Math.max(0,+n0||0));
